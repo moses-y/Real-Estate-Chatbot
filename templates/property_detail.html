@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ property.title }} - Kwetu Homes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .property-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .property-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .property-location {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .property-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .property-image {
+            width: 100%;
+            height: 400px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .property-detail-item {
+            text-align: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .detail-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .detail-label {
+            color: #666;
+        }
+        .property-description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+        .primary-button {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .secondary-button {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo">
+                <h1>Kwetu Homes Real Estate</h1>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/" class="nav-link">Chatbot</a>
+                <a href="/search" class="nav-link active">Property Search</a>
+                <a href="/analytics" class="nav-link">Analytics</a>
+            </div>
+        </header>
+        
+        <div class="property-container">
+            <a href="/search" class="back-link">← Back to Search</a>
+            
+            <div class="property-header">
+                <div>
+                    <h1 class="property-title">{{ property.title }}</h1>
+                    <div class="property-location">{{ property.location }}</div>
+                </div>
+                <div class="property-price">
+                    KES {{ "{:,}".format(property.price) }}
+                </div>
+            </div>
+            
+            <div class="property-image" style="background-image: url('/static/images/{{ property.image }}')"></div>
+            
+            <div class="property-details">
+                <div class="property-detail-item">
+                    <div class="detail-value">{{ property.bedrooms }}</div>
+                    <div class="detail-label">Bedrooms</div>
+                </div>
+                <div class="property-detail-item">
+                    <div class="detail-value">{{ property.bathrooms }}</div>
+                    <div class="detail-label">Bathrooms</div>
+                </div>
+                <div class="property-detail-item">
+                    <div class="detail-value">{{ property.size }}</div>
+                    <div class="detail-label">Square Meters</div>
+                </div>
+                <div class="property-detail-item">
+                    <div class="detail-value">{{ property.type }}</div>
+                    <div class="detail-label">Property Type</div>
+                </div>
+            </div>
+            
+            <h2>Description</h2>
+            <div class="property-description">
+                {{ property.description }}
+            </div>
+            
+            <div class="action-buttons">
+                <a href="#" class="action-button primary-button">Schedule Viewing</a>
+                <a href="#" class="action-button secondary-button">Contact Agent</a>
+                <a href="/" class="action-button secondary-button">Ask Chatbot</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

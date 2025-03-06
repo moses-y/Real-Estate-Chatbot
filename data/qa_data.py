@@ -106,3 +106,78 @@ qa_data = {
         'Kenya has both freehold and leasehold land tenure systems.'
     ]
 }
+
+# Add these to your qa_data.py file
+
+# Additional questions about property investment
+new_questions = [
+    'What are the tax implications of buying property?',
+    'How do I calculate the return on investment for a rental property?',
+    'What areas in Kenya have the highest property appreciation rates?',
+    'What are the risks of real estate investment?',
+    'How do I identify a good property investment opportunity?',
+    'What is the difference between leasehold and freehold property?',
+    'How do I conduct due diligence before buying property?',
+    'What are the current mortgage interest rates?',
+    'How do I qualify for a mortgage loan?',
+    'What are the benefits of working with a real estate agent?',
+    'How do I know if a property is priced fairly?',
+    'What are the hidden costs of buying property?',
+    'How long should I expect to wait before selling a property for profit?',
+    'What renovations add the most value to a property?',
+    'How do I handle property disputes with neighbors?'
+]
+
+new_answers = [
+    'Property taxes in Kenya include stamp duty (2-4%), capital gains tax (5%), and annual land rates. Consult with a tax advisor for personalized advice.',
+    'Calculate ROI by dividing annual rental income (minus expenses) by the total property investment cost, then multiply by 100 to get a percentage.',
+    'Areas with the highest appreciation rates include Nairobi\'s Westlands, Kilimani, Karen, and emerging areas like Kitengela and Syokimau due to infrastructure development.',
+    'Real estate investment risks include market fluctuations, liquidity challenges, property damage, tenant issues, and regulatory changes. Diversification can help mitigate these risks.',
+    'Good investment properties have favorable location, strong rental demand, good condition, reasonable price, potential for appreciation, and positive cash flow.',
+    'Freehold means you own the land and building indefinitely. Leasehold means you have rights to the property for a fixed period, after which ownership reverts to the freeholder.',
+    'Due diligence includes verifying ownership documents, checking for encumbrances, confirming zoning regulations, inspecting the property, and researching the neighborhood.',
+    'Current mortgage interest rates range from 11.5% to 15% depending on the lender, loan amount, and your credit profile.',
+    'To qualify for a mortgage, you typically need stable income, good credit history, a down payment (usually 10-20%), and a debt-to-income ratio below 40%.',
+    'Real estate agents provide market expertise, negotiation skills, access to listings, paperwork handling, and guidance throughout the buying or selling process.',
+    'Compare similar properties in the area (comps), consider price per square foot, evaluate amenities, and consult recent sales data to determine if a price is fair.',
+    'Hidden costs include legal fees (1-2%), stamp duty (2-4%), valuation fees, land rent, insurance, maintenance, and possibly homeowner association fees.',
+    'Real estate is typically a medium to long-term investment. Expect to hold property for at least 3-5 years to see significant appreciation in most markets.',
+    'Kitchen and bathroom renovations typically offer the best ROI, followed by adding usable space, improving energy efficiency, and enhancing curb appeal.',
+    'Handle property disputes by first discussing the issue directly, consulting property documents, seeking mediation, and as a last resort, pursuing legal action.'
+]
+
+# Add these to your qa_data.py file
+
+# Questions about buying property
+buying_questions = [
+    'I would like to buy property',
+    'I want to buy a house',
+    'How do I buy property?',
+    'What do I need to buy a house?',
+    'What documents are needed to buy property?',
+    'What is the process of buying a house?',
+    'I have money and want to buy property',
+    'I have 1 million, what property can I buy?',
+    'If I have 1 million as deposit, what can I get?',
+    'What can I buy with 1 million shillings?'
+]
+
+buying_answers = [
+    'To buy property, you need identification documents, proof of income, and will need to sign a sale agreement. Our agents can guide you through the entire process. Would you like to know about specific properties?',
+    'To purchase a house, you\'ll need identification, proof of income, and to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork.',
+    'The property buying process involves identifying a property, making an offer, securing financing, conducting inspections, and completing legal paperwork. Our agents can assist you at every step.',
+    'To buy a house, you need identification documents, proof of income, and a signed sale agreement. You\'ll also need a down payment (typically 10-20% of the property value) and mortgage approval if financing.',
+    'Documents needed for property purchase include national ID/passport, KRA PIN, proof of income (bank statements or payslips), and marriage certificate if applicable. You\'ll also sign a sale agreement.',
+    'The house buying process involves property viewing, price negotiation, paying a deposit, securing financing, conducting due diligence, signing the sale agreement, and transferring ownership.',
+    'Great! Our properties range from KES 3.5 million to KES 45 million. Would you like to know about specific locations or property types that match your budget?',
+    'With 1 million KES, you could make a down payment on several of our properties. This would typically be a 10-20% deposit on properties valued between KES 5-10 million. Would you like to see specific options?',
+    'With 1 million KES as a 10% deposit, you could qualify for properties around KES 10 million. This includes 2-bedroom apartments in Westlands or Kilimani. Would you like to see available options?',
+    'With 1 million KES, you could make a down payment on an apartment or land. For example, we have a plot in Kitengela for KES 3.5 million where your 1 million would cover almost 30% of the cost.'
+]
+
+# Add these to your existing qa_data dictionary
+qa_data['Question'].extend(buying_questions)
+qa_data['Answer'].extend(buying_answers)
+# Add these to your existing qa_data dictionary
+qa_data['Question'].extend(new_questions)
+qa_data['Answer'].extend(new_answers)

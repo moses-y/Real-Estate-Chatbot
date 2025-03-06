@@ -13,13 +13,24 @@
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo">
                 <h1>Kwetu Homes Real Estate Chatbot</h1>
             </div>
+            
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Chatbot</a>
+                <a href="/search" class="nav-link">Property Search</a>
+                <a href="/analytics" class="nav-link">Analytics</a>
+            </div>
         </header>
         
         <main>
             <div class="chat-container">
                 <div class="chat-box" id="chat-box">
-                    <div class="message bot">
+                    <div class="message bot" id="msg-welcome">
                         <p>Hello! I'm the Kwetu Homes Real Estate Assistant. How can I help you today?</p>
+                        <div class="feedback-buttons">
+                            <span>Was this helpful?</span>
+                            <button onclick="submitFeedback('welcome', 'helpful')" class="feedback-btn helpful">👍</button>
+                            <button onclick="submitFeedback('welcome', 'not-helpful')" class="feedback-btn not-helpful">👎</button>
+                        </div>
                     </div>
                 </div>
                 

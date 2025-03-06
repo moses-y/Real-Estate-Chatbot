@@ -1,0 +1,62 @@
+[
+  {
+    "timestamp": "2025-03-06 08:04:50",
+    "user_query": "hi i'd like to buy some property",
+    "matched_question": "greeting",
+    "similarity_score": 1.0
+  },
+  {
+    "timestamp": "2025-03-06 08:05:07",
+    "user_query": "i'd like to buy some property",
+    "matched_question": "What is the minimum deposit required to buy a property?",
+    "similarity_score": 0.23076923076923078
+  },
+  {
+    "timestamp": "2025-03-06 08:05:35",
+    "user_query": "i have 1 million, if this is 10% what can i get and what is the location?",
+    "matched_question": "greeting",
+    "similarity_score": 1.0
+  },
+  {
+    "timestamp": "2025-03-06 08:05:43",
+    "user_query": "i have 1 million, if this is 10% what can i get and what is the location?",
+    "matched_question": "greeting",
+    "similarity_score": 1.0
+  },
+  {
+    "timestamp": "2025-03-06 08:15:53",
+    "user_query": "hello",
+    "matched_question": "greeting",
+    "similarity_score": 1.0
+  },
+  {
+    "timestamp": "2025-03-06 08:16:01",
+    "user_query": "i want to buy some property",
+    "matched_question": "I have money and want to buy property",
+    "similarity_score": 0.6363636363636364
+  },
+  {
+    "timestamp": "2025-03-06 08:16:34",
+    "user_query": "yes please share locations that i can buy with 10 million",
+    "matched_question": "What can I buy with 1 million shillings?",
+    "similarity_score": 0.4
+  },
+  {
+    "timestamp": "2025-03-06 08:16:51",
+    "user_query": "any other locations for 10 million?",
+    "matched_question": "unknown",
+    "similarity_score": 0.0
+  },
+  {
+    "timestamp": "2025-03-06 08:17:04",
+    "user_query": "property locations for 10 million",
+    "matched_question": "I have 1 million, what property can I buy?",
+    "similarity_score": 0.23076923076923078
+  },
+  {
+    "timestamp": "2025-03-06 08:17:21",
+    "user_query": "yes share specific options",
+    "matched_question": "unknown",
+    "similarity_score": 0.0
+  }
+]

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kwetu Homes Chatbot Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo">
+                <h1>Kwetu Homes Real Estate</h1>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/" class="nav-link">Chatbot</a>
+                <a href="/search" class="nav-link">Property Search</a>
+                <a href="/analytics" class="nav-link active">Analytics</a>
+            </div>
+        </header>
+        
+        <div class="analytics-container">
+            <h1>Kwetu Homes Chatbot Analytics</h1>
+            
+            <div class="stats-card">
+                <h2>Summary Statistics</h2>
+                <p>Total Queries: {{ total_queries }}</p>
+                <p>Average Similarity Score: {{ "%.2f"|format(avg_similarity) }}</p>
+            </div>
+            
+            <div class="stats-card">
+                <h2>Most Common Questions</h2>
+                <table class="query-table">
+                    <tr>
+                        <th>Question</th>
+                        <th>Count</th>
+                    </tr>
+                    {% for question, count in question_counts %}
+                    <tr>
+                        <td>{{ question }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <div class="stats-card">
+                <h2>Recent Queries</h2>
+                <table class="query-table">
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>User Query</th>
+                        <th>Matched Question</th>
+                        <th>Similarity</th>
+                    </tr>
+                    {% for log in logs[-20:]|reverse %}
+                    <tr>
+                        <td>{{ log.timestamp }}</td>
+                        <td>{{ log.user_query }}</td>
+                        <td>{{ log.matched_question }}</td>
+                        <td>{{ "%.2f"|format(log.similarity_score) }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
