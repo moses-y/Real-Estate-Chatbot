@@ -26,7 +26,7 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', '', text)
     return text
 
-# Improved similarity function with keyword weighting
+# Improved similarity function with keyword weighting and n-gram matching
 def calculate_similarity(query, document):
     # Preprocess texts
     query_processed = preprocess_text(query)
@@ -42,7 +42,10 @@ def calculate_similarity(query, document):
         'rent', 'price', 'cost', 'deposit', 'down payment', 'location', 'area',
         'bedroom', 'bathroom', 'square', 'meter', 'acre', 'land', 'agent', 'broker',
         'fee', 'commission', 'contract', 'agreement', 'title', 'deed', 'document',
-        'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate'
+        'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate',
+        'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
+        'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata', 'kileleshwa',
+        'investment', 'return', 'roi', 'appreciation', 'value', 'financing'
     ]
 
     # Count word occurrences
@@ -58,18 +61,36 @@ def calculate_similarity(query, document):
 
     for word in all_words:
         # Determine word weight (higher for important keywords)
-        weight = 2.0 if word in important_keywords else 1.0
+        weight = 3.0 if word in important_keywords else 1.0
+
+        # Give even higher weight to exact number matches (e.g., "10 million")
+        if word.isdigit() and word in query_counter and word in document_counter:
+            weight = 5.0
+
         total_weight += weight
 
         # If word appears in both query and document, add its weight to matched_weight
         if word in query_counter and word in document_counter:
             matched_weight += weight
 
+    # Boost score for consecutive word matches (n-grams)
+    for i in range(len(query_words) - 1):
+        bigram = query_words[i] + " " + query_words[i+1]
+        if bigram in " ".join(document_words):
+            matched_weight += 2.0
+            total_weight += 2.0
+
     # Calculate final similarity score
     if total_weight == 0:
         return 0
 
     similarity = matched_weight / total_weight
+
+    # Boost similarity for short queries that are fully contained in the document
+    if len(query_words) <= 5 and all(word in document_words for word in query_words):
+        similarity += 0.2
+        similarity = min(similarity, 1.0)  # Cap at 1.0
+
     return similarity
 
 # Function to log user queries
@@ -127,6 +148,22 @@ def is_greeting_only(message):
         ]
 
         if any(message.startswith(phrase) for phrase in greeting_phrases):
+            return True
+
+    return False
+
+# Function to handle follow-up questions
+def is_follow_up(message):
+    follow_up_phrases = [
+        'yes', 'yeah', 'sure', 'please', 'ok', 'okay', 'show me', 'tell me more',
+        'more information', 'more details', 'specific', 'options', 'share', 'show'
+    ]
+
+    message_lower = message.lower().strip()
+
+    # Check if message starts with a follow-up phrase
+    for phrase in follow_up_phrases:
+        if message_lower.startswith(phrase) or message_lower == phrase:
             return True
 
     return False
@@ -195,8 +232,35 @@ properties = [
         'type': 'Land',
         'description': 'Ready for development plot with all utilities and good access road.',
         'image': 'property5.jpg'
+    },
+    {
+        'id': 6,
+        'title': '2 Bedroom Apartment in South B',
+        'location': 'South B, Nairobi',
+        'price': 8500000,
+        'bedrooms': 2,
+        'bathrooms': 1,
+        'size': 80,  # square meters
+        'type': 'Apartment',
+        'description': 'Well-maintained 2 bedroom apartment in a family-friendly neighborhood with good security and amenities.',
+        'image': 'property6.jpg'
+    },
+    {
+        'id': 7,
+        'title': '3 Bedroom House in Langata',
+        'location': 'Langata, Nairobi',
+        'price': 12000000,
+        'bedrooms': 3,
+        'bathrooms': 2,
+        'size': 150,  # square meters
+        'type': 'House',
+        'description': 'Spacious 3 bedroom house with a small garden in a quiet neighborhood, close to Nairobi National Park.',
+        'image': 'property7.jpg'
     }
 ]
+
+# Store the last question for context
+last_question_context = {}
 
 # Routes
 @app.route('/')
@@ -206,11 +270,29 @@ def home():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.form['message'].lower().strip()
+    user_id = request.remote_addr  # Use IP address as a simple user identifier
 
     # Check if message is ONLY a greeting
     if is_greeting_only(user_message):
         response = random.choice(greeting_responses)
         log_query(user_message, "greeting", 1.0)
+        last_question_context[user_id] = None
+    # Check if it's a follow-up question
+    elif is_follow_up(user_message) and user_id in last_question_context and last_question_context[user_id]:
+        # Find questions related to the previous context
+        prev_context = last_question_context[user_id]
+
+        # If previous context was about locations or properties
+        if any(keyword in prev_context.lower() for keyword in ['location', 'property', 'million', 'buy', 'deposit']):
+            # Provide specific property options
+            response = "Here are some specific options in our portfolio:\n\n1. Modern 2 Bedroom Apartment - KES 9,500,000\nLocation: Westlands, near Sarit Centre\nFeatures: 85 sq.m, 1 bathroom, modern finishes\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nLocation: South B, Nairobi\nFeatures: 80 sq.m, 1 bathroom, family-friendly neighborhood\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nLocation: Langata, near Nairobi National Park\nFeatures: 150 sq.m, 2 bathrooms, small garden\n\nWould you like to schedule a viewing for any of these properties?"
+            log_query(user_message, "follow-up: property options", 0.9)
+            last_question_context[user_id] = "property options"
+        else:
+            # Generic follow-up
+            response = "I'd be happy to provide more information. Could you please specify what aspect you'd like to know more about?"
+            log_query(user_message, "follow-up: generic", 0.8)
+            last_question_context[user_id] = None
     else:
         # For messages that contain more than just a greeting,
         # calculate similarity with predefined questions
@@ -226,11 +308,29 @@ def chat():
             similarity_score = similarities[most_similar_index]
             response = data['Answer'][most_similar_index]
 
+            # Store context for follow-up questions
+            last_question_context[user_id] = matched_question
+
             # Log the query
             log_query(user_message, matched_question, similarity_score)
         else:
-            response = "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?"
-            log_query(user_message, "unknown", 0.0)
+            # Check for specific keywords to provide better responses
+            if "10 million" in user_message or "10m" in user_message:
+                response = "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands (9.5M) or South B (8.5M), or contribute significantly toward a 3-bedroom house in Langata (12M). Would you like to see specific listings for any of these options?"
+                log_query(user_message, "What can I buy with 10 million?", 0.7)
+                last_question_context[user_id] = "What can I buy with 10 million?"
+            elif "location" in user_message or "where" in user_message or "area" in user_message:
+                response = "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?"
+                log_query(user_message, "What locations do you have properties in?", 0.7)
+                last_question_context[user_id] = "What locations do you have properties in?"
+            elif "buy" in user_message or "purchase" in user_message:
+                response = "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?"
+                log_query(user_message, "How do I buy property?", 0.7)
+                last_question_context[user_id] = "How do I buy property?"
+            else:
+                response = "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?"
+                log_query(user_message, "unknown", 0.0)
+                last_question_context[user_id] = None
 
     return jsonify({'response': response})
 

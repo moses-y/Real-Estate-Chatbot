@@ -107,8 +107,6 @@ qa_data = {
     ]
 }
 
-# Add these to your qa_data.py file
-
 # Additional questions about property investment
 new_questions = [
     'What are the tax implications of buying property?',
@@ -146,8 +144,6 @@ new_answers = [
     'Handle property disputes by first discussing the issue directly, consulting property documents, seeking mediation, and as a last resort, pursuing legal action.'
 ]
 
-# Add these to your qa_data.py file
-
 # Questions about buying property
 buying_questions = [
     'I would like to buy property',
@@ -175,9 +171,68 @@ buying_answers = [
     'With 1 million KES, you could make a down payment on an apartment or land. For example, we have a plot in Kitengela for KES 3.5 million where your 1 million would cover almost 30% of the cost.'
 ]
 
-# Add these to your existing qa_data dictionary
-qa_data['Question'].extend(buying_questions)
-qa_data['Answer'].extend(buying_answers)
+# Location-specific questions
+location_questions = [
+    "What locations do you have properties in?",
+    "Where are your properties located?",
+    "Which areas do you have houses in?",
+    "Property locations for 10 million",
+    "What locations can I buy with 10 million?",
+    "Any other locations for 10 million?",
+    "Share locations that I can buy with 10 million",
+    "Where can I buy property with 10 million?",
+    "What areas have properties within 10 million?",
+    "Show me locations with properties around 10 million"
+]
+
+location_answers = [
+    "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
+    "Our properties are located in prime areas of Nairobi including Kilimani, Westlands, Karen, and the CBD. We also have land in Kitengela. For a budget of around 10 million, Westlands and South B offer good options. Would you like to see specific listings?",
+    "We have houses and apartments in Kilimani, Westlands, Karen, South B, Langata, and the CBD. We also have land in Kitengela. With a budget of 10 million, you could afford a nice 2-bedroom apartment in Westlands or South B. Would you like to see available options?",
+    "For a budget of 10 million KES, we have 2-bedroom apartments in Westlands starting at 9.5 million and in South B starting at 8.5 million. These are in good locations close to shopping centers and restaurants. Would you like to see specific listings?",
+    "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
+    "Yes, besides Westlands and South B, you might also consider Langata where your 10 million budget could get you a smaller 3-bedroom house. Would you like more information about these areas?",
+    "With 10 million KES, you can purchase property in Westlands (2-bedroom apartments), South B (2-bedroom apartments), or Langata (smaller 3-bedroom houses). Would you like to see specific listings in any of these areas?",
+    "With 10 million KES, you can buy property in Westlands, South B, Langata, or parts of Kileleshwa. The most value for money would be in Westlands where we have modern 2-bedroom apartments for 9.5 million. Would you like to see these options?",
+    "Areas with properties around 10 million include Westlands, South B, Langata, and parts of Kileleshwa. The type of property varies by location - apartments in Westlands and South B, and possibly small houses in Langata.",
+    "For properties around 10 million, look at Westlands (2-bedroom apartments for 9.5M), South B (2-bedroom apartments for 8.5M), and Langata (smaller 3-bedroom houses for around 12M). Would you like to see specific listings in any of these areas?"
+]
+
 # Add these to your existing qa_data dictionary
 qa_data['Question'].extend(new_questions)
 qa_data['Answer'].extend(new_answers)
+qa_data['Question'].extend(buying_questions)
+qa_data['Answer'].extend(buying_answers)
+qa_data['Question'].extend(location_questions)
+qa_data['Answer'].extend(location_answers)
+
+# Follow-up questions
+followup_questions = [
+    "Yes, show me specific options",
+    "Yes please share options",
+    "Show me available properties",
+    "Tell me more about the properties",
+    "What specific options do you have?",
+    "Yes, I'd like to see listings",
+    "Share more details please",
+    "Can you show me what's available?",
+    "Yes, tell me about specific properties",
+    "I want to see the available options"
+]
+
+followup_answers = [
+    "Here are some specific options in our portfolio:\n\n1. Modern 2 Bedroom Apartment - KES 9,500,000\nLocation: Westlands, near Sarit Centre\nFeatures: 85 sq.m, 1 bathroom, modern finishes\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nLocation: South B, Nairobi\nFeatures: 80 sq.m, 1 bathroom, family-friendly neighborhood\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nLocation: Langata, near Nairobi National Park\nFeatures: 150 sq.m, 2 bathrooms, small garden\n\nWould you like to schedule a viewing for any of these properties?",
+    "I'd be happy to share some options with you. Here are three properties that might interest you:\n\n1. 2 Bedroom Apartment in Westlands - KES 9,500,000\nModern finishes, close to shopping centers, 85 sq.m\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nFamily-friendly area, good security, 80 sq.m\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nQuiet neighborhood, small garden, 150 sq.m\n\nWould you like more information about any of these properties?",
+    "Here are some available properties in our portfolio:\n\n1. Modern 2 Bedroom Apartment in Westlands - KES 9,500,000\n2. 2 Bedroom Apartment in South B - KES 8,500,000\n3. 3 Bedroom House in Langata - KES 12,000,000\n4. 1/4 Acre Plot in Kitengela - KES 3,500,000\n\nEach property has different features and amenities. Would you like more details about any specific property?",
+    "I'd be happy to tell you more about our properties. Our current listings include apartments in Westlands and South B starting from KES 8.5 million, houses in Langata from KES 12 million, and land in Kitengela from KES 3.5 million. All our properties are in secure locations with good infrastructure. Would you like specific details about any of these areas?",
+    "We have several options available. In Westlands, we have a 2-bedroom apartment for KES 9.5M. In South B, we have a similar 2-bedroom unit for KES 8.5M. For those looking for a house, we have a 3-bedroom in Langata for KES 12M. We also have land in Kitengela starting at KES 3.5M. Which of these would you like more information about?",
+    "Here are some listings you might be interested in:\n\n1. Westlands: 2BR apartment, 85 sq.m, KES 9.5M\n2. South B: 2BR apartment, 80 sq.m, KES 8.5M\n3. Langata: 3BR house, 150 sq.m, KES 12M\n4. Kitengela: 1/4 acre plot, KES 3.5M\n\nAll properties are in secure locations with good amenities. Would you like to schedule a viewing?",
+    "I'd be happy to share more details. Our Westlands apartment (KES 9.5M) features modern finishes, 24-hour security, and is close to Sarit Centre. The South B apartment (KES 8.5M) is in a family-friendly compound with a playground. The Langata house (KES 12M) has a small garden and is in a quiet neighborhood. Which property interests you most?",
+    "Here's what we currently have available:\n\n- Westlands: Modern 2BR apartment, KES 9.5M\n- South B: Spacious 2BR apartment, KES 8.5M\n- Langata: Cozy 3BR house with garden, KES 12M\n- Kitengela: 1/4 acre plot with good access road, KES 3.5M\n\nAll residential properties come with parking, security, and water storage. Would you like to know more about any specific property?",
+    "Here are some specific properties in our portfolio:\n\n1. Westlands 2BR Apartment (KES 9.5M): Located near Sarit Centre, modern finishes, 85 sq.m, 1 bathroom, 24-hour security.\n\n2. South B 2BR Apartment (KES 8.5M): Family-friendly area, 80 sq.m, 1 bathroom, close to Mombasa Road.\n\n3. Langata 3BR House (KES 12M): Near Nairobi National Park, 150 sq.m, 2 bathrooms, small garden, quiet neighborhood.\n\nWould you like to schedule a viewing?",
+    "I'm happy to show you our available options. We have:\n\n1. A modern 2-bedroom apartment in Westlands for KES 9.5M\n2. A well-maintained 2-bedroom apartment in South B for KES 8.5M\n3. A cozy 3-bedroom house in Langata for KES 12M\n4. A 1/4 acre plot in Kitengela for KES 3.5M\n\nEach property has its unique features and benefits. Which one would you like more information about?"
+]
+
+# Add follow-up questions to the dataset
+qa_data['Question'].extend(followup_questions)
+qa_data['Answer'].extend(followup_answers)
