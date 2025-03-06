@@ -1,6 +1,6 @@
 # Kwetu Homes Real Estate Chatbot
 
-A sophisticated chatbot application designed to answer real estate inquiries using natural language processing and machine learning techniques.
+A simple chatbot application designed to answer real estate inquiries using natural language processing and machine learning techniques.
 
 ## Features
 
