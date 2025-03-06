@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import random
 import os
+import re
+from collections import Counter
 from data.qa_data import qa_data
 
 # Try to import config, use environment variables as fallback
@@ -17,12 +17,36 @@ app = Flask(__name__)
 # Extract questions and answers from data
 data = qa_data
 
-# Initialize TF-IDF Vectorizer for text similarity
-vectorizer = TfidfVectorizer()
+# Function to preprocess text
+def preprocess_text(text):
+    # Convert to lowercase and remove punctuation
+    text = text.lower()
+    text = re.sub(r'[^\w\s]', '', text)
+    return text
 
-# Convert the questions from the dataset into TF-IDF vectors
-corpus = list(data['Question'])
-X = vectorizer.fit_transform(corpus)
+# Function to calculate similarity using a simple bag of words approach
+def calculate_similarity(query, document):
+    # Preprocess texts
+    query_processed = preprocess_text(query)
+    document_processed = preprocess_text(document)
+
+    # Tokenize (split into words)
+    query_words = query_processed.split()
+    document_words = document_processed.split()
+
+    # Count word occurrences
+    query_counter = Counter(query_words)
+    document_counter = Counter(document_words)
+
+    # Find common words
+    common_words = set(query_counter.keys()) & set(document_counter.keys())
+
+    # Calculate similarity score (number of common words / total unique words)
+    if not common_words:
+        return 0
+
+    similarity = len(common_words) / (len(set(query_words) | set(document_words)))
+    return similarity
 
 # Handle greetings and salutations
 greetings = ['hi', 'hello', 'good morning', 'good evening', 'hey', 'howdy', 'hola', 'greetings']
@@ -43,19 +67,20 @@ def chat():
 
     # Check if message is a greeting
     if any(greeting in user_message for greeting in greetings):
-        response = np.random.choice(greeting_responses)
+        response = random.choice(greeting_responses)
     else:
-        # Convert user message to vector
-        user_message_vector = vectorizer.transform([user_message])
-
         # Calculate similarity between user message and predefined questions
-        similarities = cosine_similarity(user_message_vector, X)
+        similarities = []
+        for question in data['Question']:
+            similarity = calculate_similarity(user_message, question)
+            similarities.append(similarity)
 
         # Get the index of the most similar question
-        most_similar_index = np.argmax(similarities)
-
-        # Return the answer associated with the most similar question
-        response = data['Answer'][most_similar_index]
+        if similarities:
+            most_similar_index = similarities.index(max(similarities))
+            response = data['Answer'][most_similar_index]
+        else:
+            response = "I'm sorry, I don't understand your question."
 
     return jsonify({'response': response})
 
