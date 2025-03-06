@@ -174,7 +174,7 @@
                 <a href="{{ url_for('search_page') }}" class="nav-link active">
                     <i class="fas fa-search"></i> Property Search
                 </a>
-                <a href="{{ url_for('analytics_page') }}" class="nav-link">
+                <a href="{{ url_for('analytics') }}" class="nav-link">
                     <i class="fas fa-chart-bar"></i> Analytics
                 </a>
             </div>
@@ -182,7 +182,7 @@
         
         <main>
             <div class="property-detail-container">
-                <div class="property-detail-header" style="background-image: url('{{ property.image|default('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80') }}')">
+                <div class="property-detail-header" style="background-image: url({% if property.image %}{{ property.image }}{% else %}https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80{% endif %})">
                     <div class="property-detail-overlay">
                         <div class="property-detail-title">{{ property.title|default('Modern 2 Bedroom Apartment') }}</div>
                         <div class="property-detail-location"><i class="fas fa-map-marker-alt"></i> {{ property.location|default('Westlands, Nairobi') }}</div>
