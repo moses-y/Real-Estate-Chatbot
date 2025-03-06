@@ -2,6 +2,10 @@
 
 A simple chatbot application designed to answer real estate inquiries using natural language processing and machine learning techniques.
 
+## Live Demo
+
+Check out the live demo: [Kwetu Homes Chatbot](https://moses-y.github.io/Real-Estate-Chatbot/)
+
 ## Features
 
 - **Natural Language Understanding**: Processes user queries with advanced text similarity algorithms
