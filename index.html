@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kwetu Homes Chatbot</title>
+    <title>Kwetu Homes Real Estate Chatbot</title>
+    <meta name="description" content="Kwetu Homes Real Estate Chatbot - Get instant answers about properties, buying process, and more.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Styles for GitHub Pages */
+        /* Modern color scheme and design variables */
+        :root {
+            --primary-color: #2a4365;
+            --secondary-color: #4299e1;
+            --accent-color: #ed8936;
+            --light-bg: #f7fafc;
+            --dark-text: #2d3748;
+            --light-text: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+            --border-radius-sm: 5px;
+            --border-radius-lg: 20px;
+        }
+
+        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -15,23 +32,27 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+            color: var(--dark-text);
+            background-color: #f5f7fa;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234299e1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
         }
 
+        /* Enhanced Header styles */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            padding: 15px 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
         }
 
         .logo {
@@ -40,28 +61,64 @@
             gap: 15px;
         }
 
-        .logo h1 {
-            font-size: 24px;
-            color: #2c3e50;
+        .logo img {
+            height: 60px;
+            transition: var(--transition);
         }
 
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Improved Navigation styles */
         .nav-links {
             display: flex;
-            gap: 20px;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .nav-link {
-            color: #2c3e50;
+            padding: 12px 20px;
             text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background-color: #eee;
+        .nav-link:hover {
+            background-color: rgba(66, 153, 225, 0.1);
         }
 
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Main content styles */
         main {
             display: grid;
             grid-template-columns: 1fr;
@@ -74,300 +131,955 @@
             }
         }
 
+        /* Enhanced chat container styles */
         .chat-container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: var(--border-radius);
             overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .chat-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            opacity: 1;
         }
 
         .chat-box {
-            height: 400px;
+            flex: 1;
             padding: 20px;
             overflow-y: auto;
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
         }
 
+        /* Improved chat bubbles */
         .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 10px;
-            max-width: 80%;
             position: relative;
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.5;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease;
         }
 
-        .user {
-            background-color: #3498db;
-            color: white;
-            margin-left: auto;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(10px); }
         }
 
         .bot {
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            border-top-left-radius: 2px;
+            align-self: flex-start;
         }
 
+        .user {
+            background: white;
+            color: var(--dark-text);
+            border-top-right-radius: 2px;
+            align-self: flex-end;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-content {
+            word-wrap: break-word;
+        }
+
+        .message-timestamp {
+            position: absolute;
+            bottom: -18px;
+            font-size: 0.7em;
+            color: #718096;
+            opacity: 0.7;
+        }
+
+        .bot .message-timestamp {
+            left: 5px;
+        }
+
+        .user .message-timestamp {
+            right: 5px;
+        }
+
+        /* Typing indicator animation */
+        .typing-indicator-container {
+            padding: 15px;
+            width: auto;
+            max-width: 150px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: var(--light-text);
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.7;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation: bounce 1.2s infinite 0.1s;
+        }
+        .typing-indicator span:nth-child(2) {
+            animation: bounce 1.2s infinite 0.2s;
+        }
+        .typing-indicator span:nth-child(3) {
+            animation: bounce 1.2s infinite 0.3s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+        }
+
+        /* Chat controls */
+        .chat-controls {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+            background-color: #f9f9f9;
+        }
+
+        .control-btn {
+            padding: 8px 12px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .control-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Enhanced input area */
+        .input-area {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: white;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #e1e1e1;
+            border-radius: 24px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .input-area input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+            outline: none;
+        }
+
+        .input-area button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            width: 46px;
+            height: 46px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-area button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced suggestion chips */
+        .suggestions {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .suggestions h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suggestion-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .suggestion-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 18px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .suggestion-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Enhanced feedback buttons */
         .feedback-buttons {
             display: flex;
-            gap: 5px;
-            margin-top: 5px;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
             justify-content: flex-end;
         }
 
         .feedback-btn {
             background: none;
             border: none;
-            cursor: pointer;
             font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
             opacity: 0.7;
-            transition: opacity 0.3s;
         }
 
         .feedback-btn:hover {
             opacity: 1;
+            transform: scale(1.2);
         }
 
-        .input-area {
-            display: flex;
-            padding: 15px;
-            border-top: 1px solid #eee;
+        .feedback-btn.helpful {
+            color: #38A169;
         }
 
-        .input-area input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
+        .feedback-btn.not-helpful {
+            color: #E53E3E;
         }
 
-        .input-area button {
-            margin-left: 10px;
-            padding: 10px 20px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+        .feedback-text {
+            font-size: 12px;
+            color: #718096;
         }
 
-        .input-area button:hover {
-            background-color: #1a252f;
+        /* Quick actions section */
+        .quick-actions {
+            margin-top: 25px;
+            border-top: 1px solid #edf2f7;
+            padding-top: 20px;
         }
 
-        .suggestions {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .suggestions h3 {
+        .quick-actions h4 {
+            color: var(--primary-color);
             margin-bottom: 15px;
-            color: #2c3e50;
+            font-size: 16px;
         }
 
-        .suggestion-buttons {
+        .action-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 20px;
         }
 
-        .suggestion-btn {
-            padding: 8px 15px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 20px;
+        .action-btn {
+            padding: 10px 15px;
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .action-btn:hover {
+            background-color: #edf2f7;
+            transform: translateY(-2px);
+        }
+
+        /* Featured property card */
+        .property-highlight {
+            margin-top: 25px;
+            border-top: 1px solid #edf2f7;
+            padding-top: 20px;
+        }
+
+        .property-highlight h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .mini-property-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .mini-property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mini-property-image {
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mini-property-info {
+            padding: 12px;
+        }
+
+        .mini-property-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .mini-property-location {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .mini-property-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .mini-view-details {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 6px 0;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: var(--transition);
+            font-size: 13px;
         }
 
-        .suggestion-btn:hover {
-            background-color: #e0e0e0;
+        .mini-view-details:hover {
+            background-color: var(--secondary-color);
         }
 
+        /* Enhanced property cards */
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            color: #718096;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .property-location::before {
+            content: "📍";
+            margin-right: 5px;
+        }
+
+        .property-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .property-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #4a5568;
+            gap: 5px;
+        }
+
+        .view-btn {
+            width: 100%;
+            padding: 10px 0;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .view-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Property search styles */
+        .search-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        /* GitHub link */
         .github-link {
             margin-top: 20px;
             text-align: center;
         }
 
         .github-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #2c3e50;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background-color: #24292e;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-weight: bold;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
         }
 
         .github-link a:hover {
-            background-color: #1a252f;
+            background-color: #3a3a3a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
         }
 
-        .demo-notice {
-            background-color: #f39c12;
-            color: white;
+        /* Shortcuts info */
+        .shortcuts-info {
+            margin: 15px 0;
+            text-align: center;
+            color: #718096;
+            font-size: 13px;
+            background-color: var(--light-bg);
             padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
         }
 
+        /* Enhanced footer */
         footer {
-            margin-top: 30px;
-            text-align: center;
-            color: #7f8c8d;
+            margin-top: 40px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: var(--transition);
             font-size: 14px;
         }
 
-        /* Property cards for search page */
-        .property-card {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+        .footer-links a:hover {
+            color: var(--primary-color);
         }
 
-        .property-image {
-            height: 200px;
-            background-color: #ddd;
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: #4a5568;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid #edf2f7;
+        }
+
+        /* In-chat property results */
+        .chat-property-results {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .chat-property-card {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .chat-property-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .chat-property-image {
+            width: 80px;
+            height: 80px;
             background-size: cover;
             background-position: center;
         }
 
-        .property-details {
-            padding: 15px;
+        .chat-property-info {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 12px;
         }
 
-        .property-title {
-            font-size: 18px;
+        .chat-property-title {
             font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .chat-property-location {
+            color: #718096;
+            margin-bottom: 3px;
+        }
+
+        .chat-property-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 3px;
+        }
+
+        .chat-property-specs {
+            color: #718096;
             margin-bottom: 5px;
         }
 
-        .property-location {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-
-        .property-price {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .property-features {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .view-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #2c3e50;
+        .chat-property-link {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: var(--primary-color);
             color: white;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
         }
 
-        .view-btn:hover {
-            background-color: #1a252f;
+        .view-all-link {
+            text-align: center;
+            display: block;
+            margin-top: 5px;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* Demo notice */
+        .demo-notice {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(66, 153, 225, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+            
+            header {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .nav-link {
+                padding: 10px;
+                font-size: 14px;
+                justify-content: center;
+                flex: 1;
+            }
+            
+            main {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .chat-container {
+                height: 450px;
+                margin-bottom: 20px;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .input-area {
+                padding: 10px;
+            }
+            
+            .input-area input {
+                padding: 10px 15px;
+            }
+            
+            .suggestions {
+                order: -1;
+                margin-bottom: 20px;
+            }
+            
+            .suggestion-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .search-filters > div {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .show-suggestions {
+            display: block !important;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="demo-notice">
+            <p><i class="fas fa-info-circle"></i> This is a static demo of the Kwetu Homes Chatbot. For the full experience, check out our <a href="https://github.com/moses-y/Real-Estate-Chatbot" style="color: white; text-decoration: underline;">GitHub repository</a>.</p>
+        </div>
+        
         <header>
             <div class="logo">
-                <img src="images/logo.png" alt="Kwetu Homes Logo" style="height: 60px;">
-                <h1>Kwetu Homes Chatbot</h1>
+                <img src="images/logo.png" alt="Kwetu Homes Logo" onerror="this.src='https://via.placeholder.com/60x60?text=KH';this.onerror='';">
+                <h1>Kwetu Homes Real Estate</h1>
             </div>
             <div class="nav-links">
-                <a href="#" class="nav-link active" id="chat-link">Chat</a>
-                <a href="#" class="nav-link" id="search-link">Property Search</a>
+                <a href="#" class="nav-link active" id="chat-link">
+                    <i class="fas fa-comment-dots"></i> Chatbot
+                </a>
+                <a href="#" class="nav-link" id="search-link">
+                    <i class="fas fa-search"></i> Property Search
+                </a>
             </div>
         </header>
         
         <main id="chat-view">
             <div class="chat-container">
-                <div class="chat-box" id="chat-box">
-                    <div class="message bot">
-                        <p>Hello! I'm the Kwetu Homes AI Assistant. How can I help you today?</p>
+                <div class="chat-header">
+                    <h2><i class="fas fa-robot"></i> Kwetu Homes Assistant</h2>
+                    <div class="chat-header-actions">
+                        <button id="toggle-suggestions" title="Toggle suggestions panel" class="action-btn">
+                            <i class="fas fa-lightbulb"></i>
+                        </button>
                     </div>
                 </div>
                 
+                <div class="chat-box" id="chat-box">
+                    <div class="message bot" id="msg-welcome">
+                        <div class="message-content">
+                            Hello! I'm the Kwetu Homes Real Estate Assistant. How can I help you today? I can provide information about properties, buying process, mortgages, and more.
+                        </div>
+                        <div class="feedback-buttons">
+                            <button class="feedback-btn helpful" onclick="provideFeedback(this, true)" title="This was helpful">👍</button>
+                            <button class="feedback-btn not-helpful" onclick="provideFeedback(this, false)" title="This needs improvement">👎</button>
+                        </div>
+                        <div class="message-timestamp">Now</div>
+                    </div>
+                </div>
+                
+                <div class="chat-controls">
+                    <button id="reset-chat" class="control-btn">
+                        <i class="fas fa-trash-alt"></i> Clear Conversation
+                    </button>
+                </div>
+                
                 <div class="input-area">
-                    <input type="text" id="user-input" placeholder="Ask me anything about real estate...">
-                    <button id="send-btn">Send</button>
+                    <input type="text" id="user-input" placeholder="Ask me anything about real estate..." aria-label="Type your message">
+                    <button id="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
             
             <div class="suggestions">
-                <h3>Try asking about:</h3>
+                <h3><i class="fas fa-lightbulb"></i> Try asking about:</h3>
                 <div class="suggestion-buttons">
-                    <button class="suggestion-btn">Property viewing</button>
-                    <button class="suggestion-btn">Buying documents</button>
-                    <button class="suggestion-btn">Property prices</button>
+                    <button class="suggestion-btn">Property viewing process</button>
+                    <button class="suggestion-btn">Document requirements</button>
+                    <button class="suggestion-btn">Property prices in Nairobi</button>
                     <button class="suggestion-btn">Mortgage options</button>
-                    <button class="suggestion-btn">Properties for 10 million</button>
+                    <button class="suggestion-btn">Properties under 10 million</button>
+                </div>
+                
+                <div class="quick-actions">
+                    <h4>Quick Actions</h4>
+                    <div class="action-buttons">
+                        <a href="#" id="search-properties-btn" class="action-btn">
+                            <i class="fas fa-search"></i> Search Properties
+                        </a>
+                        <a href="#" id="schedule-viewing" class="action-btn">
+                            <i class="fas fa-calendar-alt"></i> Schedule Viewing
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="property-highlight">
+                    <h4>Featured Property</h4>
+                    <div class="mini-property-card">
+                        <div class="mini-property-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')">
+                            <div class="property-badge">Featured</div>
+                        </div>
+                        <div class="mini-property-info">
+                            <div class="mini-property-title">Modern 2 Bedroom Apartment</div>
+                            <div class="mini-property-location">Westlands, Nairobi</div>
+                            <div class="mini-property-price">KES 9,500,000</div>
+                            <button class="mini-view-details" onclick="sendMessage('Tell me about the Westlands apartment')">View Details</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="github-link">
-                    <a href="https://github.com/moses-y/Real-Estate-Chatbot">View on GitHub</a>
+                    <a href="https://github.com/moses-y/Real-Estate-Chatbot" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
             </div>
         </main>
 
         <main id="search-view" style="display: none; grid-template-columns: 1fr;">
             <div class="search-container">
-                <h2>Search for Properties</h2>
-                <div class="search-filters" style="margin-bottom: 20px;">
+                <h2><i class="fas fa-search"></i> Find Your Dream Property</h2>
+                <div class="search-filters">
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
                         <div>
                             <label for="location">Location</label>
-                            <input type="text" id="location" placeholder="Enter location..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="text" id="location" placeholder="Enter location..." style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
                         </div>
                         <div>
                             <label for="min_price">Min Price</label>
-                            <input type="number" id="min_price" placeholder="KES" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" id="min_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
                         </div>
                         <div>
                             <label for="max_price">Max Price</label>
-                            <input type="number" id="max_price" placeholder="KES" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" id="max_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
                         </div>
                         <div>
                             <label for="type">Property Type</label>
-                            <select id="type" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <select id="type" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
                                 <option value="">Any</option>
-                                <option value="Apartment">Apartment</option>
-                                <option value="Villa">Villa</option>
-                                <option value="House">House</option>
-                                <option value="Commercial">Commercial</option>
-                                <option value="Land">Land</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="villa">Villa</option>
+                                <option value="house">House</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="land">Land</option>
                             </select>
                         </div>
                         <div>
                             <label for="bedrooms">Bedrooms</label>
-                            <input type="number" id="bedrooms" placeholder="Number of bedrooms" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" id="bedrooms" placeholder="Number of bedrooms" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
                         </div>
                     </div>
-                    <button id="search-btn" style="padding: 10px 20px; background-color: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+                    <button id="search-btn" style="padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: var(--border-radius-sm); cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-search"></i> Search Properties
+                    </button>
                 </div>
                 <div id="property-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
                     <!-- Property cards will be dynamically inserted here -->
@@ -375,370 +1087,509 @@
             </div>
         </main>
         
+        <div class="shortcuts-info">
+            <p><strong>Keyboard shortcuts:</strong> Alt+R to reset chat • Alt+S to focus search input</p>
+        </div>
+        
         <footer>
-            <p>&copy; 2025 Kwetu Homes. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="Kwetu Homes Logo" width="40" onerror="this.src='https://via.placeholder.com/40x40?text=KH';this.onerror='';">
+                    <span>Kwetu Homes Real Estate</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
+            </div>
         </footer>
     </div>
 
     <script>
-        // Chatbot dataset (simplified version of your qa_data.py)
-        const qaData = {
-            'questions': [
-                'How can I schedule a property viewing?',
-                'What documents do I need to buy a house?',
-                'What is the price range for houses in Nyeri?',
-                'How do I check if a property has a valid title deed?',
-                'What are the steps to buying land in Nairobi?',
-                'Do you have rental apartments in Eldoret?',
-                'What should I consider when choosing a real estate agent?',
-                'What are the legal requirements for buying a house in Kitengela?',
-                'Do you offer virtual property tours?',
-                'What factors affect property value appreciation?',
-                'Can I negotiate the price of a house?',
-                'What is the best location to invest in real estate currently?',
-                'What financing options do you offer for home purchases?',
-                'How do I calculate my monthly mortgage payments?',
-                'What are the common home loan interest rates?',
-                'I would like to buy property',
-                'I want to buy a house',
-                'How do I buy property?',
-                'What do I need to buy a house?',
-                'What documents are needed to buy property?',
-                'What is the process of buying a house?',
-                'I have money and want to buy property',
-                'I have 1 million, what property can I buy?',
-                'If I have 1 million as deposit, what can I get?',
-                'What can I buy with 1 million shillings?',
-                'What locations do you have properties in?',
-                'Where are your properties located?',
-                'Which areas do you have houses in?',
-                'Property locations for 10 million',
-                'What locations can I buy with 10 million?',
-                'Any other locations for 10 million?',
-                'Share locations that I can buy with 10 million',
-                'Where can I buy property with 10 million?',
-                'What areas have properties within 10 million?',
-                'Show me locations with properties around 10 million'
-            ],
-            'answers': [
-                'You can schedule a property viewing by contacting our agents via phone or email.',
-                'To buy a house, you need identification, proof of income, and a signed sale agreement.',
-                'The price range for houses in Nyeri varies between KES 5M and KES 50M.',
-                'You can verify a title deed at the local land registry to ensure ownership legitimacy.',
-                'Buying land involves due diligence, title deed verification, and legal paperwork.',
-                'Yes, we have several rental apartments in Eldoret with different price ranges.',
-                'When choosing an agent, consider their experience, reputation, and market knowledge.',
-                'The legal requirements include title deed verification, contract signing, and land registry checks.',
-                'Yes, we provide virtual tours to help you view properties remotely.',
-                'Factors affecting property value include location, infrastructure, and demand trends.',
-                'Yes, property prices are often negotiable depending on market conditions and seller preferences.',
-                'Investment potential in Machakos is high due to infrastructure development and economic growth.',
-                'We offer financing options including mortgages and installment payment plans.',
-                'Monthly mortgage payments depend on the loan amount, interest rate, and loan tenure.',
-                'Home loan interest rates typically range from 9% to 13% per annum.',
-                'To buy property, you need identification documents, proof of income, and will need to sign a sale agreement. Our agents can guide you through the entire process. Would you like to know about specific properties?',
-                'To purchase a house, you\'ll need identification, proof of income, and to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork.',
-                'The property buying process involves identifying a property, making an offer, securing financing, conducting inspections, and completing legal paperwork. Our agents can assist you at every step.',
-                'To buy a house, you need identification documents, proof of income, and a signed sale agreement. You\'ll also need a down payment (typically 10-20% of the property value) and mortgage approval if financing.',
-                'Documents needed for property purchase include national ID/passport, KRA PIN, proof of income (bank statements or payslips), and marriage certificate if applicable. You\'ll also sign a sale agreement.',
-                'The house buying process involves property viewing, price negotiation, paying a deposit, securing financing, conducting due diligence, signing the sale agreement, and transferring ownership.',
-                'Great! Our properties range from KES 3.5 million to KES 45 million. Would you like to know about specific locations or property types that match your budget?',
-                'With 1 million KES, you could make a down payment on several of our properties. This would typically be a 10-20% deposit on properties valued between KES 5-10 million. Would you like to see specific options?',
-                'With 1 million KES as a 10% deposit, you could qualify for properties around KES 10 million. This includes 2-bedroom apartments in Westlands or Kilimani. Would you like to see available options?',
-                'With 1 million KES, you could make a down payment on an apartment or land. For example, we have a plot in Kitengela for KES 3.5 million where your 1 million would cover almost 30% of the cost.',
-                'We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?',
-                'Our properties are located in prime areas of Nairobi including Kilimani, Westlands, Karen, and the CBD. We also have land in Kitengela. For a budget of around 10 million, Westlands and South B offer good options. Would you like to see specific listings?',
-                'We have houses and apartments in Kilimani, Westlands, Karen, South B, Langata, and the CBD. We also have land in Kitengela. With a budget of 10 million, you could afford a nice 2-bedroom apartment in Westlands or South B. Would you like to see available options?',
-                'For a budget of 10 million KES, we have 2-bedroom apartments in Westlands starting at 9.5 million and in South B starting at 8.5 million. These are in good locations close to shopping centers and restaurants. Would you like to see specific listings?',
-                'With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?',
-                'Yes, besides Westlands and South B, you might also consider Langata where your 10 million budget could get you a smaller 3-bedroom house. Would you like more information about these areas?',
-                'With 10 million KES, you can purchase property in Westlands (2-bedroom apartments), South B (2-bedroom apartments), or Langata (smaller 3-bedroom houses). Would you like to see specific listings in any of these areas?',
-                'With 10 million KES, you can buy property in Westlands, South B, Langata, or parts of Kileleshwa. The most value for money would be in Westlands where we have modern 2-bedroom apartments for 9.5 million. Would you like to see these options?',
-                'Areas with properties around 10 million include Westlands, South B, Langata, and parts of Kileleshwa. The type of property varies by location - apartments in Westlands and South B, and possibly small houses in Langata.',
-                'For properties around 10 million, look at Westlands (2-bedroom apartments for 9.5M), South B (2-bedroom apartments for 8.5M), and Langata (smaller 3-bedroom houses for around 12M). Would you like to see specific listings in any of these areas?'
-            ]
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chatbot dataset (simplified version of your qa_data.py)
+            const qaData = {
+                'questions': [
+                    'How can I schedule a property viewing?',
+                    'What documents do I need to buy a house?',
+                    'What is the price range for houses in Nyeri?',
+                    'How do I check if a property has a valid title deed?',
+                    'What are the steps to buying land in Nairobi?',
+                    'Do you have rental apartments in Eldoret?',
+                    'What should I consider when choosing a real estate agent?',
+                    'What are the legal requirements for buying a house in Kitengela?',
+                    'Do you offer virtual property tours?',
+                    'What factors affect property value appreciation?',
+                    'Can I negotiate the price of a house?',
+                    'What is the best location to invest in real estate currently?',
+                    'What financing options do you offer for home purchases?',
+                    'How do I calculate my monthly mortgage payments?',
+                    'What are the common home loan interest rates?',
+                    'I would like to buy property',
+                    'I want to buy a house',
+                    'How do I buy property?',
+                    'What do I need to buy a house?',
+                    'What documents are needed to buy property?',
+                    'What is the process of buying a house?',
+                    'I have money and want to buy property',
+                    'I have 1 million, what property can I buy?',
+                    'If I have 1 million as deposit, what can I get?',
+                    'What can I buy with 1 million shillings?',
+                    'What locations do you have properties in?',
+                    'Where are your properties located?',
+                    'Which areas do you have houses in?',
+                    'Property locations for 10 million',
+                    'What locations can I buy with 10 million?',
+                    'Any other locations for 10 million?',
+                    'Share locations that I can buy with 10 million',
+                    'Where can I buy property with 10 million?',
+                    'What areas have properties within 10 million?',
+                    'Show me locations with properties around 10 million'
+                ],
+                'answers': [
+                    'You can schedule a property viewing by contacting our agents via phone or email.',
+                    'To buy a house, you need identification, proof of income, and a signed sale agreement.',
+                    'The price range for houses in Nyeri varies between KES 5M and KES 50M.',
+                    'You can verify a title deed at the local land registry to ensure ownership legitimacy.',
+                    'Buying land involves due diligence, title deed verification, and legal paperwork.',
+                    'Yes, we have several rental apartments in Eldoret with different price ranges.',
+                    'When choosing an agent, consider their experience, reputation, and market knowledge.',
+                    'The legal requirements include title deed verification, contract signing, and land registry checks.',
+                    'Yes, we provide virtual tours to help you view properties remotely.',
+                    'Factors affecting property value include location, infrastructure, and demand trends.',
+                    'Yes, property prices are often negotiable depending on market conditions and seller preferences.',
+                    'Investment potential in Machakos is high due to infrastructure development and economic growth.',
+                    'We offer financing options including mortgages and installment payment plans.',
+                    'Monthly mortgage payments depend on the loan amount, interest rate, and loan tenure.',
+                    'Home loan interest rates typically range from 9% to 13% per annum.',
+                    'To buy property, you need identification documents, proof of income, and will need to sign a sale agreement. Our agents can guide you through the entire process. Would you like to know about specific properties?',
+                    'To purchase a house, you\'ll need identification, proof of income, and to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork.',
+                    'The property buying process involves identifying a property, making an offer, securing financing, conducting inspections, and completing legal paperwork. Our agents can assist you at every step.',
+                    'To buy a house, you need identification documents, proof of income, and a signed sale agreement. You\'ll also need a down payment (typically 10-20% of the property value) and mortgage approval if financing.',
+                    'Documents needed for property purchase include national ID/passport, KRA PIN, proof of income (bank statements or payslips), and marriage certificate if applicable. You\'ll also sign a sale agreement.',
+                    'The house buying process involves property viewing, price negotiation, paying a deposit, securing financing, conducting due diligence, signing the sale agreement, and transferring ownership.',
+                    'Great! Our properties range from KES 3.5 million to KES 45 million. Would you like to know about specific locations or property types that match your budget?',
+                    'With 1 million KES, you could make a down payment on several of our properties. This would typically be a 10-20% deposit on properties valued between KES 5-10 million. Would you like to see specific options?',
+                    'With 1 million KES as a 10% deposit, you could qualify for properties around KES 10 million. This includes 2-bedroom apartments in Westlands or Kilimani. Would you like to see available options?',
+                    'With 1 million KES, you could make a down payment on an apartment or land. For example, we have a plot in Kitengela for KES 3.5 million where your 1 million would cover almost 30% of the cost.',
+                    'We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?',
+                    'Our properties are located in prime areas of Nairobi including Kilimani, Westlands, Karen, and the CBD. We also have land in Kitengela. For a budget of around 10 million, Westlands and South B offer good options. Would you like to see specific listings?',
+                    'We have houses and apartments in Kilimani, Westlands, Karen, South B, Langata, and the CBD. We also have land in Kitengela. With a budget of 10 million, you could afford a nice 2-bedroom apartment in Westlands or South B. Would you like to see available options?',
+                    'For a budget of 10 million KES, we have 2-bedroom apartments in Westlands starting at 9.5 million and in South B starting at 8.5 million. These are in good locations close to shopping centers and restaurants. Would you like to see specific listings?',
+                    'With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?',
+                    'Yes, besides Westlands and South B, you might also consider Langata where your 10 million budget could get you a smaller 3-bedroom house. Would you like more information about these areas?',
+                    'With 10 million KES, you can purchase property in Westlands (2-bedroom apartments), South B (2-bedroom apartments), or Langata (smaller 3-bedroom houses). Would you like to see specific listings in any of these areas?',
+                    'With 10 million KES, you can buy property in Westlands, South B, Langata, or parts of Kileleshwa. The most value for money would be in Westlands where we have modern 2-bedroom apartments for 9.5 million. Would you like to see these options?',
+                    'Areas with properties around 10 million include Westlands, South B, Langata, and parts of Kileleshwa. The type of property varies by location - apartments in Westlands and South B, and possibly small houses in Langata.',
+                    'For properties around 10 million, look at Westlands (2-bedroom apartments for 9.5M), South B (2-bedroom apartments for 8.5M), and Langata (smaller 3-bedroom houses for around 12M). Would you like to see specific listings in any of these areas?'
+                ]
+            };
 
-        // Greeting responses
-        const greetingResponses = [
-            "Hello! How can I assist you with your real estate needs today?",
-            "Hi there! Welcome to Kwetu Homes. How can I help you?",
-            "Good day! I'm here to answer your real estate questions. What would you like to know?",
-            "Hey! Looking for property information? I'm here to help!"
-        ];
+            // Greeting responses
+            const greetingResponses = [
+                "Hello! How can I assist you with your real estate needs today?",
+                "Hi there! Welcome to Kwetu Homes. How can I help you?",
+                "Good day! I'm here to answer your real estate questions. What would you like to know?",
+                "Hey! Looking for property information? I'm here to help!"
+            ];
 
-        // Follow-up response for when user asks to see specific options
-        const specificOptionsResponse = "Here are some specific options in our portfolio:\n\n1. Modern 2 Bedroom Apartment - KES 9,500,000\nLocation: Westlands, near Sarit Centre\nFeatures: 85 sq.m, 1 bathroom, modern finishes\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nLocation: South B, Nairobi\nFeatures: 80 sq.m, 1 bathroom, family-friendly neighborhood\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nLocation: Langata, near Nairobi National Park\nFeatures: 150 sq.m, 2 bathrooms, small garden\n\nWould you like to schedule a viewing for any of these properties?";
+            // Follow-up response for when user asks to see specific options
+            const specificOptionsResponse = "Here are some specific options in our portfolio:\n\n1. Modern 2 Bedroom Apartment - KES 9,500,000\nLocation: Westlands, near Sarit Centre\nFeatures: 85 sq.m, 1 bathroom, modern finishes\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nLocation: South B, Nairobi\nFeatures: 80 sq.m, 1 bathroom, family-friendly neighborhood\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nLocation: Langata, near Nairobi National Park\nFeatures: 150 sq.m, 2 bathrooms, small garden\n\nWould you like to schedule a viewing for any of these properties?";
 
-        // Sample property data
-        const properties = [
-            {
-                id: 1,
-                title: 'Modern 3 Bedroom Apartment',
-                location: 'Kilimani, Nairobi',
-                price: 15000000,
-                bedrooms: 3,
-                bathrooms: 2,
-                size: 120,
-                type: 'Apartment',
-                description: 'Luxurious 3 bedroom apartment with modern finishes, spacious living area, and balcony with city views.',
-                image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 2,
-                title: '4 Bedroom Villa with Garden',
-                location: 'Karen, Nairobi',
-                price: 45000000,
-                bedrooms: 4,
-                bathrooms: 3,
-                size: 300,
-                type: 'Villa',
-                description: 'Spacious family home with large garden, swimming pool, and modern kitchen. Located in a secure gated community.',
-                image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 3,
-                title: '2 Bedroom Apartment',
-                location: 'Westlands, Nairobi',
-                price: 9500000,
-                bedrooms: 2,
-                bathrooms: 1,
-                size: 85,
-                type: 'Apartment',
-                description: 'Cozy 2 bedroom apartment with modern finishes, close to shopping centers and restaurants.',
-                image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 4,
-                title: 'Commercial Space',
-                location: 'CBD, Nairobi',
-                price: 25000000,
-                bedrooms: 0,
-                bathrooms: 2,
-                size: 200,
-                type: 'Commercial',
-                description: 'Prime commercial space in Nairobi CBD, suitable for office or retail use.',
-                image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8b2ZmaWNlJTIwc3BhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 5,
-                title: '1/4 Acre Plot',
-                location: 'Kitengela, Kajiado',
-                price: 3500000,
-                bedrooms: 0,
-                bathrooms: 0,
-                size: 1011,
-                type: 'Land',
-                description: 'Ready for development plot with all utilities and good access road.',
-                image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 6,
-                title: '2 Bedroom Apartment in South B',
-                location: 'South B, Nairobi',
-                price: 8500000,
-                bedrooms: 2,
-                bathrooms: 1,
-                size: 80,
-                type: 'Apartment',
-                description: 'Well-maintained 2 bedroom apartment in a family-friendly neighborhood with good security and amenities.',
-                image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
-            },
-            {
-                id: 7,
-                title: '3 Bedroom House in Langata',
-                location: 'Langata, Nairobi',
-                price: 12000000,
-                bedrooms: 3,
-                bathrooms: 2,
-                size: 150,
-                type: 'House',
-                description: 'Spacious 3 bedroom house with a small garden in a quiet neighborhood, close to Nairobi National Park.',
-                image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+            // Sample property data
+            const properties = [
+                {
+                    id: 1,
+                    title: 'Modern 3 Bedroom Apartment',
+                    location: 'Kilimani, Nairobi',
+                    price: 15000000,
+                    bedrooms: 3,
+                    bathrooms: 2,
+                    size: 120,
+                    type: 'Apartment',
+                    description: 'Luxurious 3 bedroom apartment with modern finishes, spacious living area, and balcony with city views.',
+                    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 2,
+                    title: '4 Bedroom Villa with Garden',
+                    location: 'Karen, Nairobi',
+                    price: 45000000,
+                    bedrooms: 4,
+                    bathrooms: 3,
+                    size: 300,
+                    type: 'Villa',
+                    description: 'Spacious family home with large garden, swimming pool, and modern kitchen. Located in a secure gated community.',
+                    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 3,
+                    title: '2 Bedroom Apartment',
+                    location: 'Westlands, Nairobi',
+                    price: 9500000,
+                    bedrooms: 2,
+                    bathrooms: 1,
+                    size: 85,
+                    type: 'Apartment',
+                    description: 'Cozy 2 bedroom apartment with modern finishes, close to shopping centers and restaurants.',
+                    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 4,
+                    title: 'Commercial Space',
+                    location: 'CBD, Nairobi',
+                    price: 25000000,
+                    bedrooms: 0,
+                    bathrooms: 2,
+                    size: 200,
+                    type: 'Commercial',
+                    description: 'Prime commercial space in Nairobi CBD, suitable for office or retail use.',
+                    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8b2ZmaWNlJTIwc3BhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 5,
+                    title: '1/4 Acre Plot',
+                    location: 'Kitengela, Kajiado',
+                    price: 3500000,
+                    bedrooms: 0,
+                    bathrooms: 0,
+                    size: 1011,
+                    type: 'Land',
+                    description: 'Ready for development plot with all utilities and good access road.',
+                    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 6,
+                    title: '2 Bedroom Apartment in South B',
+                    location: 'South B, Nairobi',
+                    price: 8500000,
+                    bedrooms: 2,
+                    bathrooms: 1,
+                    size: 80,
+                    type: 'Apartment',
+                    description: 'Well-maintained 2 bedroom apartment in a family-friendly neighborhood with good security and amenities.',
+                    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 7,
+                    title: '3 Bedroom House in Langata',
+                    location: 'Langata, Nairobi',
+                    price: 12000000,
+                    bedrooms: 3,
+                    bathrooms: 2,
+                    size: 150,
+                    type: 'House',
+                    description: 'Spacious 3 bedroom house with a small garden in a quiet neighborhood, close to Nairobi National Park.',
+                    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+                }
+            ];
+
+            // DOM elements
+            const chatBox = document.getElementById('chat-box');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+            const chatLink = document.getElementById('chat-link');
+            const searchLink = document.getElementById('search-link');
+            const chatView = document.getElementById('chat-view');
+            const searchView = document.getElementById('search-view');
+            const searchBtn = document.getElementById('search-btn');
+            const propertyResults = document.getElementById('property-results');
+            const resetChatBtn = document.getElementById('reset-chat');
+            const toggleSuggestionsBtn = document.getElementById('toggle-suggestions');
+            const searchPropertiesBtn = document.getElementById('search-properties-btn');
+            const scheduleViewingBtn = document.getElementById('schedule-viewing');
+
+            // Last context for follow-up questions
+            let lastContext = null;
+
+            // Check if user is a first-time visitor
+            checkFirstTimeVisitor();
+
+            // Show typing indicator
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message bot typing-indicator-container';
+                typingDiv.innerHTML = `
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                `;
+                chatBox.appendChild(typingDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                return typingDiv;
             }
-        ];
 
-        // DOM elements
-        const chatBox = document.getElementById('chat-box');
-        const userInput = document.getElementById('user-input');
-        const sendBtn = document.getElementById('send-btn');
-        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
-        const chatLink = document.getElementById('chat-link');
-        const searchLink = document.getElementById('search-link');
-        const chatView = document.getElementById('chat-view');
-        const searchView = document.getElementById('search-view');
-        const searchBtn = document.getElementById('search-btn');
-        const propertyResults = document.getElementById('property-results');
+            // Function to format a message with links and structured content
+            function formatMessage(message) {
+                // Convert URLs to clickable links
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                let formattedMessage = message.replace(urlRegex, function(url) {
+                    return `<a href="${url}" target="_blank">${url}</a>`;
+                });
+                
+                // Replace newlines with <br>
+                formattedMessage = formattedMessage.replace(/\n/g, '<br>');
+                
+                // Highlight property prices for better visibility
+                formattedMessage = formattedMessage.replace(/KES (\d{1,3}(,\d{3})*(\.\d+)?)/g, 
+                    '<span style="font-weight: bold; color: var(--accent-color);">KES $1</span>');
+                
+                return formattedMessage;
+            }
 
-        // Last context for follow-up questions
-        let lastContext = null;
-
-        // Function to check if a message is a greeting
-        function isGreeting(message) {
-            const greetings = ['hi', 'hello', 'hey', 'howdy', 'hola', 'greetings', 'good morning', 'good afternoon', 'good evening'];
-            message = message.toLowerCase().trim();
-            
-            for (const greeting of greetings) {
-                if (message === greeting || message === greeting + '!' || message === greeting + '.') {
-                    return true;
+            // Function to check if a message is a greeting
+            function isGreeting(message) {
+                const greetings = ['hi', 'hello', 'hey', 'howdy', 'hola', 'greetings', 'good morning', 'good afternoon', 'good evening'];
+                message = message.toLowerCase().trim();
+                
+                for (const greeting of greetings) {
+                    if (message === greeting || message === greeting + '!' || message === greeting + '.') {
+                        return true;
+                    }
+                    
+                    const greetingPhrases = [
+                        greeting + ' there',
+                        greeting + ' how are you',
+                        greeting + ' how are you doing',
+                        greeting + ' how is it going',
+                        greeting + ' kwetu',
+                        greeting + ' team'
+                    ];
+                    
+                    if (greetingPhrases.some(phrase => message.startsWith(phrase))) {
+                        return true;
+                    }
                 }
                 
-                const greetingPhrases = [
-                    greeting + ' there',
-                    greeting + ' how are you',
-                    greeting + ' how are you doing',
-                    greeting + ' how is it going',
-                    greeting + ' kwetu',
-                    greeting + ' team'
+                return false;
+            }
+
+            // Function to check if a message is a follow-up
+            function isFollowUp(message) {
+                const followUpPhrases = [
+                    'yes', 'yeah', 'sure', 'please', 'ok', 'okay', 'show me', 'tell me more', 
+                    'more information', 'more details', 'specific', 'options', 'share', 'show'
                 ];
                 
-                if (greetingPhrases.some(phrase => message.startsWith(phrase))) {
-                    return true;
+                message = message.toLowerCase().trim();
+                
+                for (const phrase of followUpPhrases) {
+                    if (message.startsWith(phrase) || message === phrase) {
+                        return true;
+                    }
                 }
+                
+                return false;
             }
-            
-            return false;
-        }
 
-        // Function to check if a message is a follow-up
-        function isFollowUp(message) {
-            const followUpPhrases = [
-                'yes', 'yeah', 'sure', 'please', 'ok', 'okay', 'show me', 'tell me more', 
-                'more information', 'more details', 'specific', 'options', 'share', 'show'
-            ];
-            
-            message = message.toLowerCase().trim();
-            
-            for (const phrase of followUpPhrases) {
-                if (message.startsWith(phrase) || message === phrase) {
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-
-        // Function to calculate similarity between two strings
-        function calculateSimilarity(query, document) {
-            // Simple implementation - count matching words
-            const queryWords = query.toLowerCase().split(/\s+/);
-            const docWords = document.toLowerCase().split(/\s+/);
-            
-            let matches = 0;
-            for (const word of queryWords) {
-                if (docWords.includes(word)) {
-                    matches++;
-                }
-            }
-            
-            return matches / Math.max(queryWords.length, 1);
-        }
-
-        // Function to find the best matching question
-        function findBestMatch(userMessage) {
-                    let bestMatchIndex = -1;
-                    let bestMatchScore = 0;
-                    
-                    for (let i = 0; i < qaData.questions.length; i++) {
-                        const similarity = calculateSimilarity(userMessage, qaData.questions[i]);
-                        if (similarity > bestMatchScore) {
-                            bestMatchScore = similarity;
-                            bestMatchIndex = i;
+            // Function to calculate similarity between two strings
+            function calculateSimilarity(query, document) {
+                // Simple implementation - count matching words
+                const queryWords = query.toLowerCase().split(/\s+/);
+                const docWords = document.toLowerCase().split(/\s+/);
+                
+                // Real estate specific keywords that should have higher weight
+                const importantKeywords = [
+                    'property', 'house', 'apartment', 'mortgage', 'loan', 'buy', 'purchase',
+                    'rent', 'price', 'cost', 'deposit', 'down payment', 'location', 'area',
+                    'bedroom', 'bathroom', 'square', 'meter', 'acre', 'land', 'agent', 'broker',
+                    'fee', 'commission', 'contract', 'agreement', 'title', 'deed', 'document',
+                    'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate',
+                    'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
+                    'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata'
+                ];
+                
+                let matches = 0;
+                let totalWeight = queryWords.length;
+                
+                for (const word of queryWords) {
+                    if (docWords.includes(word)) {
+                        // Give more weight to important keywords
+                        if (importantKeywords.includes(word)) {
+                            matches += 2;
+                            totalWeight += 1;
+                        } else {
+                            matches += 1;
                         }
                     }
-                    
-                    // Check if the match is good enough
-                    if (bestMatchScore > 0.2) {
-                        return {
-                            question: qaData.questions[bestMatchIndex],
-                            answer: qaData.answers[bestMatchIndex],
-                            score: bestMatchScore
-                        };
+                }
+                
+                return matches / totalWeight;
+            }
+
+            // Function to find the best matching question
+            function findBestMatch(userMessage) {
+                let bestMatchIndex = -1;
+                let bestMatchScore = 0;
+                
+                for (let i = 0; i < qaData.questions.length; i++) {
+                    const similarity = calculateSimilarity(userMessage, qaData.questions[i]);
+                    if (similarity > bestMatchScore) {
+                        bestMatchScore = similarity;
+                        bestMatchIndex = i;
                     }
-                    
-                    // Check for specific keywords
-                    const message = userMessage.toLowerCase();
-                    if (message.includes('10 million') || message.includes('10m')) {
-                        return {
-                            question: "What can I buy with 10 million?",
-                            answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
-                            score: 0.7
-                        };
-                    } else if (message.includes('location') || message.includes('where') || message.includes('area')) {
-                        return {
-                            question: "What locations do you have properties in?",
-                            answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
-                            score: 0.7
-                        };
-                    } else if (message.includes('buy') || message.includes('purchase')) {
-                        return {
-                            question: "How do I buy property?",
-                            answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?",
-                            score: 0.7
-                        };
-                    }
-                    
-                    // No good match found
+                }
+                
+                // Check if the match is good enough
+                if (bestMatchScore > 0.2) {
                     return {
-                        question: "unknown",
-                        answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
-                        score: 0
+                        question: qaData.questions[bestMatchIndex],
+                        answer: qaData.answers[bestMatchIndex],
+                        score: bestMatchScore
                     };
                 }
-
-                // Function to add a message to the chat box
-                function addMessage(message, isUser = false) {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-                    
-                    // Replace newlines with <br> tags
-                    const formattedMessage = message.replace(/\n/g, '<br>');
-                    messageDiv.innerHTML = `<p>${formattedMessage}</p>`;
-                    
-                    // Add feedback buttons for bot messages
-                    if (!isUser) {
-                        const feedbackDiv = document.createElement('div');
-                        feedbackDiv.className = 'feedback-buttons';
-                        feedbackDiv.innerHTML = `
-                            <button class="feedback-btn" onclick="provideFeedback(this, true)">👍</button>
-                            <button class="feedback-btn" onclick="provideFeedback(this, false)">👎</button>
-                        `;
-                        messageDiv.appendChild(feedbackDiv);
-                    }
-                    
-                    chatBox.appendChild(messageDiv);
-                    chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // Check for specific keywords
+                const message = userMessage.toLowerCase();
+                if (message.includes('10 million') || message.includes('10m')) {
+                    return {
+                        question: "What can I buy with 10 million?",
+                        answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
+                        score: 0.7
+                    };
+                } else if (message.includes('westlands') || message.includes('apartment')) {
+                    return {
+                        question: "Tell me about the Westlands apartment",
+                        answer: "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?",
+                        score: 0.8
+                    };
+                } else if (message.includes('location') || message.includes('where') || message.includes('area')) {
+                    return {
+                        question: "What locations do you have properties in?",
+                        answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
+                        score: 0.7
+                    };
+                } else if (message.includes('buy') || message.includes('purchase')) {
+                    return {
+                        question: "How do I buy property?",
+                        answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?",
+                        score: 0.7
+                    };
                 }
+                
+                // No good match found
+                return {
+                    question: "unknown",
+                    answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
+                    score: 0
+                };
+            }
 
-                // Function to handle user input
-                function handleUserInput() {
-                    const message = userInput.value.trim();
-                    if (message === '') return;
-                    
-                    // Add user message to chat
-                    addMessage(message, true);
-                    
-                    // Clear input field
+            // Function to add a message to the chat box
+            function addMessage(message, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+                
+                const messageId = Date.now().toString();
+                messageDiv.id = `msg-${messageId}`;
+                
+                // Create message content with proper formatting
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                
+                // Format the message (handle links, line breaks, etc.)
+                const formattedMessage = formatMessage(message);
+                messageContent.innerHTML = formattedMessage;
+                
+                messageDiv.appendChild(messageContent);
+                
+                // Add feedback buttons for bot messages
+                if (!isUser) {
+                    const feedbackDiv = document.createElement('div');
+                    feedbackDiv.className = 'feedback-buttons';
+                    feedbackDiv.innerHTML = `
+                        <button class="feedback-btn helpful" onclick="provideFeedback(this, true)" title="This was helpful">👍</button>
+                        <button class="feedback-btn not-helpful" onclick="provideFeedback(this, false)" title="This needs improvement">👎</button>
+                    `;
+                    messageDiv.appendChild(feedbackDiv);
+                }
+                
+                // Add timestamp
+                const timestamp = document.createElement('div');
+                timestamp.className = 'message-timestamp';
+                const time = new Date();
+                timestamp.textContent = time.getHours() + ':' + 
+                    (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+                messageDiv.appendChild(timestamp);
+                
+                chatBox.appendChild(messageDiv);
+                
+                // Scroll to the bottom of the chat box with smooth animation
+                chatBox.scrollTo({
+                    top: chatBox.scrollHeight,
+                    behavior: 'smooth'
+                });
+                
+                // Update suggestions based on context if it's a bot message
+                if (!isUser && lastContext) {
+                    updateSuggestions(lastContext);
+                }
+                
+                return messageId;
+            }
+
+            // Function to send a message (global for button access)
+            window.sendMessage = function(message) {
+                // Add the user's message to the chat
+                if (!message) {
+                    message = userInput.value.trim();
+                    if (!message) return;
                     userInput.value = '';
+                }
+                
+                addMessage(message, true);
+                
+                // Show typing indicator
+                const typingIndicator = showTypingIndicator();
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    typingIndicator.remove();
                     
                     // Process message and get response
                     let response;
                     
                     if (isGreeting(message)) {
                         // If it's a greeting, respond with a random greeting
-                        response = greetingResponses[Math.floor(Math.random() * greetingResponses.length)];
+                        const randomIndex = Math.floor(Math.random() * greetingResponses.length);
+                        response = greetingResponses[randomIndex];
                         lastContext = null;
                     } else if (isFollowUp(message) && lastContext) {
                         // If it's a follow-up question and we have context
                         if (lastContext.includes('location') || lastContext.includes('property') || 
                             lastContext.includes('million') || lastContext.includes('buy') || 
                             lastContext.includes('deposit')) {
-                            response = specificOptionsResponse;
-                            lastContext = "property options";
+                            
+                            // Check if the message is asking about property search
+                            if (message.toLowerCase().includes('search') || message.toLowerCase().includes('find properties')) {
+                                showPropertyResultsInChat(filterProperties(), "properties matching your criteria");
+                                return;
+                            } else {
+                                response = specificOptionsResponse;
+                                lastContext = "property options";
+                            }
                         } else {
                             response = "I'd be happy to provide more information. Could you please specify what aspect you'd like to know more about?";
                             lastContext = null;
                         }
+                    } else if (message.toLowerCase().includes('schedule') && message.toLowerCase().includes('viewing')) {
+                        // Handle scheduling request
+                        response = "I'd be happy to help you schedule a viewing! Please provide your preferred date and time, and our agents will contact you to confirm the appointment. You can also call us directly at +254 700 123 456.";
+                        lastContext = "schedule viewing";
                     } else {
                         // Find the best matching question and answer
                         const match = findBestMatch(message);
@@ -746,125 +1597,376 @@
                         lastContext = match.question;
                     }
                     
-                    // Add bot response to chat (with a small delay to simulate thinking)
-                    setTimeout(() => {
-                        addMessage(response);
-                    }, 500);
-                }
+                    // Add bot response to chat
+                    addMessage(response);
+                }, 1500); // 1.5 seconds delay for typing effect
+            };
 
-                // Function to handle feedback
-                function provideFeedback(button, isPositive) {
-                    const feedbackDiv = button.parentElement;
-                    feedbackDiv.innerHTML = isPositive ? 
-                        '<span style="color: green;">Thanks for your feedback!</span>' : 
-                        '<span style="color: red;">Thanks for your feedback. We\'ll improve.</span>';
-                    
-                    // In a real app, you would send this feedback to your server
-                    console.log(`User provided ${isPositive ? 'positive' : 'negative'} feedback`);
-                }
+            // Function to handle feedback (global for button access)
+            window.provideFeedback = function(button, isPositive) {
+                const feedbackDiv = button.parentElement;
+                feedbackDiv.innerHTML = isPositive ? 
+                    '<span class="feedback-text">Thanks for your feedback! 😊</span>' : 
+                    '<span class="feedback-text">Thanks for your feedback. We\'ll improve. 🙏</span>';
+            };
 
-                // Function to filter properties based on search criteria
-                function filterProperties() {
-                    const location = document.getElementById('location').value.toLowerCase();
-                    const minPrice = parseInt(document.getElementById('min_price').value) || 0;
-                    const maxPrice = parseInt(document.getElementById('max_price').value) || Number.MAX_SAFE_INTEGER;
-                    const propertyType = document.getElementById('type').value.toLowerCase();
-                    const bedrooms = parseInt(document.getElementById('bedrooms').value) || 0;
+            // Update suggestions based on conversation context
+            function updateSuggestions(context) {
+                const suggestionsDiv = document.querySelector('.suggestion-buttons');
+                if (!suggestionsDiv) return;
+                
+                let newSuggestions = [];
+                
+                // Check context and provide relevant suggestions
+                if (!context) {
+                    // Default suggestions
+                    newSuggestions = [
+                        'Property viewing process',
+                        'Document requirements',
+                        'Property prices in Nairobi',
+                        'Mortgage options'
+                    ];
+                } else if (typeof context === 'string') {
+                    if (context.toLowerCase().includes('location') || context.toLowerCase().includes('area')) {
+                        newSuggestions = [
+                            'Properties in Westlands',
+                            'Properties in Karen',
+                            'Properties in Kilimani',
+                            'Upcoming developments'
+                        ];
+                    } else if (context.toLowerCase().includes('price') || context.toLowerCase().includes('cost') || 
+                            context.toLowerCase().includes('million')) {
+                        newSuggestions = [
+                            'Properties under 5 million',
+                            'Properties around 10 million',
+                            'Luxury properties',
+                            'Payment plans available'
+                        ];
+                    } else if (context.toLowerCase().includes('buy') || context.toLowerCase().includes('purchase')) {
+                        newSuggestions = [
+                            'Buying process',
+                            'Required documents',
+                            'Schedule a viewing',
+                            'Financing options'
+                        ];
+                    } else if (context.toLowerCase().includes('property options')) {
+                        newSuggestions = [
+                            'Schedule a viewing',
+                            'More details on Westlands',
+                            'More details on South B',
+                            'More details on Langata'
+                        ];
+                    } else if (context.toLowerCase().includes('schedule')) {
+                        newSuggestions = [
+                            'View Westlands property',
+                            'View South B property',
+                            'View Langata property',
+                            'Contact an agent'
+                        ];
+                    }
+                }
+                
+                // Only update if we have new suggestions
+                if (newSuggestions.length > 0) {
+                    // Update the suggestion buttons
+                    suggestionsDiv.innerHTML = '';
                     
-                    return properties.filter(property => {
-                        // Check location
-                        if (location && !property.location.toLowerCase().includes(location)) {
-                            return false;
-                        }
-                        
-                        // Check price range
-                        if (property.price < minPrice || property.price > maxPrice) {
-                            return false;
-                        }
-                        
-                        // Check property type
-                        if (propertyType && property.type.toLowerCase() !== propertyType) {
-                            return false;
-                        }
-                        
-                        // Check bedrooms
-                        if (bedrooms > 0 && property.bedrooms < bedrooms) {
-                            return false;
-                        }
-                        
-                        return true;
+                    newSuggestions.forEach((suggestion, index) => {
+                        const button = document.createElement('button');
+                        button.className = 'suggestion-btn';
+                        button.style.setProperty('--btn-index', index);
+                        button.textContent = suggestion;
+                        button.addEventListener('click', () => {
+                            sendMessage(suggestion);
+                        });
+                        suggestionsDiv.appendChild(button);
                     });
                 }
+            }
 
-                // Function to display property results
-                function displayPropertyResults(filteredProperties) {
-                    propertyResults.innerHTML = '';
-                    
-                    if (filteredProperties.length === 0) {
-                        propertyResults.innerHTML = '<p>No properties match your search criteria.</p>';
-                        return;
+            // Function to filter properties based on search criteria
+            function filterProperties() {
+                const location = document.getElementById('location')?.value?.toLowerCase() || '';
+                const minPrice = parseInt(document.getElementById('min_price')?.value) || 0;
+                const maxPrice = parseInt(document.getElementById('max_price')?.value) || Number.MAX_SAFE_INTEGER;
+                const propertyType = document.getElementById('type')?.value?.toLowerCase() || '';
+                const bedrooms = parseInt(document.getElementById('bedrooms')?.value) || 0;
+                
+                return properties.filter(property => {
+                    // Check location
+                    if (location && !property.location.toLowerCase().includes(location)) {
+                        return false;
                     }
                     
-                    filteredProperties.forEach(property => {
-                        const propertyCard = document.createElement('div');
-                        propertyCard.className = 'property-card';
-                        
-                        propertyCard.innerHTML = `
-                            <div class="property-image" style="background-image: url('${property.image}')"></div>
-                            <div class="property-details">
-                                <div class="property-title">${property.title}</div>
-                                <div class="property-location">${property.location}</div>
-                                <div class="property-price">KES ${property.price.toLocaleString()}</div>
-                                <div class="property-features">
-                                    <div class="feature">${property.bedrooms} Bed</div>
-                                    <div class="feature">${property.bathrooms} Bath</div>
-                                    <div class="feature">${property.size} m²</div>
-                                </div>
-                                <button class="view-btn" onclick="alert('This is a demo. In a real application, this would show property details.')">View Details</button>
+                    // Check price range
+                    if (property.price < minPrice || property.price > maxPrice) {
+                        return false;
+                    }
+                    
+                    // Check property type
+                    if (propertyType && property.type.toLowerCase() !== propertyType) {
+                        return false;
+                    }
+                    
+                    // Check bedrooms
+                    if (bedrooms > 0 && property.bedrooms < bedrooms) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+            }
+
+            // Function to display property results in search page
+            function displayPropertyResults(filteredProperties) {
+                propertyResults.innerHTML = '';
+                
+                if (filteredProperties.length === 0) {
+                    propertyResults.innerHTML = '<p>No properties match your search criteria.</p>';
+                    return;
+                }
+                
+                filteredProperties.forEach(property => {
+                    const propertyCard = document.createElement('div');
+                    propertyCard.className = 'property-card';
+                    
+                    // Add property badge for new or featured properties
+                    const badgeHtml = property.id % 2 === 0 ? '<div class="property-badge">New</div>' : 
+                                    (property.id % 3 === 0 ? '<div class="property-badge" style="background-color: var(--secondary-color);">Featured</div>' : '');
+                    
+                    propertyCard.innerHTML = `
+                        <div class="property-image" style="background-image: url('${property.image}')">
+                            ${badgeHtml}
+                        </div>
+                        <div class="property-info">
+                            <div class="property-title">${property.title}</div>
+                            <div class="property-location">${property.location}</div>
+                            <div class="property-price">KES ${property.price.toLocaleString()}</div>
+                            <div class="property-features">
+                                <div class="feature"><i class="fas fa-bed"></i> ${property.bedrooms} Bed${property.bedrooms !== 1 ? 's' : ''}</div>
+                                <div class="feature"><i class="fas fa-bath"></i> ${property.bathrooms} Bath${property.bathrooms !== 1 ? 's' : ''}</div>
+                                <div class="feature"><i class="fas fa-ruler-combined"></i> ${property.size} m²</div>
                             </div>
-                        `;
-                        
-                        propertyResults.appendChild(propertyCard);
-                    });
+                            <button class="view-btn" onclick="viewPropertyDetails(${property.id})">View Details</button>
+                        </div>
+                    `;
+                    
+                    propertyResults.appendChild(propertyCard);
+                });
+            }
+
+            // Function to display property results in chat
+            function showPropertyResultsInChat(properties, query) {
+                if (properties.length === 0) {
+                    addMessage(`I couldn't find any properties matching "${query}". Would you like to try different search criteria?`);
+                    return;
                 }
+                
+                // Add intro message
+                addMessage(`I found ${properties.length} properties that match your criteria. Here are some options:`);
+                
+                // Create a property results container
+                const resultsContainer = document.createElement('div');
+                resultsContainer.className = 'chat-property-results';
+                
+                // Add up to 3 properties
+                const displayProperties = properties.slice(0, 3);
+                displayProperties.forEach(property => {
+                    const propertyCard = document.createElement('div');
+                    propertyCard.className = 'chat-property-card';
+                    
+                    propertyCard.innerHTML = `
+                        <div class="chat-property-image" style="background-image: url('${property.image}')"></div>
+                        <div class="chat-property-info">
+                            <div class="chat-property-title">${property.title}</div>
+                            <div class="chat-property-location">${property.location}</div>
+                            <div class="chat-property-price">KES ${property.price.toLocaleString()}</div>
+                            <div class="chat-property-specs">${property.bedrooms} Bed • ${property.bathrooms} Bath • ${property.size} m²</div>
+                            <button class="chat-property-link" onclick="viewPropertyDetails(${property.id})">View Details</button>
+                        </div>
+                    `;
+                    
+                    resultsContainer.appendChild(propertyCard);
+                });
+                
+                // Add "View All" link if there are more than 3 properties
+                if (properties.length > 3) {
+                    const viewAllLink = document.createElement('a');
+                    viewAllLink.href = "#";
+                    viewAllLink.className = 'view-all-link';
+                    viewAllLink.textContent = `View all ${properties.length} properties →`;
+                    viewAllLink.onclick = function(e) {
+                        e.preventDefault();
+                        chatLink.classList.remove('active');
+                        searchLink.classList.add('active');
+                        chatView.style.display = 'none';
+                        searchView.style.display = 'grid';
+                        displayPropertyResults(properties);
+                    };
+                    resultsContainer.appendChild(viewAllLink);
+                }
+                
+                // Add the container to chat
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot';
+                messageDiv.appendChild(resultsContainer);
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // Add a follow-up message
+                setTimeout(() => {
+                    addMessage("Would you like more information about any of these properties?");
+                    lastContext = "property options";
+                }, 1000);
+            }
 
-                // Event listeners
-                sendBtn.addEventListener('click', handleUserInput);
+            // Function to view property details (global for button access)
+            window.viewPropertyDetails = function(propertyId) {
+                const property = properties.find(p => p.id === propertyId);
+                if (!property) return;
                 
-                userInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        handleUserInput();
-                    }
-                });
-                
-                suggestionBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        userInput.value = btn.textContent;
-                        handleUserInput();
-                    });
-                });
-                
-                chatLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    chatView.style.display = 'grid';
-                    searchView.style.display = 'none';
-                    chatLink.classList.add('active');
-                    searchLink.classList.remove('active');
-                });
-                
-                searchLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    chatView.style.display = 'none';
-                    searchView.style.display = 'grid';
-                    chatLink.classList.remove('active');
-                    searchLink.classList.add('active');
-                });
-                
-                searchBtn.addEventListener('click', () => {
-                    const filteredProperties = filterProperties();
-                    displayPropertyResults(filteredProperties);
-                });
+                alert(`Property Details: ${property.title}\n\nLocation: ${property.location}\nPrice: KES ${property.price.toLocaleString()}\nBedrooms: ${property.bedrooms}\nBathrooms: ${property.bathrooms}\nSize: ${property.size} m²\n\nDescription: ${property.description}\n\nThis is a demo. In a full application, this would link to a detailed property page.`);
+            };
 
-                // Initialize with all properties
+            // Welcome tour for first-time visitors
+            function showWelcomeTour() {
+                setTimeout(() => {
+                    addMessage("👋 Welcome to Kwetu Homes Chatbot! I'm here to help you with all your real estate needs.");
+                }, 1000);
+                
+                setTimeout(() => {
+                    addMessage("You can ask me about property locations, prices, the buying process, and more. I'll do my best to provide helpful information.");
+                }, 4000);
+                
+                setTimeout(() => {
+                    addMessage("Try the suggestion chips for common questions, or just type your query. Ready to find your dream home?");
+                }, 7000);
+            }
+
+            // Check if user is a first-time visitor
+            function checkFirstTimeVisitor() {
+                if (!localStorage.getItem('hasVisitedBefore')) {
+                    // Show welcome tour
+                    showWelcomeTour();
+                    
+                    // Set flag in localStorage
+                    localStorage.setItem('hasVisitedBefore', 'true');
+                }
+            }
+
+            // Reset chat function
+            function resetChat() {
+                // Remove all messages except the welcome message
+                const messages = document.querySelectorAll('.message:not(#msg-welcome)');
+                messages.forEach(message => {
+                    // Add fade-out animation
+                    message.classList.add('fade-out');
+                    
+                    // Remove after animation completes
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                });
+                
+                // Reset context
+                lastContext = null;
+                
+                // Reset suggestions
+                updateSuggestions(null);
+                
+                // Add a system message
+                setTimeout(() => {
+                    addMessage("Conversation has been reset. How can I help you today?");
+                }, 350);
+            }
+
+            // Event listeners
+            sendBtn.addEventListener('click', function() {
+                sendMessage(userInput.value.trim());
+            });
+            
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage(userInput.value.trim());
+                }
+            });
+            
+            suggestionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sendMessage(this.textContent);
+                });
+            });
+            
+            chatLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatView.style.display = 'grid';
+                searchView.style.display = 'none';
+                chatLink.classList.add('active');
+                searchLink.classList.remove('active');
+            });
+            
+            searchLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatView.style.display = 'none';
+                searchView.style.display = 'grid';
+                chatLink.classList.remove('active');
+                searchLink.classList.add('active');
+                
+                // Load all properties
                 displayPropertyResults(properties);
-            </script>
+            });
+            
+            searchBtn.addEventListener('click', function() {
+                const filteredProperties = filterProperties();
+                displayPropertyResults(filteredProperties);
+            });
+            
+            resetChatBtn.addEventListener('click', resetChat);
+            
+            toggleSuggestionsBtn.addEventListener('click', function() {
+                const suggestions = document.querySelector('.suggestions');
+                suggestions.classList.toggle('show-suggestions');
+            });
+            
+            searchPropertiesBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatLink.classList.remove('active');
+                searchLink.classList.add('active');
+                chatView.style.display = 'none';
+                searchView.style.display = 'grid';
+                
+                // Load all properties
+                displayPropertyResults(properties);
+            });
+            
+            scheduleViewingBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                sendMessage('I would like to schedule a property viewing');
+            });
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Alt+R to reset chat
+                if (e.altKey && e.key === 'r') {
+                    e.preventDefault();
+                    resetChat();
+                }
+                
+                // Alt+S to focus search input
+                if (e.altKey && e.key === 's') {
+                    e.preventDefault();
+                    userInput.focus();
+                }
+            });
+            
+            // Initialize with all properties
+            displayPropertyResults(properties);
+            
+            // Focus on input field
+            setTimeout(() => {
+                userInput.focus();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
