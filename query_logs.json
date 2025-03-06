@@ -58,5 +58,11 @@
     "user_query": "yes share specific options",
     "matched_question": "unknown",
     "similarity_score": 0.0
+  },
+  {
+    "timestamp": "2025-03-06 14:27:58",
+    "user_query": "what is the cheapest house i can buy",
+    "matched_question": "What do I need to buy a house?",
+    "similarity_score": 0.5
   }
 ]

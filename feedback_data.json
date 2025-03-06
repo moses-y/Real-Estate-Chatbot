@@ -1,27 +1,7 @@
 [
   {
-    "message_id": "welcome",
-    "rating": "helpful",
-    "timestamp": "2025-03-06 08:04:38"
-  },
-  {
-    "message_id": "1741266290699",
+    "message_id": "1741289278804",
     "rating": "not-helpful",
-    "timestamp": "2025-03-06 08:04:53"
-  },
-  {
-    "message_id": "1741266307523",
-    "rating": "helpful",
-    "timestamp": "2025-03-06 08:05:10"
-  },
-  {
-    "message_id": "1741266335535",
-    "rating": "not-helpful",
-    "timestamp": "2025-03-06 08:05:38"
-  },
-  {
-    "message_id": "1741266343198",
-    "rating": "not-helpful",
-    "timestamp": "2025-03-06 08:05:45"
+    "timestamp": "2025-03-06 14:28:06"
   }
 ]
