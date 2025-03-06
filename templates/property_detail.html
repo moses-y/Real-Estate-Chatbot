@@ -3,94 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ property.title }} - Kwetu Homes</title>
+    <title>{{ property.title|default('Property Details') }} - Kwetu Homes AI Assistant</title>
+    <meta name="description" content="Detailed information about {{ property.title|default('this property') }} from Kwetu Homes.">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .property-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .property-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        .property-title {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        .property-location {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .property-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .property-image {
-            width: 100%;
-            height: 400px;
-            background-color: #f0f0f0;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .property-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .property-detail-item {
-            text-align: center;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            flex: 1;
-            margin: 0 5px;
-        }
-        .detail-value {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .detail-label {
-            color: #666;
-        }
-        .property-description {
-            line-height: 1.6;
+        .property-detail-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
             margin-bottom: 30px;
         }
-        .action-buttons {
-            display: flex;
-            gap: 10px;
+        
+        .property-detail-header {
+            position: relative;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
         }
-        .action-button {
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-            text-align: center;
-        }
-        .primary-button {
-            background-color: #2c3e50;
+        
+        .property-detail-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
             color: white;
         }
-        .secondary-button {
-            background-color: #f5f5f5;
-            color: #333;
+        
+        .property-detail-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #333;
-            text-decoration: none;
+        
+        .property-detail-location {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            margin-bottom: 5px;
         }
-        .back-link:hover {
-            text-decoration: underline;
+        
+        .property-detail-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .property-detail-content {
+            padding: 30px;
+        }
+        
+        .property-detail-section {
+            margin-bottom: 30px;
+        }
+        
+        .property-detail-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .property-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .property-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .property-feature i {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            height: 150px;
+            border-radius: var(--border-radius-sm);
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .action-btn {
+            padding: 12px 25px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .primary-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .secondary-btn:hover {
+            background-color: #f9f9f9;
+            transform: translateY(-2px);
+        }
+        
+        .map-container {
+            height: 300px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #718096;
         }
     </style>
 </head>
@@ -98,66 +164,147 @@
     <div class="container">
         <header>
             <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo">
-                <h1>Kwetu Homes </h1>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo" onerror="this.src='https://via.placeholder.com/60x60?text=KH';this.onerror='';">
+                <h1>Kwetu Homes AI Assistant</h1>
             </div>
-            
             <div class="nav-links">
-                <a href="/" class="nav-link">Chatbot</a>
-                <a href="/search" class="nav-link active">Property Search</a>
-                <a href="/analytics" class="nav-link">Analytics</a>
+                <a href="{{ url_for('home') }}" class="nav-link">
+                    <i class="fas fa-comment-dots"></i> Chatbot
+                </a>
+                <a href="{{ url_for('search') }}" class="nav-link active">
+                    <i class="fas fa-search"></i> Property Search
+                </a>
+                <a href="{{ url_for('analytics') }}" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </a>
             </div>
         </header>
         
-        <div class="property-container">
-            <a href="/search" class="back-link">← Back to Search</a>
-            
-            <div class="property-header">
-                <div>
-                    <h1 class="property-title">{{ property.title }}</h1>
-                    <div class="property-location">{{ property.location }}</div>
+        <main>
+            <div class="property-detail-container">
+                <div class="property-detail-header" style="background-image: url('{{ property.image|default('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80') }}')">
+                    <div class="property-detail-overlay">
+                        <div class="property-detail-title">{{ property.title|default('Modern 2 Bedroom Apartment') }}</div>
+                        <div class="property-detail-location"><i class="fas fa-map-marker-alt"></i> {{ property.location|default('Westlands, Nairobi') }}</div>
+                        <div class="property-detail-price">KES {{ property.price|default(9500000)|number_format }}</div>
+                    </div>
                 </div>
-                <div class="property-price">
-                    KES {{ "{:,}".format(property.price) }}
+                
+                <div class="property-detail-content">
+                    <div class="property-detail-section">
+                        <div class="property-detail-section-title"><i class="fas fa-info-circle"></i> Overview</div>
+                        <p>{{ property.description|default('This modern 2-bedroom apartment in Westlands offers exceptional city living with premium finishes, spacious living areas, and a convenient location near shopping centers and restaurants. The property features a well-designed layout that maximizes space and natural light, making it perfect for young professionals or small families.') }}</p>
+                    </div>
+                    
+                    <div class="property-detail-section">
+                        <div class="property-detail-section-title"><i class="fas fa-list"></i> Property Features</div>
+                        <div class="property-features-grid">
+                            <div class="property-feature">
+                                <i class="fas fa-bed"></i>
+                                <span>{{ property.bedrooms|default(2) }} Bedrooms</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-bath"></i>
+                                <span>{{ property.bathrooms|default(1) }} Bathrooms</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>{{ property.size|default(85) }} sq.m</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-car"></i>
+                                <span>{{ property.parking|default(1) }} Parking Spaces</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-building"></i>
+                                <span>{{ property.floor|default(3) }}rd Floor</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Built in {{ property.year_built|default(2020) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-detail-section">
+                        <div class="property-detail-section-title"><i class="fas fa-images"></i> Gallery</div>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')"></div>
+                            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')"></div>
+                            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBhcnRtZW50JTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60')"></div>
+                            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1586105251261-72a756497a11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXBhcnRtZW50JTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60')"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-detail-section">
+                        <div class="property-detail-section-title"><i class="fas fa-map-marked-alt"></i> Location</div>
+                        <div class="map-container">
+                            <p>Map loading... (Google Maps will be integrated here)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn primary-btn" id="schedule-viewing-btn">
+                            <i class="fas fa-calendar-alt"></i> Schedule Viewing
+                        </button>
+                        <button class="action-btn secondary-btn" id="contact-agent-btn">
+                            <i class="fas fa-phone"></i> Contact Agent
+                        </button>
+                        <button class="action-btn secondary-btn" id="share-property-btn">
+                            <i class="fas fa-share-alt"></i> Share Property
+                        </button>
+                    </div>
                 </div>
             </div>
-            
-            <div class="property-image" style="background-image: url('/static/images/{{ property.image }}')"></div>
-            
-            <div class="property-details">
-                <div class="property-detail-item">
-                    <div class="detail-value">{{ property.bedrooms }}</div>
-                    <div class="detail-label">Bedrooms</div>
-                </div>
-                <div class="property-detail-item">
-                    <div class="detail-value">{{ property.bathrooms }}</div>
-                    <div class="detail-label">Bathrooms</div>
-                </div>
-                <div class="property-detail-item">
-                    <div class="detail-value">{{ property.size }}</div>
-                    <div class="detail-label">Square Meters</div>
-                </div>
-                <div class="property-detail-item">
-                    <div class="detail-value">{{ property.type }}</div>
-                    <div class="detail-label">Property Type</div>
-                </div>
-            </div>
-            
-            <h2>Description</h2>
-            <div class="property-description">
-                {{ property.description }}
-            </div>
-            
-            <div class="action-buttons">
-                <a href="#" class="action-button primary-button">Schedule Viewing</a>
-                <a href="#" class="action-button secondary-button">Contact Agent</a>
-                <a href="/" class="action-button secondary-button">Ask Chatbot</a>
-            </div>
-        </div>
+        </main>
         
         <footer>
-            <p>&copy; 2025 Kwetu Homes. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kwetu Homes Logo" width="40" onerror="this.src='https://via.placeholder.com/40x40?text=KH';this.onerror='';">
+                    <span>Kwetu Homes AI Assistant</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
+            </div>
         </footer>
     </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('schedule-viewing-btn').addEventListener('click', function() {
+            alert('Viewing scheduling feature will be implemented here.');
+        });
+        
+        document.getElementById('contact-agent-btn').addEventListener('click', function() {
+            alert('Contact our agent at +254 700 123 456 or email at agent@kwetuhomes.com');
+        });
+        
+        document.getElementById('share-property-btn').addEventListener('click', function() {
+            // Share functionality would be implemented here
+            alert('Share this property: ' + window.location.href);
+        });
+        
+        // Simulate photo gallery functionality
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imageUrl = this.style.backgroundImage.slice(4, -1).replace(/"/g, "");
+                alert('Gallery viewer would open here with the image: ' + imageUrl);
+            });
+        });
+    </script>
 </body>
 </html>
