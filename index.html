@@ -54,7 +54,10 @@
             display: flex !important; /* Ensure it's a flex container - !important for testing, remove later if not needed */
             justify-content: space-between; /* Distribute space between main and side-nav */
             align-items: flex-start; /* Align items to the top */
-            /* flex-direction: row;  Default is row, can add for clarity if you like */
+            flex-direction: row; /* Explicitly set flex-direction to row for PC/Desktop */
+            max-width: 1200px; /* Re-introduce max-width for container to limit width on very large screens if desired */
+            margin: 20px auto; /* Center container horizontally on larger screens */
+            padding: 20px;
         }
 
         /* Enhanced Header styles */
@@ -138,10 +141,11 @@
 
         /* Main content styles */
         main {
-            display: flex; /* Keep display: flex for main if you are using flexbox inside main for other reasons (like chat messages), otherwise, not strictly needed for width issue */
-            flex-direction: column; /* Stack content inside main vertically */
+            display: flex;
+            flex-direction: column;
             flex: 2; /* Take up more of the horizontal space (ratio 2:1 with side-nav) */
-            /* width: 60%;  Remove fixed width to let flex control width */
+            /* width: 60%;  Remove fixed width - let flex control width */
+            min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
         }
 
         /* Enhanced chat container styles */
@@ -903,7 +907,7 @@
             70% { box-shadow: 0 0 0 10px rgba(66, 153, 225, 0); }
             100% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0); }
         }
-        
+
         /* Responsive design */
         @media (max-width: 768px) {
             .container {
@@ -1041,10 +1045,11 @@
             border-radius: var(--border-radius);
             box-shadow: var(--glass-shadow);
             backdrop-filter: var(--glass-blur);
-            flex: 1; /* Take remaining space */
-            flex-grow: 1; /* Allow it to grow and fill the space */
-            margin-left: 10px; /* Add some space between main and side nav */
+            flex: 1; /* Take up less horizontal space (ratio 1:2 with main) */
+            flex-grow: 1; /* Allow side-nav to grow and fill remaining space */
+            margin-left: 10px; /* Space between main and side nav */
             padding: 20px;
+            min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
         }
 
         .side-nav h3 {
