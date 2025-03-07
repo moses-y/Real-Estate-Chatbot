@@ -1262,7 +1262,7 @@
             updateScreenReaderStatus("An error occurred");
         }
         document.addEventListener('DOMContentLoaded', function() {
-            // Chatbot dataset (simplified version of your qa_data.py)
+            // Chatbot dataset (version of your qa_data.py)
             const qaData = {
                 'questions': [
                     'How can I schedule a property viewing?',
@@ -1732,12 +1732,14 @@
                 return false;
             }
 
+
+
             // Function to calculate similarity between two strings
             function calculateSimilarity(query, document) {
                 // Simple implementation - count matching words
                 const queryWords = query.toLowerCase().split(/\s+/);
                 const docWords = document.toLowerCase().split(/\s+/);
-                
+
                 // Real estate specific keywords that should have higher weight
                 const importantKeywords = [
                     'property', 'house', 'apartment', 'mortgage', 'loan', 'buy', 'purchase',
@@ -1748,10 +1750,10 @@
                     'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
                     'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata'
                 ];
-                
+
                 let matches = 0;
                 let totalWeight = queryWords.length;
-                
+
                 for (const word of queryWords) {
                     if (docWords.includes(word)) {
                         // Give more weight to important keywords
@@ -1763,7 +1765,7 @@
                         }
                     }
                 }
-                
+
                 return matches / totalWeight;
             }
 
@@ -1771,24 +1773,37 @@
             function findBestMatch(userMessage) {
                 let bestMatchIndex = -1;
                 let bestMatchScore = 0;
-                
+                let contextAdjustedScore = 0;
+
+                // First, check if there's a lastContext and adjust the score
+                if (lastContext) {
+                    const contextSimilarity = calculateSimilarity(userMessage, lastContext.question);
+                    contextAdjustedScore = contextSimilarity * 0.2; // Adjust the weight as needed
+                }
+
                 for (let i = 0; i < qaData.questions.length; i++) {
-                    const similarity = calculateSimilarity(userMessage, qaData.questions[i]);
+                    let similarity = calculateSimilarity(userMessage, qaData.questions[i]);
+                    similarity += contextAdjustedScore; // Add context-adjusted score
+
                     if (similarity > bestMatchScore) {
                         bestMatchScore = similarity;
                         bestMatchIndex = i;
                     }
                 }
-                
+
                 // Check if the match is good enough
-                if (bestMatchScore > 0.2) {
+                if (bestMatchScore > 0.4) {
+                    const question = qaData.questions[bestMatchIndex];
+                    const answers = qaData.answers[bestMatchIndex];
+                    const answer = answers[Math.floor(Math.random() * answers.length)]; // Select a random answer
+
                     return {
-                        question: qaData.questions[bestMatchIndex],
-                        answer: qaData.answers[bestMatchIndex],
+                        question: question,
+                        answer: answer,
                         score: bestMatchScore
                     };
                 }
-                
+
                 // Check for specific keywords
                 const message = userMessage.toLowerCase();
                 if (message.includes('10 million') || message.includes('10m')) {
@@ -1816,7 +1831,7 @@
                         score: 0.7
                     };
                 }
-                
+
                 // No good match found
                 return {
                     question: "unknown",
@@ -1826,7 +1841,7 @@
             }
 
             // Function to add a message to the chat box
-            function addMessage(message, isUser = false) {
+            function addMessage(message, isUser = false, question = null) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
                 const messageId = Date.now().toString();
@@ -1851,10 +1866,16 @@
                     const feedbackDiv = document.createElement('div');
                     feedbackDiv.className = 'feedback-buttons';
                     feedbackDiv.innerHTML = `
-                        <button class="feedback-btn helpful" onclick="provideFeedback('${messageId}', true)" title="This was helpful">👍</button>
-                        <button class="feedback-btn not-helpful" onclick="provideFeedback('${messageId}', false)" title="This needs improvement">👎</button>
-                    `;
+            <button class="feedback-btn helpful" onclick="provideFeedback('${messageId}', true)" title="This was helpful">👍</button>
+            <button class="feedback-btn not-helpful" onclick="provideFeedback('${messageId}', false)" title="This needs improvement">👎</button>
+        `;
                     messageDiv.appendChild(feedbackDiv);
+
+                    // Store the context for follow-up questions
+                    lastContext = {
+                        question: question,
+                        answer: message
+                    };
                 }
 
                 // Add timestamp
@@ -1872,7 +1893,6 @@
                     top: chatBox.scrollHeight,
                     behavior: 'smooth'
                 });
-
                 // Update suggestions based on context if it's a bot message
                 if (!isUser && lastContext) {
                     updateSuggestions(lastContext);
