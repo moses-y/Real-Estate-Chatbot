@@ -51,12 +51,10 @@
         }
 
         .container {
-            /* max-width: 1200px; Remove max-width to allow full width */
-            margin: 20px auto;
-            padding: 20px;
-            display: flex !important; /* Use flexbox to manage layout */
-            justify-content: space-between; /* Distribute space evenly */
-            align-items: flex-start; /* Align items to the start */
+            display: flex !important; /* Ensure it's a flex container - !important for testing, remove later if not needed */
+            justify-content: space-between; /* Distribute space between main and side-nav */
+            align-items: flex-start; /* Align items to the top */
+            /* flex-direction: row;  Default is row, can add for clarity if you like */
         }
 
         /* Enhanced Header styles */
@@ -140,11 +138,10 @@
 
         /* Main content styles */
         main {
-            display: flex; /* Use flexbox for main content */
-            flex-direction: row; /* Stack items vertically */
-            flex: 2; /* Take up more space */
-            /* gap: 10px; */
-            /* width: 60%;  Adjust width as needed */
+            display: flex; /* Keep display: flex for main if you are using flexbox inside main for other reasons (like chat messages), otherwise, not strictly needed for width issue */
+            flex-direction: column; /* Stack content inside main vertically */
+            flex: 2; /* Take up more of the horizontal space (ratio 2:1 with side-nav) */
+            /* width: 60%;  Remove fixed width to let flex control width */
         }
 
         /* Enhanced chat container styles */
@@ -910,8 +907,6 @@
         /* Responsive design */
         @media (max-width: 768px) {
             .container {
-                padding: 10px;
-                margin: 10px;
                 flex-direction: column; /* Stack items vertically */
                 align-items: stretch; /* Stretch items to fill width */
             }
@@ -939,7 +934,6 @@
             }
             
             main {
-                flex-direction: column;
                 width: 100%; /* Take full width */
             }
             
@@ -981,8 +975,9 @@
                 grid-template-columns: 1fr !important;
             }
             .side-nav {
-                width: 100%; /* Take full width */
-                margin-left: 0; /* Remove left margin */
+                width: 100%; /* Take full width on mobile */
+                margin-left: 0; /* Remove left margin on mobile */
+                margin-top: 20px; /* Add some space above side-nav when stacked below main */
             }
         }
 
