@@ -144,7 +144,7 @@
             display: flex;
             flex-direction: column;
             flex: 2; /* Take up more of the horizontal space (ratio 2:1 with side-nav) */
-            /* width: 60%;  Remove fixed width - let flex control width */
+            width: 60%;  /*Remove fixed width - let flex control width */
             min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
         }
 
@@ -1047,8 +1047,8 @@
             backdrop-filter: var(--glass-blur);
             flex: 1; /* Take up less horizontal space (ratio 1:2 with main) */
             flex-grow: 1; /* Allow side-nav to grow and fill remaining space */
-            margin-left: 10px; /* Space between main and side nav */
-            padding: 20px;
+            margin-left: 0px; /* Space between main and side nav */
+            padding: 10px;
             min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
         }
 
