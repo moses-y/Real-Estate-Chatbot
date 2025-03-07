@@ -21,6 +21,12 @@
             --border-radius: 10px;
             --border-radius-sm: 5px;
             --border-radius-lg: 20px;
+
+            /* Glass-like variables */
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --glass-blur: blur(4px);
         }
 
         /* Improve focus states for keyboard navigation */
@@ -48,6 +54,9 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
+            display: flex; /* Use flexbox to manage layout */
+            justify-content: space-between; /* Distribute space evenly */
+            align-items: flex-start; /* Align items to the start */
         }
 
         /* Enhanced Header styles */
@@ -56,9 +65,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
             margin-bottom: 25px;
         }
 
@@ -86,10 +97,12 @@
         /* Improved Navigation styles */
         .nav-links {
             display: flex;
-            background-color: #fff;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
         }
 
         .nav-link {
@@ -127,26 +140,24 @@
 
         /* Main content styles */
         main {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex; /* Use flexbox for main content */
+            flex-direction: column; /* Stack items vertically */
+            flex: 2; /* Take up more space */
             gap: 30px;
-        }
-
-        @media (min-width: 768px) {
-            main {
-                grid-template-columns: 2fr 1fr;
-            }
+            width: 70%; /* Adjust width as needed */
         }
 
         /* Enhanced chat container styles */
         .chat-container {
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
             display: flex;
             flex-direction: column;
             height: 500px;
+            overflow: hidden;
         }
 
         .chat-header {
@@ -189,7 +200,7 @@
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background-color: var(--light-bg);
+            background-color: transparent; /* Make background transparent */
             display: flex;
             flex-direction: column;
             scroll-behavior: smooth;
@@ -222,21 +233,23 @@
         }
 
         .bot {
-            background: var(--light-bg);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: var(--dark-text);
             border-radius: 20px;
             align-self: flex-start;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
         }
 
         .user {
-            background: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: var(--dark-text);
             border-radius: 20px;
             align-self: flex-end;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
         }
 
         .message-content {
@@ -303,7 +316,10 @@
             justify-content: flex-end;
             padding: 10px 15px;
             border-top: 1px solid #eee;
-            background-color: #f9f9f9;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
         }
 
         .control-btn {
@@ -330,7 +346,10 @@
             align-items: center;
             padding: 15px;
             border-top: 1px solid #eee;
-            background-color: white;
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
         }
 
         .input-area input {
@@ -370,10 +389,12 @@
 
         /* Enhanced suggestion chips */
         .suggestions {
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
             padding: 20px;
-            box-shadow: var(--shadow);
         }
 
         .suggestions h3 {
@@ -393,15 +414,16 @@
         }
 
         .suggestion-btn {
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: var(--primary-color);
-            border: 1px solid var(--primary-color);
             border-radius: 18px;
             padding: 8px 16px;
             font-size: 14px;
             cursor: pointer;
             transition: var(--transition);
             white-space: nowrap;
+            backdrop-filter: var(--glass-blur);
         }
 
         .suggestion-btn:hover {
@@ -468,9 +490,9 @@
 
         .action-btn {
             padding: 10px 15px;
-            background-color: var(--light-bg);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: var(--primary-color);
-            border: 1px solid #e2e8f0;
             border-radius: var(--border-radius-sm);
             text-decoration: none;
             display: flex;
@@ -478,6 +500,7 @@
             gap: 8px;
             transition: var(--transition);
             font-size: 14px;
+            backdrop-filter: var(--glass-blur);
         }
 
         .action-btn:hover {
@@ -499,12 +522,13 @@
         }
 
         .mini-property-card {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: var(--glass-shadow);
             transition: var(--transition);
+            backdrop-filter: var(--glass-blur);
         }
 
         .mini-property-card:hover {
@@ -574,12 +598,14 @@
 
         /* Enhanced property cards */
         .property-card {
-            background: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--glass-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 25px;
+            backdrop-filter: var(--glass-blur);
         }
 
         .property-card:hover {
@@ -670,11 +696,13 @@
         }
 
         .search-filters {
-            background-color: white;
-            padding: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
             margin-bottom: 30px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            padding: 20px;
         }
 
         /* GitHub link */
@@ -709,17 +737,21 @@
             text-align: center;
             color: #718096;
             font-size: 13px;
-            background-color: var(--light-bg);
-            padding: 10px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
+            backdrop-filter: var(--glass-blur);
+            padding: 10px;
         }
 
         /* Enhanced footer */
         footer {
             margin-top: 40px;
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
             padding: 20px;
         }
 
@@ -791,11 +823,13 @@
 
         .chat-property-card {
             display: flex;
-            background: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: var(--glass-shadow);
             transition: var(--transition);
+            backdrop-filter: var(--glass-blur);
         }
 
         .chat-property-card:hover {
@@ -878,6 +912,8 @@
             .container {
                 padding: 10px;
                 margin: 10px;
+                flex-direction: column; /* Stack items vertically */
+                align-items: stretch; /* Stretch items to fill width */
             }
             
             header {
@@ -903,8 +939,8 @@
             }
             
             main {
-                display: flex;
                 flex-direction: column;
+                width: 100%; /* Take full width */
             }
             
             .chat-container {
@@ -943,6 +979,10 @@
             
             .search-filters > div {
                 grid-template-columns: 1fr !important;
+            }
+            .side-nav {
+                width: 100%; /* Take full width */
+                margin-left: 0; /* Remove left margin */
             }
         }
 
@@ -1003,11 +1043,14 @@
             vertical-align: middle;
         }
         .side-nav {
-            background-color: var(--light-bg);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            flex: 1; /* Take remaining space */
+            margin-left: 20px; /* Add some space between main and side nav */
             padding: 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
         }
 
         .side-nav h3 {
@@ -1017,15 +1060,16 @@
         }
 
         .side-nav-btn {
-            background-color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: var(--primary-color);
-            border: 1px solid var(--primary-color);
             border-radius: 20px;
             padding: 8px 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: block;
             margin-bottom: 10px;
+            backdrop-filter: var(--glass-blur);
         }
 
         .side-nav-btn:hover {
@@ -1047,6 +1091,7 @@
             }
         }
     </style>
+    
 </head>
 <body>
         <header>
@@ -1775,14 +1820,19 @@
                 let bestMatchScore = 0;
                 let contextAdjustedScore = 0;
 
+                // Normalize user message
+                const normalizedUserMessage = userMessage.toLowerCase().trim();
+
                 // First, check if there's a lastContext and adjust the score
                 if (lastContext) {
-                    const contextSimilarity = calculateSimilarity(userMessage, lastContext.question);
+                    const contextSimilarity = calculateSimilarity(normalizedUserMessage, lastContext.question);
                     contextAdjustedScore = contextSimilarity * 0.2; // Adjust the weight as needed
                 }
 
                 for (let i = 0; i < qaData.questions.length; i++) {
-                    let similarity = calculateSimilarity(userMessage, qaData.questions[i]);
+                    // Normalize question
+                    const normalizedQuestion = qaData.questions[i].toLowerCase().trim();
+                    let similarity = calculateSimilarity(normalizedUserMessage, normalizedQuestion);
                     similarity += contextAdjustedScore; // Add context-adjusted score
 
                     if (similarity > bestMatchScore) {
@@ -1792,10 +1842,16 @@
                 }
 
                 // Check if the match is good enough
-                if (bestMatchScore > 0.4) {
+                if (bestMatchScore > 0.3) {
                     const question = qaData.questions[bestMatchIndex];
                     const answers = qaData.answers[bestMatchIndex];
                     const answer = answers[Math.floor(Math.random() * answers.length)]; // Select a random answer
+
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: question,
+                        answer: answer
+                    };
 
                     return {
                         question: question,
@@ -1805,26 +1861,49 @@
                 }
 
                 // Check for specific keywords
-                const message = userMessage.toLowerCase();
-                if (message.includes('10 million') || message.includes('10m')) {
+                if (normalizedUserMessage.includes('10 million') || normalizedUserMessage.includes('10m')) {
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: "What can I buy with 10 million?",
+                        answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?"
+                    };
+
                     return {
                         question: "What can I buy with 10 million?",
                         answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
                         score: 0.7
                     };
-                } else if (message.includes('westlands') || message.includes('apartment')) {
+                } else if (normalizedUserMessage.includes('westlands') || normalizedUserMessage.includes('apartment')) {
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: "Tell me about the Westlands apartment",
+                        answer: "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?"
+                    };
+
                     return {
                         question: "Tell me about the Westlands apartment",
                         answer: "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?",
                         score: 0.8
                     };
-                } else if (message.includes('location') || message.includes('where') || message.includes('area')) {
+                } else if (normalizedUserMessage.includes('location') || normalizedUserMessage.includes('where') || normalizedUserMessage.includes('area')) {
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: "What locations do you have properties in?",
+                        answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?"
+                    };
+
                     return {
                         question: "What locations do you have properties in?",
                         answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
                         score: 0.7
                     };
-                } else if (message.includes('buy') || message.includes('purchase')) {
+                } else if (normalizedUserMessage.includes('buy') || normalizedUserMessage.includes('purchase')) {
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: "How do I buy property?",
+                        answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?"
+                    };
+
                     return {
                         question: "How do I buy property?",
                         answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?",
@@ -1833,6 +1912,9 @@
                 }
 
                 // No good match found
+                // Reset lastContext
+                lastContext = null;
+
                 return {
                     question: "unknown",
                     answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
