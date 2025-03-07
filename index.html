@@ -51,12 +51,11 @@
         }
 
         .container {
-            display: flex !important; /* Ensure it's a flex container - !important for testing, remove later if not needed */
-            justify-content: space-between; /* Distribute space between main and side-nav */
-            align-items: flex-start; /* Align items to the top */
-            flex-direction: row; /* Explicitly set flex-direction to row for PC/Desktop */
-            max-width: 1200px; /* Re-introduce max-width for container to limit width on very large screens if desired */
-            margin: 20px auto; /* Center container horizontally on larger screens */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
         }
 
@@ -913,7 +912,6 @@
             .container {
                 flex-direction: column; /* Stack items vertically */
                 align-items: stretch; /* Stretch items to fill width */
-                display: flex; /* From the third block - might be redundant if already set outside media query */
             }
 
             header {
@@ -940,7 +938,7 @@
 
             main {
                 width: 100%; /* Take full width */
-                order: 1; /* Moves chat to the top - from the third block */
+                order: 1; /* Moves chat to the top */
             }
 
             .chat-container {
@@ -967,9 +965,7 @@
 
             .suggestion-btn {
                 font-size: 12px;
-                padding: 6px 12px; /* From the first block */
-                padding: 12px 16px; /* Larger padding - from the second block - you might want to choose one or adjust */
-                margin-bottom: 10px; /* More space between buttons - from the second block */
+                padding: 6px 12px;
             }
 
             .footer-content {
@@ -987,15 +983,15 @@
                 width: 100%; /* Take full width on mobile */
                 margin-left: 0; /* Remove left margin on mobile */
                 margin-top: 20px; /* Add some space above side-nav when stacked below main */
-                order: 2; /* Moves side nav below chat - from the third block */
+                order: 2; /* Moves side nav below chat */
             }
 
             .input-area button {
-                width: 56px; /* Larger touch target - from the second block */
-                height: 56px; /* Larger touch target - from the second block */
+                width: 56px; /* Larger touch target */
+                height: 56px; /* Larger touch target */
             }
 
-            /* Improve spacing for property cards - from the second block */
+            /* Improve spacing for property cards */
             .property-card {
                 margin-bottom: 30px;
             }
@@ -1046,10 +1042,9 @@
             box-shadow: var(--glass-shadow);
             backdrop-filter: var(--glass-blur);
             flex: 1; /* Take up less horizontal space (ratio 1:2 with main) */
-            flex-grow: 1; /* Allow side-nav to grow and fill remaining space */
-            margin-left: 0px; /* Space between main and side nav */
             padding: 10px;
-            min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
+            min-width: 300px; /* Ensure side-nav doesn't collapse too much */
+            max-width: 400px; /* Limit side-nav width */
         }
 
         .side-nav h3 {
@@ -1077,7 +1072,6 @@
         }
 
     </style>
-    
 </head>
 <body>
         <header>
