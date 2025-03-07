@@ -141,10 +141,9 @@
         /* Main content styles */
         main {
             display: flex;
-            flex-direction: row;
-            flex: 2; /* Take up more of the horizontal space (ratio 2:1 with side-nav) */
-            /* width: 60%;  Remove fixed width - let flex control width */
-            min-width: 0; /* Add min-width: 0 to allow flex-item to shrink below its content size if needed */
+            flex-direction: row; /* Ensure main is row */
+            flex: 1; /* Take up remaining space */
+            min-width: 0; /* Allow to shrink */
         }
 
         /* Enhanced chat container styles */
@@ -158,6 +157,8 @@
             flex-direction: column;
             height: 500px;
             overflow: hidden;
+            flex: 2; /* Chat takes more space */
+            margin-right: 20px; /* Spacing between chat and side-nav */
         }
 
         .chat-header {
@@ -939,11 +940,13 @@
             main {
                 width: 100%; /* Take full width */
                 order: 1; /* Moves chat to the top */
+                flex-direction: column; /* Stack chat and suggestions */
             }
 
             .chat-container {
                 height: 450px;
                 margin-bottom: 20px;
+                margin-right: 0; /* Remove right margin on mobile */
             }
 
             .message {
@@ -1041,7 +1044,7 @@
             border-radius: var(--border-radius);
             box-shadow: var(--glass-shadow);
             backdrop-filter: var(--glass-blur);
-            flex: 1; /* Take up less horizontal space (ratio 1:2 with main) */
+            flex: 1; /* Take up remaining space */
             padding: 10px;
             min-width: 200px; /* Ensure side-nav doesn't collapse too much */
             max-width: 300px; /* Limit side-nav width */
