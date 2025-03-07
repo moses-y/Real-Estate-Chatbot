@@ -1032,7 +1032,6 @@
             background-color: var(--primary-color);
             color: white;
         }
-
         @media (max-width: 768px) {
             .container {
                 display: flex;
@@ -1108,8 +1107,7 @@
                 </div>
             </div>
         </main>
-
-        <main>           
+          
             <div class="side-nav">
                 <h3><i class="fas fa-tools"></i> Quick Actions</h3>
                 <button class="side-nav-btn"><i class="fas fa-search"></i> Search Properties</button>
@@ -1134,80 +1132,79 @@
                     </a>
                 </div>
             </div>
-        </main>
 
-        <main id="search-view" style="display: none; grid-template-columns: 1fr;">
-            <div class="search-container">
-                <h2><i class="fas fa-search"></i> Find Your Dream Property</h2>
-                <div class="search-filters">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
-                        <div>
-                            <label for="location">Location</label>
-                            <input type="text" id="location" placeholder="Enter location..." style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+            <div id="search-view" style="display: none; grid-template-columns: 1fr;">
+                <div class="search-container">
+                    <h2><i class="fas fa-search"></i> Find Your Dream Property</h2>
+                    <div class="search-filters">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                            <div>
+                                <label for="location">Location</label>
+                                <input type="text" id="location" placeholder="Enter location..." style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+                            </div>
+                            <div>
+                                <label for="min_price">Min Price</label>
+                                <input type="number" id="min_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+                            </div>
+                            <div>
+                                <label for="max_price">Max Price</label>
+                                <input type="number" id="max_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+                            </div>
+                            <div>
+                                <label for="type">Property Type</label>
+                                <select id="type" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+                                    <option value="">Any</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="villa">Villa</option>
+                                    <option value="house">House</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="land">Land</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="bedrooms">Bedrooms</label>
+                                <input type="number" id="bedrooms" placeholder="Number of bedrooms" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
+                            </div>
                         </div>
-                        <div>
-                            <label for="min_price">Min Price</label>
-                            <input type="number" id="min_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
-                        </div>
-                        <div>
-                            <label for="max_price">Max Price</label>
-                            <input type="number" id="max_price" placeholder="KES" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
-                        </div>
-                        <div>
-                            <label for="type">Property Type</label>
-                            <select id="type" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
-                                <option value="">Any</option>
-                                <option value="apartment">Apartment</option>
-                                <option value="villa">Villa</option>
-                                <option value="house">House</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="land">Land</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="bedrooms">Bedrooms</label>
-                            <input type="number" id="bedrooms" placeholder="Number of bedrooms" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-sm);">
-                        </div>
+                        <button id="search-btn" style="padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: var(--border-radius-sm); cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-search"></i> Search Properties
+                        </button>
                     </div>
-                    <button id="search-btn" style="padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: var(--border-radius-sm); cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-search"></i> Search Properties
-                    </button>
-                </div>
-                <div id="property-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                    <!-- Property cards will be dynamically inserted here -->
+                    <div id="property-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                        <!-- Property cards will be dynamically inserted here -->
+                    </div>
                 </div>
             </div>
-        </main>
         
-        <div class="shortcuts-info">
-            <p><strong>Keyboard shortcuts:</strong> Alt+R to reset chat • Alt+S to focus search input</p>
+            <div class="shortcuts-info">
+                <p><strong>Keyboard shortcuts:</strong> Alt+R to reset chat • Alt+S to focus search input</p>
+            </div>
+            
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="Kwetu Homes Logo" width="40" onerror="this.src='https://via.placeholder.com/40x40?text=KH';this.onerror='';">
+                        <span>Kwetu Homes AI Assistant</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
+                </div>
+            </footer>
         </div>
-        
-        <footer>
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/logo.png" alt="Kwetu Homes Logo" width="40" onerror="this.src='https://via.placeholder.com/40x40?text=KH';this.onerror='';">
-                    <span>Kwetu Homes AI Assistant</span>
-                </div>
-                <div class="footer-links">
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Kwetu Homes Real Estate. All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-    <div class="sr-only" aria-live="polite" id="chat-status"></div>
+        <div class="sr-only" aria-live="polite" id="chat-status"></div>
 
     <script>
         function updateScreenReaderStatus(message) {
@@ -1832,54 +1829,55 @@
             function addMessage(message, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-                let avatar = isUser ? '<img src="user-avatar.png" class="avatar">' : '<img src="bot-avatar.png" class="avatar">';
-                messageDiv.innerHTML = avatar + message;
-                
                 const messageId = Date.now().toString();
                 messageDiv.id = `msg-${messageId}`;
-                
+
+                // Avatar handling
+                let avatarSrc = isUser ? 'images/user.png' : 'images/bot.png';
+                let avatarHTML = `<img src="${avatarSrc}" class="avatar" alt="${isUser ? 'User Avatar' : 'Bot Avatar'}">`;
+
                 // Create message content with proper formatting
                 const messageContent = document.createElement('div');
                 messageContent.className = 'message-content';
-                
+
                 // Format the message (handle links, line breaks, etc.)
                 const formattedMessage = formatMessage(message);
-                messageContent.innerHTML = formattedMessage;
-                
+                messageContent.innerHTML = avatarHTML + formattedMessage; // Add avatar here
+
                 messageDiv.appendChild(messageContent);
-                
+
                 // Add feedback buttons for bot messages
                 if (!isUser) {
                     const feedbackDiv = document.createElement('div');
                     feedbackDiv.className = 'feedback-buttons';
                     feedbackDiv.innerHTML = `
-                        <button class="feedback-btn helpful" onclick="provideFeedback(this, true)" title="This was helpful">👍</button>
-                        <button class="feedback-btn not-helpful" onclick="provideFeedback(this, false)" title="This needs improvement">👎</button>
+                        <button class="feedback-btn helpful" onclick="provideFeedback('${messageId}', true)" title="This was helpful">👍</button>
+                        <button class="feedback-btn not-helpful" onclick="provideFeedback('${messageId}', false)" title="This needs improvement">👎</button>
                     `;
                     messageDiv.appendChild(feedbackDiv);
                 }
-                
+
                 // Add timestamp
                 const timestamp = document.createElement('div');
                 timestamp.className = 'message-timestamp';
                 const time = new Date();
-                timestamp.textContent = time.getHours() + ':' + 
+                timestamp.textContent = time.getHours() + ':' +
                     (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
                 messageDiv.appendChild(timestamp);
-                
+
                 chatBox.appendChild(messageDiv);
-                
+
                 // Scroll to the bottom of the chat box with smooth animation
                 chatBox.scrollTo({
                     top: chatBox.scrollHeight,
                     behavior: 'smooth'
                 });
-                
+
                 // Update suggestions based on context if it's a bot message
                 if (!isUser && lastContext) {
                     updateSuggestions(lastContext);
                 }
-                
+
                 return messageId;
             }
 
@@ -1889,7 +1887,7 @@
                 if (!message) {
                     message = userInput.value.trim();
                     if (!message) return;
-                    userInput.value = '';
+                    userInput.value = ''; // Clear the input field
                 }
                 
                 addMessage(message, true);
