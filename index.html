@@ -13,9 +13,9 @@
             --primary-color: #1a365d;  /* Darker blue for better contrast */
             --secondary-color: #4299e1;
             --accent-color: #dd6b20;   /* Darker orange for better contrast */
-            --light-bg: #f7fafc;
+            --light-bg: #b7b9bb;
             --dark-text: #1a202c;      /* Nearly black text */
-            --light-text: #ffffff;     /* Pure white for maximum contrast on dark backgrounds */
+            --light-text: #d7c6c6;     /* Pure white for maximum contrast on dark backgrounds */
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
             --transition: all 0.3s ease;
             --border-radius: 10px;
@@ -51,7 +51,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            /* max-width: 1200px; Remove max-width to allow full width */
             margin: 20px auto;
             padding: 20px;
             display: flex; /* Use flexbox to manage layout */
@@ -1049,6 +1049,7 @@
             box-shadow: var(--glass-shadow);
             backdrop-filter: var(--glass-blur);
             flex: 1; /* Take remaining space */
+            flex-grow: 1; /* Allow it to grow and fill the space */
             margin-left: 20px; /* Add some space between main and side nav */
             padding: 20px;
         }
