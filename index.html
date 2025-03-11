@@ -1856,7 +1856,7 @@
             if (!query || !document) return 0;
             
             try {
-                // Simple implementation - count matching words
+                // Simple implementation - count matching words and n-grams
                 const queryWords = query.toLowerCase().split(/\s+/);
                 const docWords = document.toLowerCase().split(/\s+/);
 
@@ -1868,12 +1868,13 @@
                     'fee', 'commission', 'contract', 'agreement', 'title', 'deed', 'document',
                     'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate',
                     'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
-                    'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata'
+                    'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata', 'available', 'where'
                 ];
 
                 let matches = 0;
                 let totalWeight = queryWords.length || 1; // Avoid division by zero
 
+                // Word matching
                 for (const word of queryWords) {
                     if (docWords.includes(word)) {
                         // Give more weight to important keywords
@@ -1885,8 +1886,30 @@
                         }
                     }
                 }
+                
+                // Check for bigrams (pairs of words) for better phrase matching
+                if (queryWords.length > 1) {
+                    for (let i = 0; i < queryWords.length - 1; i++) {
+                        const queryBigram = queryWords[i] + ' ' + queryWords[i+1];
+                        for (let j = 0; j < docWords.length - 1; j++) {
+                            const docBigram = docWords[j] + ' ' + docWords[j+1];
+                            if (queryBigram === docBigram) {
+                                matches += 2; // Bigram matches are more significant
+                            }
+                        }
+                    }
+                }
+                
+                // Check if query is contained in document or vice versa
+                const queryText = queryWords.join(' ');
+                const docText = docWords.join(' ');
+                if (docText.includes(queryText)) {
+                    matches += queryWords.length; // Significant boost for full inclusion
+                } else if (queryText.includes(docText)) {
+                    matches += docWords.length;
+                }
 
-                return matches / totalWeight;
+                return matches / (totalWeight + 2); // +2 to normalize the score a bit
             } catch (error) {
                 console.error("Error calculating similarity:", error);
                 return 0;
@@ -1914,7 +1937,26 @@
                 // First, check if there's a lastContext and adjust the score
                 if (lastContext && typeof lastContext === 'object' && lastContext.question) {
                     const contextSimilarity = calculateSimilarity(normalizedUserMessage, lastContext.question);
-                    contextAdjustedScore = contextSimilarity * 0.2; // Adjust the weight as needed
+                    contextAdjustedScore = contextSimilarity * 0.3; // Increase context weight
+                }
+
+                // Check for location-related questions first if in buying context
+                if (lastContext && 
+                    (typeof lastContext === 'string' && lastContext.includes('buy')) || 
+                    (typeof lastContext === 'object' && lastContext.question && 
+                    (lastContext.question.includes('buy') || lastContext.question.includes('property')))) {
+                    
+                    if (normalizedUserMessage.includes('location') || 
+                        normalizedUserMessage.includes('where') || 
+                        normalizedUserMessage.includes('area') || 
+                        normalizedUserMessage.includes('available')) {
+                        
+                        return {
+                            question: "What locations do you have properties in?",
+                            answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
+                            score: 0.9
+                        };
+                    }
                 }
 
                 // Check each question in the dataset
@@ -1922,7 +1964,11 @@
                     // Normalize question
                     const normalizedQuestion = qaData.questions[i].toLowerCase().trim();
                     let similarity = calculateSimilarity(normalizedUserMessage, normalizedQuestion);
-                    similarity += contextAdjustedScore; // Add context-adjusted score
+                    
+                    // Add context-adjusted score with higher weight for follow-up questions
+                    if (lastContext) {
+                        similarity += contextAdjustedScore;
+                    }
 
                     if (similarity > bestMatchScore) {
                         bestMatchScore = similarity;
@@ -1948,35 +1994,10 @@
                     };
                 }
 
-                // Check for specific keywords
-                if (normalizedUserMessage.includes('10 million') || normalizedUserMessage.includes('10m')) {
-                    // Update lastContext with the matched question and answer
-                    const answer = "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?";
-                    lastContext = {
-                        question: "What can I buy with 10 million?",
-                        answer: answer
-                    };
-
-                    return {
-                        question: "What can I buy with 10 million?",
-                        answer: answer,
-                        score: 0.7
-                    };
-                } else if (normalizedUserMessage.includes('westlands') || normalizedUserMessage.includes('apartment')) {
-                    // Update lastContext with the matched question and answer
-                    const answer = "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?";
-                    lastContext = {
-                        question: "Tell me about the Westlands apartment",
-                        answer: answer
-                    };
-
-                    return {
-                        question: "Tell me about the Westlands apartment",
-                        answer: answer,
-                        score: 0.8
-                    };
-                } else if (normalizedUserMessage.includes('location') || normalizedUserMessage.includes('where') || normalizedUserMessage.includes('area')) {
-                    // Update lastContext with the matched question and answer
+                // Check for specific keywords with more comprehensive matching
+                if (normalizedUserMessage.includes('location') || normalizedUserMessage.includes('where') || 
+                    normalizedUserMessage.includes('area') || normalizedUserMessage.includes('available')) {
+                    
                     const answer = "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?";
                     lastContext = {
                         question: "What locations do you have properties in?",
@@ -1986,10 +2007,11 @@
                     return {
                         question: "What locations do you have properties in?",
                         answer: answer,
-                        score: 0.7
+                        score: 0.8
                     };
-                } else if (normalizedUserMessage.includes('buy') || normalizedUserMessage.includes('purchase')) {
-                    // Update lastContext with the matched question and answer
+                } else if (normalizedUserMessage.includes('buy') || normalizedUserMessage.includes('purchase') || 
+                        normalizedUserMessage.includes('property') || normalizedUserMessage.includes('house')) {
+                    
                     const answer = "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?";
                     lastContext = {
                         question: "How do I buy property?",
@@ -1999,14 +2021,45 @@
                     return {
                         question: "How do I buy property?",
                         answer: answer,
-                        score: 0.7
+                        score: 0.8
+                    };
+                } else if (normalizedUserMessage.includes('price') || normalizedUserMessage.includes('cost') || 
+                        normalizedUserMessage.includes('million') || normalizedUserMessage.includes('afford')) {
+                    
+                    const answer = "Our properties range from KES 3.5 million for plots in Kitengela to KES 45 million for luxury homes in Karen. Apartments in Westlands start at KES 9.5 million, while those in South B start at KES 8.5 million. What's your budget range so I can suggest suitable options?";
+                    lastContext = {
+                        question: "What is the price range for properties?",
+                        answer: answer
+                    };
+
+                    return {
+                        question: "What is the price range for properties?",
+                        answer: answer,
+                        score: 0.8
                     };
                 }
 
-                // No good match found
-                // Reset lastContext
+                // No good match found - provide a helpful response based on context
+                if (lastContext) {
+                    if (typeof lastContext === 'object' && lastContext.question) {
+                        if (lastContext.question.includes('buy') || lastContext.question.includes('property')) {
+                            return {
+                                question: "follow-up on property",
+                                answer: "I'd be happy to help you find the right property. Could you tell me more about what you're looking for? For example, your preferred location, budget, or property type (apartment, house, land)?",
+                                score: 0.5
+                            };
+                        } else if (lastContext.question.includes('location')) {
+                            return {
+                                question: "follow-up on location",
+                                answer: "We have properties in Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Each area has different types of properties and price ranges. Which area interests you most?",
+                                score: 0.5
+                            };
+                        }
+                    }
+                }
+                
+                // Generic fallback
                 lastContext = null;
-
                 return {
                     question: "unknown",
                     answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
@@ -2157,57 +2210,101 @@
                         // If it's a greeting, respond with a random greeting
                         const randomIndex = Math.floor(Math.random() * greetingResponses.length);
                         response = greetingResponses[randomIndex];
-                        lastContext = null;
+                        // Don't reset lastContext here to maintain conversation flow
                     } else if (isFollowUp(userMessage) && lastContext) {
-                        // If it's a follow-up question and we have context
+                        // Handle follow-up questions with improved context awareness
                         if (typeof lastContext === 'string') {
+                            // Handle string-based context
                             if (lastContext.toLowerCase().includes('location') || 
-                                lastContext.toLowerCase().includes('property') || 
-                                lastContext.toLowerCase().includes('million') || 
-                                lastContext.toLowerCase().includes('buy') || 
-                                lastContext.toLowerCase().includes('deposit')) {
+                                lastContext.toLowerCase().includes('area')) {
+                                response = "We have properties in Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Each area has different property types and price ranges. Which area interests you most?";
+                                lastContext = "location details";
+                            } else if (lastContext.toLowerCase().includes('property') || 
+                                    lastContext.toLowerCase().includes('buy') || 
+                                    lastContext.toLowerCase().includes('million')) {
                                 
                                 // Check if the message is asking about property search
-                                if (userMessage.toLowerCase().includes('search') || userMessage.toLowerCase().includes('find properties')) {
+                                if (userMessage.toLowerCase().includes('search') || 
+                                    userMessage.toLowerCase().includes('find properties')) {
                                     showPropertyResultsInChat(filterProperties(), "properties matching your criteria");
                                     isProcessingResponse = false;
                                     showLoadingState(false);
                                     return;
+                                } else if (userMessage.toLowerCase().includes('location') || 
+                                        userMessage.toLowerCase().includes('where') || 
+                                        userMessage.toLowerCase().includes('area')) {
+                                    response = "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?";
+                                    lastContext = "location inquiry";
                                 } else {
                                     response = specificOptionsResponse;
                                     lastContext = "property options";
                                 }
                             } else {
                                 response = "I'd be happy to provide more information. Could you please specify what aspect you'd like to know more about?";
-                                lastContext = null;
+                                // Keep the existing context
                             }
                         } else if (lastContext && typeof lastContext === 'object' && lastContext.question) {
-                            // Handle follow-up based on the stored question context
-                            if (lastContext.question.toLowerCase().includes('location') || 
-                                lastContext.question.toLowerCase().includes('property') || 
-                                lastContext.question.toLowerCase().includes('million') || 
-                                lastContext.question.toLowerCase().includes('buy')) {
+                            // Handle object-based context
+                            const contextQuestion = lastContext.question.toLowerCase();
+                            
+                            if (contextQuestion.includes('buy') || 
+                                contextQuestion.includes('property') || 
+                                contextQuestion.includes('house')) {
                                 
-                                response = specificOptionsResponse;
-                                lastContext = "property options";
+                                if (userMessage.toLowerCase().includes('location') || 
+                                    userMessage.toLowerCase().includes('where') || 
+                                    userMessage.toLowerCase().includes('area') ||
+                                    userMessage.toLowerCase().includes('available')) {
+                                    response = "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?";
+                                    lastContext = {
+                                        question: "What locations do you have properties in?",
+                                        answer: response
+                                    };
+                                } else {
+                                    response = specificOptionsResponse;
+                                    lastContext = {
+                                        question: "property options",
+                                        answer: response
+                                    };
+                                }
+                            } else if (contextQuestion.includes('location') || contextQuestion.includes('area')) {
+                                response = "I'd be happy to tell you more about our locations. We have properties in Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Each area has different property types and price ranges. Which area would you like to know more about?";
+                                lastContext = {
+                                    question: "Tell me more about locations",
+                                    answer: response
+                                };
                             } else {
+                                // For other contexts, provide a relevant follow-up
                                 response = "I'd be happy to provide more information about " + 
-                                    lastContext.question.toLowerCase() + ". What specific details would you like to know?";
+                                    contextQuestion + ". What specific details would you like to know?";
+                                // Keep the existing context
                             }
                         } else {
                             // Fallback if lastContext is in an unexpected format
                             response = "I'd be happy to help. Could you please specify what you'd like to know more about?";
+                            // Reset context to avoid confusion
                             lastContext = null;
                         }
-                    } else if (userMessage.toLowerCase().includes('schedule') && userMessage.toLowerCase().includes('viewing')) {
+                    } else if (userMessage.toLowerCase().includes('schedule') && 
+                            userMessage.toLowerCase().includes('viewing')) {
                         // Handle scheduling request
                         response = "I'd be happy to help you schedule a viewing! Please provide your preferred date and time, and our agents will contact you to confirm the appointment. You can also call us directly at +254 700 123 456.";
-                        lastContext = "schedule viewing";
+                        lastContext = {
+                            question: "schedule viewing",
+                            answer: response
+                        };
                     } else {
                         // Find the best matching question and answer
                         const match = findBestMatch(userMessage);
                         response = match.answer;
-                        lastContext = match.question;
+                        
+                        // Only update context if we got a good match
+                        if (match.score > 0.2) {
+                            lastContext = {
+                                question: match.question,
+                                answer: match.answer
+                            };
+                        }
                     }
                     
                     // Ensure we have a response
