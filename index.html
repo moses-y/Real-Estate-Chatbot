@@ -1098,88 +1098,87 @@
 
     <div class="container">
         <main id="chat-view">
-            <div class="chat-area">
-                <div class="chat-container">
-                    <div class="chat-header">
-                        <h2><i class="fas fa-robot"></i> Kwetu Homes AI Assistant</h2>
-                        <div class="chat-header-actions">
-                            <button id="toggle-suggestions" title="Toggle suggestions panel" class="action-btn">
-                                <i class="fas fa-lightbulb"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="chat-box" id="chat-box">
-                        <div class="message bot" id="msg-welcome">
-                            <div class="message-content">
-                                Hello! I'm the Kwetu Homes AI Assistant. How can I help you today? I can provide information about properties, buying process, mortgages, and more.
-                            </div>
-                            <div class="feedback-buttons">
-                                <button class="feedback-btn helpful" onclick="provideFeedback(this, true)" title="This was helpful">👍</button>
-                                <button class="feedback-btn not-helpful" onclick="provideFeedback(this, false)" title="This needs improvement">👎</button>
-                            </div>
-                            <div class="message-timestamp">Now</div>
-                        </div>
-                    </div>
-
-                    <div class="chat-controls">
-                        <button id="reset-chat" class="control-btn">
-                            <i class="fas fa-trash-alt"></i> Clear Conversation
-                        </button>
-                    </div>
-
-                    <div class="input-area">
-                        <label for="user-input" class="sr-only">Type your message</label>
-                        <input type="text" id="user-input" 
-                               aria-label="Type your message" 
-                               placeholder="Ask me anything about real estate..."
-                               autocomplete="off">
-                        <button id="send-btn" aria-label="Send message">
-                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2><i class="fas fa-robot"></i> Kwetu Homes AI Assistant</h2>
+                    <div class="chat-header-actions">
+                        <button id="toggle-suggestions" title="Toggle suggestions panel" class="action-btn">
+                            <i class="fas fa-lightbulb"></i>
                         </button>
                     </div>
                 </div>
-                <div class="suggestions">
-                    <h3><i class="fas fa-tools"></i> Quick Actions</h3>
-                    <button class="side-nav-btn"><i class="fas fa-search"></i> Search Properties</button>
-                    <button class="side-nav-btn"><i class="fas fa-calendar-alt"></i> Schedule Viewing</button>
+                
+                <div class="chat-box" id="chat-box">
+                    <div class="message bot" id="msg-welcome">
+                        <div class="message-content">
+                            <img src="images/bot.png" class="avatar" alt="Bot Avatar" onerror="this.src='https://via.placeholder.com/30x30?text=Bot';this.onerror='';">
+                            Hello! I'm the Kwetu Homes AI Assistant. How can I help you today? I can provide information about properties, buying process, mortgages, and more.
+                        </div>
+                        <div class="feedback-buttons">
+                            <button class="feedback-btn helpful" onclick="provideFeedback(this, true)" title="This was helpful">👍</button>
+                            <button class="feedback-btn not-helpful" onclick="provideFeedback(this, false)" title="This needs improvement">👎</button>
+                        </div>
+                        <div class="message-timestamp">Now</div>
+                    </div>
+                </div>
+                
+                <div class="chat-controls">
+                    <button id="reset-chat" class="control-btn">
+                        <i class="fas fa-trash-alt"></i> Clear Conversation
+                    </button>
+                </div>
+                
+                <div class="input-area">
+                    <label for="user-input" class="sr-only">Type your message</label>
+                    <input type="text" id="user-input" 
+                           aria-label="Type your message" 
+                           placeholder="Ask me anything about real estate..."
+                           autocomplete="off">
+                    <button id="send-btn" aria-label="Send message">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
-
-            <section class="quick-actions">
-                <h2 class="sr-only">Quick Actions</h2>
-                <!-- Content moved to suggestions -->
-            </section>
-
-            <section class="property-highlight">
-                <h2 class="sr-only">Featured Property</h2>
-                <!-- Content moved to side-nav -->
-            </section>
-
-            <section class="property-listing">
-                <h2 class="sr-only">Property Listing</h2>
-                <!-- Content moved to search-view -->
-            </section>
-
-            <section class="search-container">
-                <h2 class="sr-only">Search Container</h2>
-                <!-- Content remains here -->
-            </section>
         </main>
-
+        
         <aside class="side-nav">
-            <h3><i class="fas fa-home"></i> Featured Property</h3>
-            <div class="mini-property-card">
-                <div class="mini-property-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')">
-                    <div class="property-badge">Featured</div>
+            <!-- Suggestions Section (Moved from main) -->
+            <section class="side-nav-section">
+                <h3><i class="fas fa-lightbulb"></i> Suggestions</h3>
+                <div class="suggestion-buttons">
+                    <button class="suggestion-btn" onclick="sendMessage(this.textContent)">Property viewing process</button>
+                    <button class="suggestion-btn" onclick="sendMessage(this.textContent)">Document requirements</button>
+                    <button class="suggestion-btn" onclick="sendMessage(this.textContent)">Property prices in Nairobi</button>
+                    <button class="suggestion-btn" onclick="sendMessage(this.textContent)">Mortgage options</button>
                 </div>
-                <div class="mini-property-info">
-                    <div class="mini-property-title">Modern 2 Bedroom Apartment</div>
-                    <div class="mini-property-location">Westlands, Nairobi</div>
-                    <div class="mini-property-price">KES 9,500,000</div>
-                    <button class="mini-view-details" onclick="sendMessage('Tell me about the Westlands apartment')">View Details</button>
+            </section>
+            
+            <!-- Quick Actions Section (Moved from main) -->
+            <section class="side-nav-section">
+                <h3><i class="fas fa-tools"></i> Quick Actions</h3>
+                <button class="side-nav-btn" id="search-properties-btn">
+                    <i class="fas fa-search"></i> Search Properties
+                </button>
+                <button class="side-nav-btn" id="schedule-viewing-btn" onclick="sendMessage('I would like to schedule a property viewing')">
+                    <i class="fas fa-calendar-alt"></i> Schedule Viewing
+                </button>
+            </section>
+            
+            <!-- Featured Property Section (Already in side-nav) -->
+            <section class="side-nav-section">
+                <h3><i class="fas fa-home"></i> Featured Property</h3>
+                <div class="mini-property-card">
+                    <div class="mini-property-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')">
+                        <div class="property-badge">Featured</div>
+                    </div>
+                    <div class="mini-property-info">
+                        <div class="mini-property-title">Modern 2 Bedroom Apartment</div>
+                        <div class="mini-property-location">Westlands, Nairobi</div>
+                        <div class="mini-property-price">KES 9,500,000</div>
+                        <button class="mini-view-details" onclick="sendMessage('Tell me about the Westlands apartment')">View Details</button>
+                    </div>
                 </div>
-            </div>
+            </section>
 
             <div class="github-link">
                 <a href="https://github.com/moses-y/Real-Estate-Chatbot" target="_blank">
@@ -1189,7 +1188,7 @@
         </aside>
     </div>
 
-    <div id="search-view" style="display: none; grid-template-columns: 1fr;">
+    <div id="search-view" style="display: none;">
         <div class="search-container">
             <h2><i class="fas fa-search"></i> Find Your Dream Property</h2>
             <div class="search-filters">
@@ -1266,13 +1265,16 @@
     function updateScreenReaderStatus(message) {
         document.getElementById('chat-status').textContent = message;
     }
+    
     // Add keyboard support for chat suggestions
-    document.querySelectorAll('.suggestion-btn').forEach(btn => {
-        btn.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                sendMessage(this.textContent);
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    sendMessage(this.textContent);
+                }
+            });
         });
     });
 
@@ -1294,9 +1296,12 @@
             }
         });
     }
+    
     // Add clear loading states
     function showLoadingState(isLoading) {
         const inputArea = document.querySelector('.input-area');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
         
         if (isLoading) {
             inputArea.classList.add('loading');
@@ -1317,6 +1322,7 @@
         console.error(message);
         updateScreenReaderStatus("An error occurred");
     }
+    
     document.addEventListener('DOMContentLoaded', function() {
         // Chatbot dataset (version of your qa_data.py)
             const qaData = {
@@ -1356,21 +1362,6 @@
                 'Where can I buy property with 10 million?',
                 'What areas have properties within 10 million?',
                 'Show me locations with properties around 10 million',
-                'How can I schedule a property viewing?',
-                'What documents do I need to buy a house?',
-                'What is the price range for houses in Nyeri?',
-                'How do I check if a property has a valid title deed?',
-                'What are the steps to buying land in Nairobi?',
-                'Do you have rental apartments in Eldoret?',
-                'What should I consider when choosing a real estate agent?',
-                'What are the legal requirements for buying a house in Kitengela?',
-                'Do you offer virtual property tours?',
-                'What factors affect property value appreciation?',
-                'Can I negotiate the price of a house?',
-                'What is the best location to invest in real estate currently?',
-                'What financing options do you offer for home purchases?',
-                'How do I calculate my monthly mortgage payments?',
-                'What are the common home loan interest rates?',
                 'What are the available properties for sale in Kitengela?',
                 'Do you offer short-term rental properties?',
                 'What is the return on investment (ROI) for rental properties?',
@@ -1421,26 +1412,6 @@
                 'How long should I expect to wait before selling a property for profit?',
                 'What renovations add the most value to a property?',
                 'How do I handle property disputes with neighbors?',
-                'I would like to buy property',
-                'I want to buy a house',
-                'How do I buy property?',
-                'What do I need to buy a house?',
-                'What documents are needed to buy property?',
-                'What is the process of buying a house?',
-                'I have money and want to buy property',
-                'I have 1 million, what property can I buy?',
-                'If I have 1 million as deposit, what can I get?',
-                'What can I buy with 1 million shillings?',
-                "What locations do you have properties in?",
-                "Where are your properties located?",
-                "Which areas do you have houses in?",
-                "Property locations for 10 million",
-                "What locations can I buy with 10 million?",
-                "Any other locations for 10 million?",
-                "Share locations that I can buy with 10 million",
-                "Where can I buy property with 10 million?",
-                "What areas have properties within 10 million?",
-                "Show me locations with properties around 10 million",
                 "Yes, show me specific options",
                 "Yes please share options",
                 "Show me available properties",
@@ -1450,7 +1421,57 @@
                 "Share more details please",
                 "Can you show me what's available?",
                 "Yes, tell me about specific properties",
-                "I want to see the available options"
+                "I want to see the available options",
+                'What types of properties do you have in Westlands?',
+                'Tell me about the Westlands apartment',
+                'What amenities are included in the Westlands apartment?',
+                'Are there any properties with swimming pools?',
+                'Do your properties have backup generators?',
+                'Are there any pet-friendly properties?',
+                'Do you have properties with garden space?',
+                'Are there any properties with a gym?',
+                'What security features do your properties have?',
+                'Do you have any eco-friendly or green properties?',
+                'What payment methods do you accept?',
+                'Can I pay for a property in installments?',
+                'Do you offer any discounts for cash payments?',
+                'How much deposit is required to secure a property?',
+                'What are the terms for mortgage financing?',
+                'Do you have partnerships with any banks for home loans?',
+                'What happens if I can"t complete my payments?',
+                'Are there any hidden fees when buying property?',
+                'Can I get a refund if I change my mind after paying a deposit?',
+                'What is the process for making an offer on a property?',
+                'What are the best areas to invest in Nairobi?',
+                'Tell me about properties in Karen',
+                'What"s the average price per square meter in Kilimani?',
+                'Which areas have the best schools nearby?',
+                'Are there any beachfront properties available?',
+                'Which locations are best for young professionals?',
+                'What areas have the best rental returns?',
+                'Tell me about upcoming neighborhoods with growth potential',
+                'Which areas have the best infrastructure?',
+                'Are there any gated communities available?',
+                'What is the process for land title verification?',
+                'How do I know if a property has clean title?',
+                'What are the land zoning regulations in Nairobi?',
+                'Can foreigners own land in Kenya?',
+                'What is the difference between leasehold and freehold land?',
+                'How long does property transfer take in Kenya?',
+                'What legal documents should I review before buying property?',
+                'Are there restrictions on property use in certain areas?',
+                'What happens if there"s a dispute over property boundaries?',
+                'How do I check for any encumbrances on a property?',
+                'Do you offer property management services?',
+                'What maintenance services are included for apartments?',
+                'How are service charges calculated for apartments?',
+                'Who handles repairs in rental properties?',
+                'Do you help with finding tenants for investment properties?',
+                'What is your tenant screening process?',
+                'How often is maintenance performed on properties?',
+                'What happens if there"s a major repair needed?',
+                'Do you handle utility connections for new properties?',
+                'How do you handle security for properties?',
 
             ],
             'answers': [
@@ -1489,21 +1510,6 @@
                 'With 10 million KES, you can buy property in Westlands, South B, Langata, or parts of Kileleshwa. The most value for money would be in Westlands where we have modern 2-bedroom apartments for 9.5 million. Would you like to see these options?',
                 'Areas with properties around 10 million include Westlands, South B, Langata, and parts of Kileleshwa. The type of property varies by location - apartments in Westlands and South B, and possibly small houses in Langata.',
                 'For properties around 10 million, look at Westlands (2-bedroom apartments for 9.5M), South B (2-bedroom apartments for 8.5M), and Langata (smaller 3-bedroom houses for around 12M). Would you like to see specific listings in any of these areas?',
-                'You can schedule a property viewing by contacting our agents via phone or email.',
-                'To buy a house, you need identification, proof of income, and a signed sale agreement.',
-                'The price range for houses in Nyeri varies between KES 5M and KES 50M.',
-                'You can verify a title deed at the local land registry to ensure ownership legitimacy.',
-                'Buying land involves due diligence, title deed verification, and legal paperwork.',
-                'Yes, we have several rental apartments in Eldoret with different price ranges.',
-                'When choosing an agent, consider their experience, reputation, and market knowledge.',
-                'The legal requirements include title deed verification, contract signing, and land registry checks.',
-                'Yes, we provide virtual tours to help you view properties remotely.',
-                'Factors affecting property value include location, infrastructure, and demand trends.',
-                'Yes, property prices are often negotiable depending on market conditions and seller preferences.',
-                'Investment potential in Machakos is high due to infrastructure development and economic growth.',
-                'We offer financing options including mortgages and installment payment plans.',
-                'Monthly mortgage payments depend on the loan amount, interest rate, and loan tenure.',
-                'Home loan interest rates typically range from 9% to 13% per annum.',
                 'Yes, we have several properties for sale in Kitengela with different price ranges.',
                 'Yes, we offer short-term rental properties for business and leisure stays.',
                 'Rental property ROI in Nakuru averages between 6% and 12% annually.',
@@ -1561,19 +1567,6 @@
                 'Documents needed for property purchase include national ID/passport, KRA PIN, proof of income (bank statements or payslips), and marriage certificate if applicable. You\'ll also sign a sale agreement.',
                 'The house buying process involves property viewing, price negotiation, paying a deposit, securing financing, conducting due diligence, signing the sale agreement, and transferring ownership.',
                 'Great! Our properties range from KES 3.5 million to KES 45 million. Would you like to know about specific locations or property types that match your budget?',
-                'With 1 million KES, you could make a down payment on several of our properties. This would typically be a 10-20% deposit on properties valued between KES 5-10 million. Would you like to see specific options?',
-                'With 1 million KES as a 10% deposit, you could qualify for properties around KES 10 million. This includes 2-bedroom apartments in Westlands or Kilimani. Would you like to see available options?',
-                'With 1 million KES, you could make a down payment on an apartment or land. For example, we have a plot in Kitengela for KES 3.5 million where your 1 million would cover almost 30% of the cost.',
-                "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
-                "Our properties are located in prime areas of Nairobi including Kilimani, Westlands, Karen, and the CBD. We also have land in Kitengela. For a budget of around 10 million, Westlands and South B offer good options. Would you like to see specific listings?",
-                "We have houses and apartments in Kilimani, Westlands, Karen, South B, Langata, and the CBD. We also have land in Kitengela. With a budget of 10 million, you could afford a nice 2-bedroom apartment in Westlands or South B. Would you like to see available options?",
-                "For a budget of 10 million KES, we have 2-bedroom apartments in Westlands starting at 9.5 million and in South B starting at 8.5 million. These are in good locations close to shopping centers and restaurants. Would you like to see specific listings?",
-                "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
-                "Yes, besides Westlands and South B, you might also consider Langata where your 10 million budget could get you a smaller 3-bedroom house. Would you like more information about these areas?",
-                "With 10 million KES, you can purchase property in Westlands (2-bedroom apartments), South B (2-bedroom apartments), or Langata (smaller 3-bedroom houses). Would you like to see specific listings in any of these areas?",
-                "With 10 million KES, you can buy property in Westlands, South B, Langata, or parts of Kileleshwa. The most value for money would be in Westlands where we have modern 2-bedroom apartments for 9.5 million. Would you like to see these options?",
-                "Areas with properties around 10 million include Westlands, South B, Langata, and parts of Kileleshwa. The type of property varies by location - apartments in Westlands and South B, and possibly small houses in Langata.",
-                "For properties around 10 million, look at Westlands (2-bedroom apartments for 9.5M), South B (2-bedroom apartments for 8.5M), and Langata (smaller 3-bedroom houses for around 12M). Would you like to see specific listings in any of these areas?",
                 "Here are some specific options in our portfolio:\n\n1. Modern 2 Bedroom Apartment - KES 9,500,000\nLocation: Westlands, near Sarit Centre\nFeatures: 85 sq.m, 1 bathroom, modern finishes\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nLocation: South B, Nairobi\nFeatures: 80 sq.m, 1 bathroom, family-friendly neighborhood\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nLocation: Langata, near Nairobi National Park\nFeatures: 150 sq.m, 2 bathrooms, small garden\n\nWould you like to schedule a viewing for any of these properties?",
                 "I'd be happy to share some options with you. Here are three properties that might interest you:\n\n1. 2 Bedroom Apartment in Westlands - KES 9,500,000\nModern finishes, close to shopping centers, 85 sq.m\n\n2. 2 Bedroom Apartment in South B - KES 8,500,000\nFamily-friendly area, good security, 80 sq.m\n\n3. 3 Bedroom House in Langata - KES 12,000,000\nQuiet neighborhood, small garden, 150 sq.m\n\nWould you like more information about any of these properties?",
                 "Here are some available properties in our portfolio:\n\n1. Modern 2 Bedroom Apartment in Westlands - KES 9,500,000\n2. 2 Bedroom Apartment in South B - KES 8,500,000\n3. 3 Bedroom House in Langata - KES 12,000,000\n4. 1/4 Acre Plot in Kitengela - KES 3,500,000\n\nEach property has different features and amenities. Would you like more details about any specific property?",
@@ -1583,7 +1576,57 @@
                 "I'd be happy to share more details. Our Westlands apartment (KES 9.5M) features modern finishes, 24-hour security, and is close to Sarit Centre. The South B apartment (KES 8.5M) is in a family-friendly compound with a playground. The Langata house (KES 12M) has a small garden and is in a quiet neighborhood. Which property interests you most?",
                 "Here's what we currently have available:\n\n- Westlands: Modern 2BR apartment, KES 9.5M\n- South B: Spacious 2BR apartment, KES 8.5M\n- Langata: Cozy 3BR house with garden, KES 12M\n- Kitengela: 1/4 acre plot with good access road, KES 3.5M\n\nAll residential properties come with parking, security, and water storage. Would you like to know more about any specific property?",
                 "Here are some specific properties in our portfolio:\n\n1. Westlands 2BR Apartment (KES 9.5M): Located near Sarit Centre, modern finishes, 85 sq.m, 1 bathroom, 24-hour security.\n\n2. South B 2BR Apartment (KES 8.5M): Family-friendly area, 80 sq.m, 1 bathroom, close to Mombasa Road.\n\n3. Langata 3BR House (KES 12M): Near Nairobi National Park, 150 sq.m, 2 bathrooms, small garden, quiet neighborhood.\n\nWould you like to schedule a viewing?",
-                "I'm happy to show you our available options. We have:\n\n1. A modern 2-bedroom apartment in Westlands for KES 9.5M\n2. A well-maintained 2-bedroom apartment in South B for KES 8.5M\n3. A cozy 3-bedroom house in Langata for KES 12M\n4. A 1/4 acre plot in Kitengela for KES 3.5M\n\nEach property has its unique features and benefits. Which one would you like more information about?"
+                "I'm happy to show you our available options. We have:\n\n1. A modern 2-bedroom apartment in Westlands for KES 9.5M\n2. A well-maintained 2-bedroom apartment in South B for KES 8.5M\n3. A cozy 3-bedroom house in Langata for KES 12M\n4. A 1/4 acre plot in Kitengela for KES 3.5M\n\nEach property has its unique features and benefits. Which one would you like more information about?",
+                'In Westlands, we have modern 1, 2, and 3-bedroom apartments in secure compounds. Most units feature contemporary finishes, ample parking, and 24-hour security. Prices range from KES 8.5M to KES 15M depending on size and specific location within Westlands.',
+                'Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?',
+                'The Westlands apartment includes amenities such as 24-hour security, reserved parking, water storage tanks, high-speed internet connectivity, and a communal garden. The building also has backup power and is located within walking distance to shopping centers and restaurants.',
+                'Yes, several of our properties in Karen and Kilimani feature swimming pools. Our luxury apartments in Kilimani (starting at KES 18M) include access to a communal pool, while some of our standalone houses in Karen have private pools.',
+                'Yes, most of our properties come with backup generators or inverter systems to ensure continuous power supply. This is a standard feature in our mid to high-end properties, particularly in areas like Kilimani, Westlands, and Karen.',
+                'Yes, we do have pet-friendly properties, primarily in Karen and parts of Langata. These properties typically have more space and garden areas. Please note that some apartments may have restrictions on pets, so it"s best to inquire about specific properties.',
+                'Yes, our properties in Karen, Langata, and some in Kilimani come with garden spaces. The standalone houses typically have private gardens, while some apartment complexes feature communal garden areas for residents.',
+                'Several of our apartment complexes in Kilimani and Westlands feature communal gyms for residents. Our premium development in Kilimani offers a fully-equipped modern gym, swimming pool, and children"s play area.',
+                'All our properties prioritize security with features such as perimeter walls, electric fencing, CCTV surveillance, 24-hour security personnel, and secure access gates. Higher-end properties may also include alarm systems and panic buttons.',
+                'We have several eco-friendly properties that incorporate solar water heating, rainwater harvesting systems, energy-efficient lighting, and natural ventilation. Our newest development in Kilimani is built to green building standards with sustainable materials and energy-efficient design.',
+                'We accept various payment methods including bank transfers, banker"s checks, and mobile money for smaller amounts. For international buyers, we also accept wire transfers. All payments should be made to our official company accounts only.',
+                'Yes, we offer installment payment plans for select properties. Typically, this involves a 30% down payment followed by structured payments over 6-24 months, depending on the property and agreement terms. Interest may apply for longer payment periods.',
+                'Yes, we offer discounts of 3-5% for full cash payments on select properties. This varies by property and current promotions. Cash buyers also benefit from a faster closing process and reduced paperwork.',
+                'The standard deposit to secure a property is 10% of the purchase price. This deposit is non-refundable unless there are issues with the property title or other legal complications on the seller"s side.',
+                'Mortgage financing typically requires a 10-20% down payment, with repayment terms ranging from 5 to 25 years. Interest rates currently range from 11.5% to 15% depending on the lender and your credit profile. We can assist you in connecting with mortgage providers.',
+                'Yes, we have partnerships with several banks including Equity Bank, KCB, Stanbic, and Co-operative Bank. These partnerships often provide preferential rates and faster processing for our clients. Our team can help you with the application process.',
+                'If you"re unable to complete payments as agreed, we first try to work out a revised payment plan. If that"s not feasible, you may forfeit a portion of your deposit based on the terms in the sale agreement. Each case is handled individually to find the best solution.',
+                'Beyond the property price, buyers should budget for legal fees (1-2%), stamp duty (2-4%), valuation fees (KES 10,000-25,000), land rent and rates (varies by location), and possibly agent commission if applicable. We provide a full breakdown of costs before you commit.',
+                'Deposits are generally non-refundable as they secure the property and take it off the market. However, if there are title issues or the seller fails to meet contractual obligations, you would be entitled to a full refund. This is detailed in the sale agreement.',
+                'To make an offer, you"ll need to complete an offer form specifying your price and any conditions. This is submitted with a booking fee (typically KES 50,000-100,000). If accepted, you"ll proceed to pay the deposit and sign a sale agreement. Our agents guide you through each step.',
+                'The best investment areas in Nairobi currently include Kilimani, Westlands, and Karen for high-end properties, while Syokimau, Athi River, and Kitengela offer good growth potential at lower price points. Emerging areas like Ngong and Kikuyu are also showing promising returns due to infrastructure development.',
+                'Karen is an upscale residential area known for its spacious properties and serene environment. Properties here range from luxury villas to modern townhouses, typically on larger plots with mature gardens. Prices range from KES 45M for townhouses to KES 150M+ for luxury villas. The area offers excellent international schools, shopping centers, and restaurants.',
+                'In Kilimani, the average price per square meter ranges from KES 120,000 to KES 180,000 for apartments, depending on the specific location, building age, and amenities. Newer developments with premium amenities command higher prices, while older apartments offer better value for money.',
+                'Karen, Lavington, and Gigiri are known for proximity to top international schools like ISK, Braeburn, and German School. For national schools, areas near Westlands, Kileleshwa, and parts of South B offer good access to reputable institutions. We can provide specific school information for any property you"re interested in.',
+                'Yes, we have beachfront properties available along the Kenyan coast, primarily in Diani, Nyali, and Malindi. These range from apartments starting at KES 15M to luxury villas at KES 80M+. These properties offer excellent rental potential during tourist seasons and are popular as holiday homes.',
+                'Westlands, Kilimani, and Lavington are ideal for young professionals, offering modern apartments close to business districts, shopping malls, restaurants, and entertainment spots. These areas have good transport links and a vibrant social scene. Prices start from KES 8.5M for 1-bedroom apartments.',
+                'Kilimani, Westlands, and South B currently offer the best rental returns in Nairobi, with yields ranging from 7-10% annually. Student housing near universities and small apartments in Westlands tend to perform particularly well. Emerging areas like Ruaka and Kikuyu are also showing strong rental potential.',
+                'Neighborhoods with significant growth potential include Kangemi, Ruaka, Athi River, and parts of Machakos County. These areas are benefiting from improved infrastructure, new bypass roads, and spillover demand from more expensive neighboring areas. Early investors in these locations typically see strong capital appreciation over 3-5 years.',
+                'Westlands, Kilimani, and Karen currently have the best infrastructure in terms of roads, water supply, internet connectivity, and power stability. The Thika Road corridor has also seen significant improvements with the superhighway development. Upcoming areas like Tatu City are being built with world-class infrastructure from the ground up.',
+                'Yes, we have several gated communities available, particularly in Karen, Kitisuru, and Runda. These offer enhanced security, community amenities like clubhouses and playgrounds, and often have homeowner associations that maintain common areas. Prices in these communities typically start from KES 35M for townhouses and can exceed KES 100M for standalone homes.',
+                'Land title verification involves conducting an official search at the lands registry, reviewing the title deed history, confirming boundary details, and checking for any encumbrances or restrictions. We recommend using a registered lawyer for this process, which typically takes 7-14 days.',
+                'A property has clean title when it has no liens, encumbrances, or legal issues that could affect ownership rights. To verify this, conduct an official search at the lands registry, check for any caveats or restrictions, verify that rates and land rent are paid up, and ensure there are no pending disputes. Our legal team can assist with this verification process.',
+                'Nairobi is divided into various zoning areas that regulate property use, including residential, commercial, industrial, and mixed-use zones. Each zone has specific regulations regarding building height, plot ratio, and permitted activities. Before purchasing, we verify that the property"s current and intended use complies with local zoning regulations.',
+                'Foreigners can own property in Kenya but with certain restrictions. They can purchase apartments and buildings but cannot own freehold land directly. Foreigners can hold leasehold land for up to 99 years. Foreign companies with Kenyan registration can own property if the majority shareholding is by Kenyan citizens.',
+                'Freehold ownership gives you absolute rights to the land without time limitations, allowing you to use, transfer, or develop it as you wish (subject to zoning laws). Leasehold ownership grants you rights to use the land for a specific period (typically 33, 66, or 99 years), after which it reverts to the freeholder unless renewed. Most urban properties in Kenya are leasehold.',
+                'Property transfer in Kenya typically takes 60-90 days from signing the sale agreement to receiving the new title deed. This includes conducting searches (7-14 days), paying stamp duty (depends on processing time), lodging transfer documents (30 days), and receiving the new title (14-30 days). Delays can occur if there are issues with the title or documentation.',
+                'Before buying property, you should review the title deed, land search certificate, approved architectural plans, occupation certificate, land rent receipts, land rates receipts, seller"s KRA PIN, consent to transfer (for leasehold), and the sale agreement. For apartments, also review the sectional plan and management agreements. Our legal team provides comprehensive document review services.',
+                'Yes, there are restrictions on property use based on zoning regulations. For example, you cannot operate a commercial business in a purely residential zone without proper approvals. Some areas also have restrictions on building height, density, and architectural style. We verify all restrictions before recommending a property for purchase.',
+                'Boundary disputes are resolved through a formal resurvey by a licensed surveyor, often with the involvement of the land registrar. If the dispute persists, it may require mediation or court proceedings. To avoid such issues, we recommend conducting a proper survey and boundary verification before completing any property purchase.',
+                'To check for encumbrances, conduct an official search at the lands registry, which will reveal any registered charges, caveats, restrictions, or ongoing disputes. You should also verify that all land rates and rent are paid up to date. Our due diligence process includes a comprehensive encumbrance check to ensure you"re purchasing a clean title.',
+                'Yes, we offer comprehensive property management services for both individual properties and entire developments. Our services include tenant sourcing and screening, rent collection, maintenance coordination, financial reporting, and regular property inspections. Our management fee typically ranges from 7-10% of the rental income.',
+                'For apartments, maintenance services typically include common area cleaning, garbage collection, security services, gardening for common areas, maintenance of shared facilities (pools, gyms, etc.), and building exterior maintenance. Individual unit maintenance is usually the owner"s responsibility unless specified otherwise in the management agreement.',
+                'Service charges for apartments are calculated based on the size of your unit (square footage) as a proportion of the total building area. These charges cover common area maintenance, security, garbage collection, and other shared services. Charges typically range from KES 35-80 per square foot per month, depending on the building"s amenities and location.',
+                'For rental properties under our management, we coordinate all repairs. Minor repairs (under KES 10,000) are typically handled without owner approval, while major repairs require authorization. The cost is either deducted from rental income or billed separately. We maintain a network of reliable contractors to ensure quality work at competitive prices.',
+                'Yes, we provide comprehensive tenant sourcing services for investment properties. This includes marketing the property, conducting viewings, screening potential tenants, preparing lease agreements, and handling the move-in process. Our tenant placement fee is typically equivalent to one month"s rent for a one-year lease.',
+                'Our tenant screening process includes background checks, credit history review, employment verification, previous landlord references, and in-person interviews. We verify income to ensure it"s at least three times the monthly rent. This thorough process helps secure reliable, long-term tenants who will care for your property.',
+                'We conduct quarterly routine maintenance inspections for all managed properties. Preventive maintenance for systems like HVAC, plumbing, and electrical is scheduled based on manufacturer recommendations, typically semi-annually. Common areas in apartment buildings receive weekly maintenance. We also respond promptly to any maintenance requests from tenants.',
+                'For major repairs, we first assess the issue and provide you with a detailed report and cost estimate. Upon your approval, we coordinate with qualified contractors, oversee the work, and ensure it meets quality standards. For emergency repairs that affect habitability or safety, we may proceed immediately and notify you as soon as possible.',
+                'Yes, we assist with utility connections for new properties, including electricity, water, internet, and security systems. We coordinate with service providers to ensure everything is set up before you move in or before tenants occupy the property. We can also help transfer existing utilities to new owners or tenants.',
+                'Security for our properties includes a combination of physical security (guards, access control systems, perimeter walls) and technology (CCTV, alarm systems, motion sensors). For high-end properties, we may also implement biometric access and panic buttons. We regularly review and update security measures based on current needs and emerging technologies.'
 
             ]
         };
@@ -1700,11 +1743,16 @@
         const propertyResults = document.getElementById('property-results');
         const resetChatBtn = document.getElementById('reset-chat');
         const toggleSuggestionsBtn = document.getElementById('toggle-suggestions');
+        
+        // Find the search properties and schedule viewing buttons
         const searchPropertiesBtn = document.getElementById('search-properties-btn');
-        const scheduleViewingBtn = document.getElementById('schedule-viewing');
+        const scheduleViewingBtn = document.getElementById('schedule-viewing-btn');
 
         // Last context for follow-up questions
         let lastContext = null;
+        
+        // Flag to track if a response is being processed
+        let isProcessingResponse = false;
 
         // Check if user is a first-time visitor
         checkFirstTimeVisitor();
@@ -1713,6 +1761,7 @@
         function showTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message bot typing-indicator-container';
+            typingDiv.id = 'typing-indicator';
             typingDiv.innerHTML = `
                 <div class="typing-indicator">
                     <span></span>
@@ -1727,24 +1776,36 @@
 
         // Function to format a message with links and structured content
         function formatMessage(message) {
-            // Convert URLs to clickable links
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            let formattedMessage = message.replace(urlRegex, function(url) {
-                return `<a href="${url}" target="_blank">${url}</a>`;
-            });
+            if (!message) {
+                console.error("Attempted to format undefined or empty message");
+                return "I'm sorry, I couldn't generate a response. Please try asking again.";
+            }
             
-            // Replace newlines with <br>
-            formattedMessage = formattedMessage.replace(/\n/g, '<br>');
-            
-            // Highlight property prices for better visibility
-            formattedMessage = formattedMessage.replace(/KES (\d{1,3}(,\d{3})*(\.\d+)?)/g, 
-                '<span style="font-weight: bold; color: var(--accent-color);">KES $1</span>');
-            
-            return formattedMessage;
+            try {
+                // Convert URLs to clickable links
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                let formattedMessage = message.replace(urlRegex, function(url) {
+                    return `<a href="${url}" target="_blank">${url}</a>`;
+                });
+                
+                // Replace newlines with <br>
+                formattedMessage = formattedMessage.replace(/\n/g, '<br>');
+                
+                // Highlight property prices for better visibility
+                formattedMessage = formattedMessage.replace(/KES (\d{1,3}(,\d{3})*(\.\d+)?)/g, 
+                    '<span style="font-weight: bold; color: var(--accent-color);">KES \$1</span>');
+                
+                return formattedMessage;
+            } catch (error) {
+                console.error("Error formatting message:", error);
+                return message || "Error formatting message";
+            }
         }
 
         // Function to check if a message is a greeting
         function isGreeting(message) {
+            if (!message) return false;
+            
             const greetings = ['hi', 'hello', 'hey', 'howdy', 'hola', 'greetings', 'good morning', 'good afternoon', 'good evening'];
             message = message.toLowerCase().trim();
             
@@ -1772,6 +1833,8 @@
 
         // Function to check if a message is a follow-up
         function isFollowUp(message) {
+            if (!message) return false;
+            
             const followUpPhrases = [
                 'yes', 'yeah', 'sure', 'please', 'ok', 'okay', 'show me', 'tell me more', 
                 'more information', 'more details', 'specific', 'options', 'share', 'show'
@@ -1788,548 +1851,768 @@
             return false;
         }
 
-
-
         // Function to calculate similarity between two strings
         function calculateSimilarity(query, document) {
-            // Simple implementation - count matching words
-            const queryWords = query.toLowerCase().split(/\s+/);
-            const docWords = document.toLowerCase().split(/\s+/);
+            if (!query || !document) return 0;
+            
+            try {
+                // Simple implementation - count matching words
+                const queryWords = query.toLowerCase().split(/\s+/);
+                const docWords = document.toLowerCase().split(/\s+/);
 
-            // Real estate specific keywords that should have higher weight
-            const importantKeywords = [
-                'property', 'house', 'apartment', 'mortgage', 'loan', 'buy', 'purchase',
-                'rent', 'price', 'cost', 'deposit', 'down payment', 'location', 'area',
-                'bedroom', 'bathroom', 'square', 'meter', 'acre', 'land', 'agent', 'broker',
-                'fee', 'commission', 'contract', 'agreement', 'title', 'deed', 'document',
-                'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate',
-                'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
-                'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata'
-            ];
+                // Real estate specific keywords that should have higher weight
+                const importantKeywords = [
+                    'property', 'house', 'apartment', 'mortgage', 'loan', 'buy', 'purchase',
+                    'rent', 'price', 'cost', 'deposit', 'down payment', 'location', 'area',
+                    'bedroom', 'bathroom', 'square', 'meter', 'acre', 'land', 'agent', 'broker',
+                    'fee', 'commission', 'contract', 'agreement', 'title', 'deed', 'document',
+                    'inspection', 'appraisal', 'valuation', 'insurance', 'tax', 'interest', 'rate',
+                    'million', 'shilling', 'kes', 'options', 'specific', 'westlands', 'kilimani',
+                    'karen', 'kitengela', 'nairobi', 'cbd', 'south', 'langata'
+                ];
 
-            let matches = 0;
-            let totalWeight = queryWords.length;
+                let matches = 0;
+                let totalWeight = queryWords.length || 1; // Avoid division by zero
 
-            for (const word of queryWords) {
-                if (docWords.includes(word)) {
-                    // Give more weight to important keywords
-                    if (importantKeywords.includes(word)) {
-                        matches += 2;
-                        totalWeight += 1;
-                    } else {
-                        matches += 1;
+                for (const word of queryWords) {
+                    if (docWords.includes(word)) {
+                        // Give more weight to important keywords
+                        if (importantKeywords.includes(word)) {
+                            matches += 2;
+                            totalWeight += 1;
+                        } else {
+                            matches += 1;
+                        }
                     }
                 }
-            }
 
-            return matches / totalWeight;
+                return matches / totalWeight;
+            } catch (error) {
+                console.error("Error calculating similarity:", error);
+                return 0;
+            }
         }
 
         // Function to find the best matching question
         function findBestMatch(userMessage) {
-            let bestMatchIndex = -1;
-            let bestMatchScore = 0;
-            let contextAdjustedScore = 0;
-
-            // Normalize user message
-            const normalizedUserMessage = userMessage.toLowerCase().trim();
-
-            // First, check if there's a lastContext and adjust the score
-            if (lastContext) {
-                const contextSimilarity = calculateSimilarity(normalizedUserMessage, lastContext.question);
-                contextAdjustedScore = contextSimilarity * 0.2; // Adjust the weight as needed
+            if (!userMessage || !userMessage.trim()) {
+                return {
+                    question: "empty",
+                    answer: "I didn't catch that. Could you please ask a question about our properties, buying process, or mortgage options?",
+                    score: 0
+                };
             }
+            
+            try {
+                let bestMatchIndex = -1;
+                let bestMatchScore = 0;
+                let contextAdjustedScore = 0;
 
-            for (let i = 0; i < qaData.questions.length; i++) {
-                // Normalize question
-                const normalizedQuestion = qaData.questions[i].toLowerCase().trim();
-                let similarity = calculateSimilarity(normalizedUserMessage, normalizedQuestion);
-                similarity += contextAdjustedScore; // Add context-adjusted score
+                // Normalize user message
+                const normalizedUserMessage = userMessage.toLowerCase().trim();
 
-                if (similarity > bestMatchScore) {
-                    bestMatchScore = similarity;
-                    bestMatchIndex = i;
+                // First, check if there's a lastContext and adjust the score
+                if (lastContext && typeof lastContext === 'object' && lastContext.question) {
+                    const contextSimilarity = calculateSimilarity(normalizedUserMessage, lastContext.question);
+                    contextAdjustedScore = contextSimilarity * 0.2; // Adjust the weight as needed
                 }
+
+                // Check each question in the dataset
+                for (let i = 0; i < qaData.questions.length; i++) {
+                    // Normalize question
+                    const normalizedQuestion = qaData.questions[i].toLowerCase().trim();
+                    let similarity = calculateSimilarity(normalizedUserMessage, normalizedQuestion);
+                    similarity += contextAdjustedScore; // Add context-adjusted score
+
+                    if (similarity > bestMatchScore) {
+                        bestMatchScore = similarity;
+                        bestMatchIndex = i;
+                    }
+                }
+
+                // Check if the match is good enough
+                if (bestMatchIndex !== -1 && bestMatchScore > 0.2) {
+                    const question = qaData.questions[bestMatchIndex];
+                    const answer = qaData.answers[bestMatchIndex];
+
+                    // Update lastContext with the matched question and answer
+                    lastContext = {
+                        question: question,
+                        answer: answer
+                    };
+
+                    return {
+                        question: question,
+                        answer: answer,
+                        score: bestMatchScore
+                    };
+                }
+
+                // Check for specific keywords
+                if (normalizedUserMessage.includes('10 million') || normalizedUserMessage.includes('10m')) {
+                    // Update lastContext with the matched question and answer
+                    const answer = "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?";
+                    lastContext = {
+                        question: "What can I buy with 10 million?",
+                        answer: answer
+                    };
+
+                    return {
+                        question: "What can I buy with 10 million?",
+                        answer: answer,
+                        score: 0.7
+                    };
+                } else if (normalizedUserMessage.includes('westlands') || normalizedUserMessage.includes('apartment')) {
+                    // Update lastContext with the matched question and answer
+                    const answer = "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?";
+                    lastContext = {
+                        question: "Tell me about the Westlands apartment",
+                        answer: answer
+                    };
+
+                    return {
+                        question: "Tell me about the Westlands apartment",
+                        answer: answer,
+                        score: 0.8
+                    };
+                } else if (normalizedUserMessage.includes('location') || normalizedUserMessage.includes('where') || normalizedUserMessage.includes('area')) {
+                    // Update lastContext with the matched question and answer
+                    const answer = "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?";
+                    lastContext = {
+                        question: "What locations do you have properties in?",
+                        answer: answer
+                    };
+
+                    return {
+                        question: "What locations do you have properties in?",
+                        answer: answer,
+                        score: 0.7
+                    };
+                } else if (normalizedUserMessage.includes('buy') || normalizedUserMessage.includes('purchase')) {
+                    // Update lastContext with the matched question and answer
+                    const answer = "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?";
+                    lastContext = {
+                        question: "How do I buy property?",
+                        answer: answer
+                    };
+
+                    return {
+                        question: "How do I buy property?",
+                        answer: answer,
+                        score: 0.7
+                    };
+                }
+
+                // No good match found
+                // Reset lastContext
+                lastContext = null;
+
+                return {
+                    question: "unknown",
+                    answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
+                    score: 0
+                };
+            } catch (error) {
+                console.error("Error finding best match:", error);
+                return {
+                    question: "error",
+                    answer: "I'm having trouble processing your question. Could you please try again with a different question?",
+                    score: 0
+                };
             }
-
-            // Check if the match is good enough
-            if (bestMatchScore > 0.3) {
-                const question = qaData.questions[bestMatchIndex];
-                const answers = qaData.answers[bestMatchIndex];
-                const answer = answers[Math.floor(Math.random() * answers.length)]; // Select a random answer
-
-                // Update lastContext with the matched question and answer
-                lastContext = {
-                    question: question,
-                    answer: answer
-                };
-
-                return {
-                    question: question,
-                    answer: answer,
-                    score: bestMatchScore
-                };
-            }
-
-            // Check for specific keywords
-            if (normalizedUserMessage.includes('10 million') || normalizedUserMessage.includes('10m')) {
-                // Update lastContext with the matched question and answer
-                lastContext = {
-                    question: "What can I buy with 10 million?",
-                    answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?"
-                };
-
-                return {
-                    question: "What can I buy with 10 million?",
-                    answer: "With 10 million KES, you can purchase a 2-bedroom apartment in Westlands or South B. These apartments are well-located with modern finishes. Would you like to see the available options?",
-                    score: 0.7
-                };
-            } else if (normalizedUserMessage.includes('westlands') || normalizedUserMessage.includes('apartment')) {
-                // Update lastContext with the matched question and answer
-                lastContext = {
-                    question: "Tell me about the Westlands apartment",
-                    answer: "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?"
-                };
-
-                return {
-                    question: "Tell me about the Westlands apartment",
-                    answer: "Our 2-bedroom apartment in Westlands is an excellent choice. Located near Sarit Centre, it features modern finishes, 1 bathroom, and spans 85 square meters. The property is priced at KES 9,500,000 and is in a secure compound with 24-hour security and parking. Would you like to schedule a viewing?",
-                    score: 0.8
-                };
-            } else if (normalizedUserMessage.includes('location') || normalizedUserMessage.includes('where') || normalizedUserMessage.includes('area')) {
-                // Update lastContext with the matched question and answer
-                lastContext = {
-                    question: "What locations do you have properties in?",
-                    answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?"
-                };
-
-                return {
-                    question: "What locations do you have properties in?",
-                    answer: "We have properties in various locations including Kilimani, Westlands, Karen, Nairobi CBD, South B, Langata, and Kitengela. Would you like more specific information about any of these areas?",
-                    score: 0.7
-                };
-            } else if (normalizedUserMessage.includes('buy') || normalizedUserMessage.includes('purchase')) {
-                // Update lastContext with the matched question and answer
-                lastContext = {
-                    question: "How do I buy property?",
-                    answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?"
-                };
-
-                return {
-                    question: "How do I buy property?",
-                    answer: "To buy property, you'll need identification documents, proof of income, and will need to sign a sale agreement. The process typically involves property viewing, making an offer, securing financing, and completing legal paperwork. Our agents can guide you through the entire process. What type of property are you interested in?",
-                    score: 0.7
-                };
-            }
-
-            // No good match found
-            // Reset lastContext
-            lastContext = null;
-
-            return {
-                question: "unknown",
-                answer: "I'm sorry, I don't understand your question. Could you please rephrase it or ask something about our properties, buying process, or mortgage options?",
-                score: 0
-            };
         }
 
         // Function to add a message to the chat box
         function addMessage(message, isUser = false, question = null) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-            const messageId = Date.now().toString();
-            messageDiv.id = `msg-${messageId}`;
-
-            // Avatar handling
-            let avatarSrc = isUser ? 'images/user.png' : 'images/bot.png';
-            let avatarHTML = `<img src="${avatarSrc}" class="avatar" alt="${isUser ? 'User Avatar' : 'Bot Avatar'}">`;
-
-            // Create message content with proper formatting
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-
-            // Format the message (handle links, line breaks, etc.)
-            const formattedMessage = formatMessage(message);
-            messageContent.innerHTML = avatarHTML + formattedMessage; // Add avatar here
-
-            messageDiv.appendChild(messageContent);
-
-            // Add feedback buttons for bot messages
-            if (!isUser) {
-                const feedbackDiv = document.createElement('div');
-                feedbackDiv.className = 'feedback-buttons';
-                feedbackDiv.innerHTML = `
-        <button class="feedback-btn helpful" onclick="provideFeedback('${messageId}', true)" title="This was helpful">👍</button>
-        <button class="feedback-btn not-helpful" onclick="provideFeedback('${messageId}', false)" title="This needs improvement">👎</button>
-    `;
-                messageDiv.appendChild(feedbackDiv);
-
-                // Store the context for follow-up questions
-                lastContext = {
-                    question: question,
-                    answer: message
-                };
+            if (!message) {
+                console.error("Attempted to add empty message to chat");
+                message = isUser ? message : "I'm sorry, I couldn't generate a response. Please try asking again.";
+                if (!message) return null; // If still empty and it's a user message, just return
             }
+            
+            try {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+                const messageId = Date.now().toString();
+                messageDiv.id = `msg-${messageId}`;
 
-            // Add timestamp
-            const timestamp = document.createElement('div');
-            timestamp.className = 'message-timestamp';
-            const time = new Date();
-            timestamp.textContent = time.getHours() + ':' +
-                (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
-            messageDiv.appendChild(timestamp);
+                // Avatar handling with fallback
+                let avatarSrc = isUser ? 'images/user.png' : 'images/bot.png';
+                let avatarHTML = `<img src="${avatarSrc}" class="avatar" alt="${isUser ? 'User Avatar' : 'Bot Avatar'}" onerror="this.src='https://via.placeholder.com/30x30?text=${isUser ? 'User' : 'Bot'}';this.onerror='';">`;
 
-            chatBox.appendChild(messageDiv);
+                // Create message content with proper formatting
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
 
-            // Scroll to the bottom of the chat box with smooth animation
-            chatBox.scrollTo({
-                top: chatBox.scrollHeight,
-                behavior: 'smooth'
-            });
-            // Update suggestions based on context if it's a bot message
-            if (!isUser && lastContext) {
-                updateSuggestions(lastContext);
+                // Format the message (handle links, line breaks, etc.)
+                const formattedMessage = formatMessage(message);
+                messageContent.innerHTML = avatarHTML + formattedMessage; // Add avatar here
+
+                messageDiv.appendChild(messageContent);
+
+                // Add feedback buttons for bot messages
+                if (!isUser) {
+                    const feedbackDiv = document.createElement('div');
+                    feedbackDiv.className = 'feedback-buttons';
+                    feedbackDiv.innerHTML = `
+                        <button class="feedback-btn helpful" onclick="provideFeedback('${messageId}', true)" title="This was helpful">👍</button>
+                        <button class="feedback-btn not-helpful" onclick="provideFeedback('${messageId}', false)" title="This needs improvement">👎</button>
+                    `;
+                    messageDiv.appendChild(feedbackDiv);
+
+                    // Store the context for follow-up questions
+                    if (question) {
+                        lastContext = {
+                            question: question,
+                            answer: message
+                        };
+                    }
+                }
+
+                // Add timestamp
+                const timestamp = document.createElement('div');
+                timestamp.className = 'message-timestamp';
+                const time = new Date();
+                timestamp.textContent = time.getHours() + ':' +
+                    (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+                messageDiv.appendChild(timestamp);
+
+                chatBox.appendChild(messageDiv);
+
+                // Scroll to the bottom of the chat box with smooth animation
+                chatBox.scrollTo({
+                    top: chatBox.scrollHeight,
+                    behavior: 'smooth'
+                });
+                
+                // Update suggestions based on context if it's a bot message
+                if (!isUser && lastContext) {
+                    updateSuggestions(lastContext);
+                }
+
+                return messageId;
+            } catch (error) {
+                console.error("Error adding message to chat:", error);
+                // Try to add a simple error message if possible
+                try {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'message bot';
+                    errorDiv.textContent = "Sorry, there was an error displaying this message.";
+                    chatBox.appendChild(errorDiv);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                } catch (e) {
+                    // If even this fails, just log it
+                    console.error("Failed to add error message:", e);
+                }
+                return null;
             }
-
-            return messageId;
         }
 
         // Function to send a message (global for button access)
         window.sendMessage = function(message) {
+            // Prevent multiple simultaneous requests
+            if (isProcessingResponse) {
+                console.log("Already processing a response, please wait...");
+                return;
+            }
+            
             // Add the user's message to the chat
             if (!message) {
                 message = userInput.value.trim();
                 if (!message) return;
-                userInput.value = ''; // Clear the input field
             }
             
-            addMessage(message, true);
+            // Store the message and clear input field immediately
+            const userMessage = message;
+            userInput.value = ''; // Clear the input field right away
+            
+            // Add user message to chat
+            addMessage(userMessage, true);
+            
+            // Set processing flag
+            isProcessingResponse = true;
             
             // Show typing indicator
             const typingIndicator = showTypingIndicator();
             
+            // Show loading state
+            showLoadingState(true);
+            
             // Simulate processing time
             setTimeout(() => {
-                typingIndicator.remove();
-                
-                // Process message and get response
-                let response;
-                
-                if (isGreeting(message)) {
-                    // If it's a greeting, respond with a random greeting
-                    const randomIndex = Math.floor(Math.random() * greetingResponses.length);
-                    response = greetingResponses[randomIndex];
-                    lastContext = null;
-                } else if (isFollowUp(message) && lastContext) {
-                    // If it's a follow-up question and we have context
-                    if (lastContext.includes('location') || lastContext.includes('property') || 
-                        lastContext.includes('million') || lastContext.includes('buy') || 
-                        lastContext.includes('deposit')) {
-                        
-                        // Check if the message is asking about property search
-                        if (message.toLowerCase().includes('search') || message.toLowerCase().includes('find properties')) {
-                            showPropertyResultsInChat(filterProperties(), "properties matching your criteria");
-                            return;
-                        } else {
-                            response = specificOptionsResponse;
-                            lastContext = "property options";
-                        }
+                try {
+                    // Remove typing indicator
+                    if (typingIndicator && typingIndicator.parentNode) {
+                        typingIndicator.remove();
                     } else {
-                        response = "I'd be happy to provide more information. Could you please specify what aspect you'd like to know more about?";
-                        lastContext = null;
+                        // If the typing indicator can't be found, try to remove it by ID
+                        const indicator = document.getElementById('typing-indicator');
+                        if (indicator) indicator.remove();
                     }
-                } else if (message.toLowerCase().includes('schedule') && message.toLowerCase().includes('viewing')) {
-                    // Handle scheduling request
-                    response = "I'd be happy to help you schedule a viewing! Please provide your preferred date and time, and our agents will contact you to confirm the appointment. You can also call us directly at +254 700 123 456.";
-                    lastContext = "schedule viewing";
-                } else {
-                    // Find the best matching question and answer
-                    const match = findBestMatch(message);
-                    response = match.answer;
-                    lastContext = match.question;
+                    
+                    // Process message and get response
+                    let response;
+                    
+                    if (isGreeting(userMessage)) {
+                        // If it's a greeting, respond with a random greeting
+                        const randomIndex = Math.floor(Math.random() * greetingResponses.length);
+                        response = greetingResponses[randomIndex];
+                        lastContext = null;
+                    } else if (isFollowUp(userMessage) && lastContext) {
+                        // If it's a follow-up question and we have context
+                        if (typeof lastContext === 'string') {
+                            if (lastContext.toLowerCase().includes('location') || 
+                                lastContext.toLowerCase().includes('property') || 
+                                lastContext.toLowerCase().includes('million') || 
+                                lastContext.toLowerCase().includes('buy') || 
+                                lastContext.toLowerCase().includes('deposit')) {
+                                
+                                // Check if the message is asking about property search
+                                if (userMessage.toLowerCase().includes('search') || userMessage.toLowerCase().includes('find properties')) {
+                                    showPropertyResultsInChat(filterProperties(), "properties matching your criteria");
+                                    isProcessingResponse = false;
+                                    showLoadingState(false);
+                                    return;
+                                } else {
+                                    response = specificOptionsResponse;
+                                    lastContext = "property options";
+                                }
+                            } else {
+                                response = "I'd be happy to provide more information. Could you please specify what aspect you'd like to know more about?";
+                                lastContext = null;
+                            }
+                        } else if (lastContext && typeof lastContext === 'object' && lastContext.question) {
+                            // Handle follow-up based on the stored question context
+                            if (lastContext.question.toLowerCase().includes('location') || 
+                                lastContext.question.toLowerCase().includes('property') || 
+                                lastContext.question.toLowerCase().includes('million') || 
+                                lastContext.question.toLowerCase().includes('buy')) {
+                                
+                                response = specificOptionsResponse;
+                                lastContext = "property options";
+                            } else {
+                                response = "I'd be happy to provide more information about " + 
+                                    lastContext.question.toLowerCase() + ". What specific details would you like to know?";
+                            }
+                        } else {
+                            // Fallback if lastContext is in an unexpected format
+                            response = "I'd be happy to help. Could you please specify what you'd like to know more about?";
+                            lastContext = null;
+                        }
+                    } else if (userMessage.toLowerCase().includes('schedule') && userMessage.toLowerCase().includes('viewing')) {
+                        // Handle scheduling request
+                        response = "I'd be happy to help you schedule a viewing! Please provide your preferred date and time, and our agents will contact you to confirm the appointment. You can also call us directly at +254 700 123 456.";
+                        lastContext = "schedule viewing";
+                    } else {
+                        // Find the best matching question and answer
+                        const match = findBestMatch(userMessage);
+                        response = match.answer;
+                        lastContext = match.question;
+                    }
+                    
+                    // Ensure we have a response
+                    if (!response) {
+                        response = "I'm sorry, I couldn't generate a response. Please try asking again.";
+                        console.error("Empty response generated for user message:", userMessage);
+                    }
+                    
+                    // Add bot response to chat
+                    addMessage(response, false, lastContext);
+                } catch (error) {
+                    console.error("Error processing message:", error);
+                    addMessage("I'm sorry, I encountered an error while processing your message. Please try again.", false);
+                } finally {
+                    // Reset processing flag and loading state
+                    isProcessingResponse = false;
+                    showLoadingState(false);
                 }
-                
-                // Add bot response to chat
-                addMessage(response);
             }, 1500); // 1.5 seconds delay for typing effect
         };
 
         // Function to handle feedback (global for button access)
-        window.provideFeedback = function(button, isPositive) {
-            const feedbackDiv = button.parentElement;
-            feedbackDiv.innerHTML = isPositive ? 
-                '<span class="feedback-text">Thanks for your feedback! 😊</span>' : 
-                '<span class="feedback-text">Thanks for your feedback. We\'ll improve. 🙏</span>';
+        window.provideFeedback = function(messageId, isPositive) {
+            try {
+                // Find the message by ID
+                const message = document.getElementById(`msg-${messageId}`);
+                if (!message) {
+                    console.error("Message not found for feedback:", messageId);
+                    return;
+                }
+                
+                const feedbackDiv = message.querySelector('.feedback-buttons');
+                if (feedbackDiv) {
+                    feedbackDiv.innerHTML = isPositive ? 
+                        '<span class="feedback-text">Thanks for your feedback! 😊</span>' : 
+                        '<span class="feedback-text">Thanks for your feedback. We\'ll improve. 🙏</span>';
+                    
+                    // You could also send this feedback to a server for analysis
+                    console.log(`User provided ${isPositive ? 'positive' : 'negative'} feedback for message:`, messageId);
+                }
+            } catch (error) {
+                console.error("Error providing feedback:", error);
+            }
         };
 
         // Update suggestions based on conversation context
         function updateSuggestions(context) {
-            const suggestionsDiv = document.querySelector('.suggestion-buttons');
-            if (!suggestionsDiv) return;
-            
-            let newSuggestions = [];
-            
-            // Check context and provide relevant suggestions
-            if (!context) {
-                // Default suggestions
-                newSuggestions = [
-                    'Property viewing process',
-                    'Document requirements',
-                    'Property prices in Nairobi',
-                    'Mortgage options'
-                ];
-            } else if (typeof context === 'string') {
-                if (context.toLowerCase().includes('location') || context.toLowerCase().includes('area')) {
-                    newSuggestions = [
-                        'Properties in Westlands',
-                        'Properties in Karen',
-                        'Properties in Kilimani',
-                        'Upcoming developments'
-                    ];
-                } else if (context.toLowerCase().includes('price') || context.toLowerCase().includes('cost') || 
-                        context.toLowerCase().includes('million')) {
-                    newSuggestions = [
-                        'Properties under 5 million',
-                        'Properties around 10 million',
-                        'Luxury properties',
-                        'Payment plans available'
-                    ];
-                } else if (context.toLowerCase().includes('buy') || context.toLowerCase().includes('purchase')) {
-                    newSuggestions = [
-                        'Buying process',
-                        'Required documents',
-                        'Schedule a viewing',
-                        'Financing options'
-                    ];
-                } else if (context.toLowerCase().includes('property options')) {
-                    newSuggestions = [
-                        'Schedule a viewing',
-                        'More details on Westlands',
-                        'More details on South B',
-                        'More details on Langata'
-                    ];
-                } else if (context.toLowerCase().includes('schedule')) {
-                    newSuggestions = [
-                        'View Westlands property',
-                        'View South B property',
-                        'View Langata property',
-                        'Contact an agent'
-                    ];
+            try {
+                const suggestionsDiv = document.querySelector('.suggestion-buttons');
+                if (!suggestionsDiv) {
+                    console.warn("Suggestions div not found");
+                    return;
                 }
-            }
-            
-            // Only update if we have new suggestions
-            if (newSuggestions.length > 0) {
-                // Update the suggestion buttons
-                suggestionsDiv.innerHTML = '';
                 
-                newSuggestions.forEach((suggestion, index) => {
-                    const button = document.createElement('button');
-                    button.className = 'suggestion-btn';
-                    button.style.setProperty('--btn-index', index);
-                    button.textContent = suggestion;
-                    button.addEventListener('click', () => {
-                        sendMessage(suggestion);
+                let newSuggestions = [];
+                
+                // Check context and provide relevant suggestions
+                if (!context) {
+                    // Default suggestions
+                    newSuggestions = [
+                        'Property viewing process',
+                        'Document requirements',
+                        'Property prices in Nairobi',
+                        'Mortgage options'
+                    ];
+                } else if (typeof context === 'string') {
+                    if (context.toLowerCase().includes('location') || context.toLowerCase().includes('area')) {
+                        newSuggestions = [
+                            'Properties in Westlands',
+                            'Properties in Karen',
+                            'Properties in Kilimani',
+                            'Upcoming developments'
+                        ];
+                    } else if (context.toLowerCase().includes('price') || context.toLowerCase().includes('cost') || 
+                            context.toLowerCase().includes('million')) {
+                        newSuggestions = [
+                            'Properties under 5 million',
+                            'Properties around 10 million',
+                            'Luxury properties',
+                            'Payment plans available'
+                        ];
+                    } else if (context.toLowerCase().includes('buy') || context.toLowerCase().includes('purchase')) {
+                        newSuggestions = [
+                            'Buying process',
+                            'Required documents',
+                            'Schedule a viewing',
+                            'Financing options'
+                        ];
+                    } else if (context.toLowerCase().includes('property options')) {
+                        newSuggestions = [
+                            'Schedule a viewing',
+                            'More details on Westlands',
+                            'More details on South B',
+                            'More details on Langata'
+                        ];
+                    } else if (context.toLowerCase().includes('schedule')) {
+                        newSuggestions = [
+                            'View Westlands property',
+                            'View South B property',
+                            'View Langata property',
+                            'Contact an agent'
+                        ];
+                    }
+                } else if (context && typeof context === 'object' && context.question) {
+                    // Handle context based on the question property
+                    const question = context.question.toLowerCase();
+                    
+                    if (question.includes('location') || question.includes('area')) {
+                        newSuggestions = [
+                            'Properties in Westlands',
+                            'Properties in Karen',
+                            'Properties in Kilimani',
+                            'Upcoming developments'
+                        ];
+                    } else if (question.includes('price') || question.includes('cost') || 
+                            question.includes('million')) {
+                        newSuggestions = [
+                            'Properties under 5 million',
+                            'Properties around 10 million',
+                            'Luxury properties',
+                            'Payment plans available'
+                        ];
+                    } else if (question.includes('buy') || question.includes('purchase')) {
+                        newSuggestions = [
+                            'Buying process',
+                            'Required documents',
+                            'Schedule a viewing',
+                            'Financing options'
+                        ];
+                    } else if (question.includes('mortgage') || question.includes('loan')) {
+                        newSuggestions = [
+                            'Current interest rates',
+                            'Mortgage requirements',
+                            'Down payment options',
+                            'Loan approval process'
+                        ];
+                    } else if (question.includes('document') || question.includes('legal')) {
+                        newSuggestions = [
+                            'Title deed verification',
+                            'Sale agreement details',
+                            'Required identification',
+                            'Legal fees involved'
+                        ];
+                    }
+                }
+                
+                // Only update if we have new suggestions
+                if (newSuggestions.length > 0) {
+                    // Update the suggestion buttons
+                    suggestionsDiv.innerHTML = '';
+                    
+                    newSuggestions.forEach((suggestion, index) => {
+                        const button = document.createElement('button');
+                        button.className = 'suggestion-btn';
+                        button.style.setProperty('--btn-index', index);
+                        button.textContent = suggestion;
+                        button.addEventListener('click', () => {
+                            sendMessage(suggestion);
+                        });
+                        suggestionsDiv.appendChild(button);
                     });
-                    suggestionsDiv.appendChild(button);
-                });
+                }
+            } catch (error) {
+                console.error("Error updating suggestions:", error);
             }
         }
 
+
         // Function to filter properties based on search criteria
         function filterProperties() {
-            const location = document.getElementById('location')?.value?.toLowerCase() || '';
-            const minPrice = parseInt(document.getElementById('min_price')?.value) || 0;
-            const maxPrice = parseInt(document.getElementById('max_price')?.value) || Number.MAX_SAFE_INTEGER;
-            const propertyType = document.getElementById('type')?.value?.toLowerCase() || '';
-            const bedrooms = parseInt(document.getElementById('bedrooms')?.value) || 0;
-            
-            return properties.filter(property => {
-                // Check location
-                if (location && !property.location.toLowerCase().includes(location)) {
-                    return false;
-                }
+            try {
+                const location = document.getElementById('location')?.value?.toLowerCase() || '';
+                const minPrice = parseInt(document.getElementById('min_price')?.value) || 0;
+                const maxPrice = parseInt(document.getElementById('max_price')?.value) || Number.MAX_SAFE_INTEGER;
+                const propertyType = document.getElementById('type')?.value?.toLowerCase() || '';
+                const bedrooms = parseInt(document.getElementById('bedrooms')?.value) || 0;
                 
-                // Check price range
-                if (property.price < minPrice || property.price > maxPrice) {
-                    return false;
-                }
-                
-                // Check property type
-                if (propertyType && property.type.toLowerCase() !== propertyType) {
-                    return false;
-                }
-                
-                // Check bedrooms
-                if (bedrooms > 0 && property.bedrooms < bedrooms) {
-                    return false;
-                }
-                
-                return true;
-            });
+                return properties.filter(property => {
+                    // Check location
+                    if (location && !property.location.toLowerCase().includes(location)) {
+                        return false;
+                    }
+                    
+                    // Check price range
+                    if (property.price < minPrice || property.price > maxPrice) {
+                        return false;
+                    }
+                    
+                    // Check property type
+                    if (propertyType && property.type.toLowerCase() !== propertyType) {
+                        return false;
+                    }
+                    
+                    // Check bedrooms
+                    if (bedrooms > 0 && property.bedrooms < bedrooms) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+            } catch (error) {
+                console.error("Error filtering properties:", error);
+                return []; // Return empty array on error
+            }
         }
 
         // Function to display property results in search page
         function displayPropertyResults(filteredProperties) {
-            propertyResults.innerHTML = '';
-            
-            if (filteredProperties.length === 0) {
-                propertyResults.innerHTML = '<p>No properties match your search criteria.</p>';
-                return;
-            }
-            
-            filteredProperties.forEach(property => {
-                const propertyCard = document.createElement('div');
-                propertyCard.className = 'property-card';
+            try {
+                propertyResults.innerHTML = '';
                 
-                // Add property badge for new or featured properties
-                const badgeHtml = property.id % 2 === 0 ? '<div class="property-badge">New</div>' : 
-                                (property.id % 3 === 0 ? '<div class="property-badge" style="background-color: var(--secondary-color);">Featured</div>' : '');
+                if (!filteredProperties || filteredProperties.length === 0) {
+                    propertyResults.innerHTML = '<p>No properties match your search criteria.</p>';
+                    return;
+                }
                 
-                propertyCard.innerHTML = `
-                    <div class="property-image" style="background-image: url('${property.image}')">
-                        ${badgeHtml}
-                    </div>
-                    <div class="property-info">
-                        <div class="property-title">${property.title}</div>
-                        <div class="property-location">${property.location}</div>
-                        <div class="property-price">KES ${property.price.toLocaleString()}</div>
-                        <div class="property-features">
-                            <div class="feature"><i class="fas fa-bed"></i> ${property.bedrooms} Bed${property.bedrooms !== 1 ? 's' : ''}</div>
-                            <div class="feature"><i class="fas fa-bath"></i> ${property.bathrooms} Bath${property.bathrooms !== 1 ? 's' : ''}</div>
-                            <div class="feature"><i class="fas fa-ruler-combined"></i> ${property.size} m²</div>
+                filteredProperties.forEach(property => {
+                    const propertyCard = document.createElement('div');
+                    propertyCard.className = 'property-card';
+                    
+                    // Add property badge for new or featured properties
+                    const badgeHtml = property.id % 2 === 0 ? '<div class="property-badge">New</div>' : 
+                                    (property.id % 3 === 0 ? '<div class="property-badge" style="background-color: var(--secondary-color);">Featured</div>' : '');
+                    
+                    propertyCard.innerHTML = `
+                        <div class="property-image" style="background-image: url('${property.image}')">
+                            ${badgeHtml}
                         </div>
-                        <button class="view-btn" onclick="viewPropertyDetails(${property.id})">View Details</button>
-                    </div>
-                `;
-                
-                propertyResults.appendChild(propertyCard);
-            });
+                        <div class="property-info">
+                            <div class="property-title">${property.title}</div>
+                            <div class="property-location">${property.location}</div>
+                            <div class="property-price">KES ${property.price.toLocaleString()}</div>
+                            <div class="property-features">
+                                <div class="feature"><i class="fas fa-bed"></i> ${property.bedrooms} Bed${property.bedrooms !== 1 ? 's' : ''}</div>
+                                <div class="feature"><i class="fas fa-bath"></i> ${property.bathrooms} Bath${property.bathrooms !== 1 ? 's' : ''}</div>
+                                <div class="feature"><i class="fas fa-ruler-combined"></i> ${property.size} m²</div>
+                            </div>
+                            <button class="view-btn" onclick="viewPropertyDetails(${property.id})">View Details</button>
+                        </div>
+                    `;
+                    
+                    propertyResults.appendChild(propertyCard);
+                });
+            } catch (error) {
+                console.error("Error displaying property results:", error);
+                propertyResults.innerHTML = '<p>An error occurred while displaying properties. Please try again.</p>';
+            }
         }
 
         // Function to display property results in chat
         function showPropertyResultsInChat(properties, query) {
-            if (properties.length === 0) {
-                addMessage(`I couldn't find any properties matching "${query}". Would you like to try different search criteria?`);
-                return;
-            }
-            
-            // Add intro message
-            addMessage(`I found ${properties.length} properties that match your criteria. Here are some options:`);
-            
-            // Create a property results container
-            const resultsContainer = document.createElement('div');
-            resultsContainer.className = 'chat-property-results';
-            
-            // Add up to 3 properties
-            const displayProperties = properties.slice(0, 3);
-            displayProperties.forEach(property => {
-                const propertyCard = document.createElement('div');
-                propertyCard.className = 'chat-property-card';
+            try {
+                if (!properties || properties.length === 0) {
+                    addMessage(`I couldn't find any properties matching "${query}". Would you like to try different search criteria?`);
+                    return;
+                }
                 
-                propertyCard.innerHTML = `
-                    <div class="chat-property-image" style="background-image: url('${property.image}')"></div>
-                    <div class="chat-property-info">
-                        <div class="chat-property-title">${property.title}</div>
-                        <div class="chat-property-location">${property.location}</div>
-                        <div class="chat-property-price">KES ${property.price.toLocaleString()}</div>
-                        <div class="chat-property-specs">${property.bedrooms} Bed • ${property.bathrooms} Bath • ${property.size} m²</div>
-                        <button class="chat-property-link" onclick="viewPropertyDetails(${property.id})">View Details</button>
-                    </div>
-                `;
+                // Add intro message
+                addMessage(`I found ${properties.length} properties that match your criteria. Here are some options:`);
                 
-                resultsContainer.appendChild(propertyCard);
-            });
-            
-            // Add "View All" link if there are more than 3 properties
-            if (properties.length > 3) {
-                const viewAllLink = document.createElement('a');
-                viewAllLink.href = "#";
-                viewAllLink.className = 'view-all-link';
-                viewAllLink.textContent = `View all ${properties.length} properties →`;
-                viewAllLink.onclick = function(e) {
-                    e.preventDefault();
-                    chatLink.classList.remove('active');
-                    searchLink.classList.add('active');
-                    chatView.style.display = 'none';
-                    searchView.style.display = 'grid';
-                    displayPropertyResults(properties);
-                };
-                resultsContainer.appendChild(viewAllLink);
+                // Create a property results container
+                const resultsContainer = document.createElement('div');
+                resultsContainer.className = 'chat-property-results';
+                
+                // Add up to 3 properties
+                const displayProperties = properties.slice(0, 3);
+                displayProperties.forEach(property => {
+                    const propertyCard = document.createElement('div');
+                    propertyCard.className = 'chat-property-card';
+                    
+                    propertyCard.innerHTML = `
+                        <div class="chat-property-image" style="background-image: url('${property.image}')"></div>
+                        <div class="chat-property-info">
+                            <div class="chat-property-title">${property.title}</div>
+                            <div class="chat-property-location">${property.location}</div>
+                            <div class="chat-property-price">KES ${property.price.toLocaleString()}</div>
+                            <div class="chat-property-specs">${property.bedrooms} Bed • ${property.bathrooms} Bath • ${property.size} m²</div>
+                            <button class="chat-property-link" onclick="viewPropertyDetails(${property.id})">View Details</button>
+                        </div>
+                    `;
+                    
+                    resultsContainer.appendChild(propertyCard);
+                });
+                
+                // Add "View All" link if there are more than 3 properties
+                if (properties.length > 3) {
+                    const viewAllLink = document.createElement('a');
+                    viewAllLink.href = "#";
+                    viewAllLink.className = 'view-all-link';
+                    viewAllLink.textContent = `View all ${properties.length} properties →`;
+                    viewAllLink.onclick = function(e) {
+                        e.preventDefault();
+                        chatLink.classList.remove('active');
+                        searchLink.classList.add('active');
+                        chatView.style.display = 'none';
+                        searchView.style.display = 'grid';
+                        displayPropertyResults(properties);
+                    };
+                    resultsContainer.appendChild(viewAllLink);
+                }
+                
+                // Add the container to chat
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot';
+                messageDiv.appendChild(resultsContainer);
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // Add a follow-up message
+                setTimeout(() => {
+                    addMessage("Would you like more information about any of these properties?");
+                    lastContext = "property options";
+                }, 1000);
+            } catch (error) {
+                console.error("Error showing property results in chat:", error);
+                addMessage("I'm sorry, I encountered an error while displaying properties. Please try again.");
             }
-            
-            // Add the container to chat
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message bot';
-            messageDiv.appendChild(resultsContainer);
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // Add a follow-up message
-            setTimeout(() => {
-                addMessage("Would you like more information about any of these properties?");
-                lastContext = "property options";
-            }, 1000);
         }
 
         // Function to view property details (global for button access)
         window.viewPropertyDetails = function(propertyId) {
-            const property = properties.find(p => p.id === propertyId);
-            if (!property) return;
-            
-            alert(`Property Details: ${property.title}\n\nLocation: ${property.location}\nPrice: KES ${property.price.toLocaleString()}\nBedrooms: ${property.bedrooms}\nBathrooms: ${property.bathrooms}\nSize: ${property.size} m²\n\nDescription: ${property.description}\n\nThis is a demo. In a full application, this would link to a detailed property page.`);
+            try {
+                const property = properties.find(p => p.id === propertyId);
+                if (!property) {
+                    console.error("Property not found:", propertyId);
+                    alert("Sorry, property details are not available.");
+                    return;
+                }
+                
+                alert(`Property Details: ${property.title}\n\nLocation: ${property.location}\nPrice: KES ${property.price.toLocaleString()}\nBedrooms: ${property.bedrooms}\nBathrooms: ${property.bathrooms}\nSize: ${property.size} m²\n\nDescription: ${property.description}\n\nThis is a demo. In a full application, this would link to a detailed property page.`);
+            } catch (error) {
+                console.error("Error viewing property details:", error);
+                alert("Sorry, there was an error displaying property details.");
+            }
         };
 
         // Welcome tour for first-time visitors
         function showWelcomeTour() {
-            setTimeout(() => {
-                addMessage("👋 Welcome to Kwetu Homes AI Assistant! I'm here to help you with all your real estate needs.");
-            }, 1000);
-            
-            setTimeout(() => {
-                addMessage("You can ask me about property locations, prices, the buying process, and more. I'll do my best to provide helpful information.");
-            }, 4000);
-            
-            setTimeout(() => {
-                addMessage("Try the suggestion chips for common questions, or just type your query. Ready to find your dream home?");
-            }, 7000);
+            try {
+                setTimeout(() => {
+                    addMessage("👋 Welcome to Kwetu Homes AI Assistant! I'm here to help you with all your real estate needs.");
+                }, 1000);
+                
+                setTimeout(() => {
+                    addMessage("You can ask me about property locations, prices, the buying process, and more. I'll do my best to provide helpful information.");
+                }, 4000);
+                
+                setTimeout(() => {
+                    addMessage("Try the suggestion chips for common questions, or just type your query. Ready to find your dream home?");
+                }, 7000);
+            } catch (error) {
+                console.error("Error showing welcome tour:", error);
+                // Try to add a simple welcome message if the tour fails
+                addMessage("👋 Welcome to Kwetu Homes AI Assistant! How can I help you today?");
+            }
         }
 
         // Check if user is a first-time visitor
         function checkFirstTimeVisitor() {
-            if (!localStorage.getItem('hasVisitedBefore')) {
-                // Show welcome tour
+            try {
+                if (!localStorage.getItem('hasVisitedBefore')) {
+                    // Show welcome tour
+                    showWelcomeTour();
+                    
+                    // Set flag in localStorage
+                    localStorage.setItem('hasVisitedBefore', 'true');
+                }
+            } catch (error) {
+                console.error("Error checking first-time visitor:", error);
+                // If localStorage fails, just show the welcome tour anyway
                 showWelcomeTour();
-                
-                // Set flag in localStorage
-                localStorage.setItem('hasVisitedBefore', 'true');
             }
         }
 
         // Reset chat function
         function resetChat() {
-            // Remove all messages except the welcome message
-            const messages = document.querySelectorAll('.message:not(#msg-welcome)');
-            messages.forEach(message => {
-                // Add fade-out animation
-                message.classList.add('fade-out');
+            try {
+                // Remove all messages except the welcome message
+                const messages = document.querySelectorAll('.message:not(#msg-welcome)');
+                messages.forEach(message => {
+                    // Add fade-out animation
+                    message.classList.add('fade-out');
+                    
+                    // Remove after animation completes
+                    setTimeout(() => {
+                        if (message.parentNode) {
+                            message.remove();
+                        }
+                    }, 300);
+                });
                 
-                // Remove after animation completes
+                // Reset context
+                lastContext = null;
+                
+                // Reset suggestions
+                updateSuggestions(null);
+                
+                // Add a system message
                 setTimeout(() => {
-                    message.remove();
-                }, 300);
-            });
-            
-            // Reset context
-            lastContext = null;
-            
-            // Reset suggestions
-            updateSuggestions(null);
-            
-            // Add a system message
-            setTimeout(() => {
-                addMessage("Conversation has been reset. How can I help you today?");
-            }, 350);
+                    addMessage("Conversation has been reset. How can I help you today?");
+                }, 350);
+            } catch (error) {
+                console.error("Error resetting chat:", error);
+                alert("There was an error resetting the chat. Please refresh the page.");
+            }
         }
 
         // Event listeners
@@ -2377,24 +2660,31 @@
         
         toggleSuggestionsBtn.addEventListener('click', function() {
             const suggestions = document.querySelector('.suggestions');
-            suggestions.classList.toggle('show-suggestions');
+            if (suggestions) {
+                suggestions.classList.toggle('show-suggestions');
+            }
         });
         
-        searchPropertiesBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            chatLink.classList.remove('active');
-            searchLink.classList.add('active');
-            chatView.style.display = 'none';
-            searchView.style.display = 'grid';
-            
-            // Load all properties
-            displayPropertyResults(properties);
-        });
+        // Make sure these elements exist before adding event listeners
+        if (searchPropertiesBtn) {
+            searchPropertiesBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatLink.classList.remove('active');
+                searchLink.classList.add('active');
+                chatView.style.display = 'none';
+                searchView.style.display = 'grid';
+                
+                // Load all properties
+                displayPropertyResults(properties);
+            });
+        }
         
-        scheduleViewingBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            sendMessage('I would like to schedule a property viewing');
-        });
+        if (scheduleViewingBtn) {
+            scheduleViewingBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                sendMessage('I would like to schedule a property viewing');
+            });
+        }
         
         // Add keyboard shortcuts
         document.addEventListener('keydown', function(e) {
@@ -2420,5 +2710,3 @@
         }, 1000);
     });
 </script>
-</body>
-</html>
